@@ -90,15 +90,19 @@
 
 
 
-<!-- ================= PAGE HEADER ================= -->
+<!-- ================= HEADER ================= -->
 
 <section class="py-5 bg-light">
 
     <div class="container text-center">
 
-        <h1 class="fw-bold text-primary">
+        <div class="feature-icon mb-3">
 
             <i class="bi bi-capsule-pill"></i>
+
+        </div>
+
+        <h1 class="fw-bold text-primary">
 
             Medicine Information
 
@@ -106,7 +110,7 @@
 
         <p class="text-muted">
 
-            Search and explore information about commonly known medicines.
+            Search and explore information about medicines.
 
         </p>
 
@@ -132,11 +136,11 @@
                         type="text"
                         id="medicineListSearch"
                         class="form-control"
-                        placeholder="Search medicine...">
+                        placeholder="Search by medicine name, category or use...">
 
                     <button
                         class="btn btn-primary"
-                        onclick="filterMedicines()">
+                        onclick="searchMedicineList()">
 
                         <i class="bi bi-search"></i>
 
@@ -156,285 +160,36 @@
 
 
 
-<!-- ================= MEDICINE CARDS ================= -->
+<!-- ================= MEDICINE LIST ================= -->
 
 <section class="py-5">
 
     <div class="container">
 
-        <div class="row g-4" id="medicineContainer">
-
-
-            <!-- PARACETAMOL -->
-
-            <div class="col-md-6 col-lg-4 medicine-card">
-
-                <div class="card h-100 shadow-sm border-0">
-
-                    <div class="card-body text-center p-4">
-
-                        <div class="feature-icon mb-3">
-
-                            <i class="bi bi-capsule"></i>
-
-                        </div>
-
-                        <h4 class="card-title">
-
-                            Paracetamol
-
-                        </h4>
-
-                        <p class="text-muted">
-
-                            Commonly used for pain and fever.
-
-                        </p>
-
-                        <a
-                            href="medicine-details.html?medicine=paracetamol"
-                            class="btn btn-outline-primary">
-
-                            View Details
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- IBUPROFEN -->
-
-            <div class="col-md-6 col-lg-4 medicine-card">
-
-                <div class="card h-100 shadow-sm border-0">
-
-                    <div class="card-body text-center p-4">
-
-                        <div class="feature-icon mb-3">
-
-                            <i class="bi bi-capsule"></i>
-
-                        </div>
-
-                        <h4 class="card-title">
-
-                            Ibuprofen
-
-                        </h4>
-
-                        <p class="text-muted">
-
-                            A medicine commonly used for pain,
-                            fever and inflammation.
-
-                        </p>
-
-                        <a
-                            href="medicine-details.html?medicine=ibuprofen"
-                            class="btn btn-outline-primary">
-
-                            View Details
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- AMOXICILLIN -->
-
-            <div class="col-md-6 col-lg-4 medicine-card">
-
-                <div class="card h-100 shadow-sm border-0">
-
-                    <div class="card-body text-center p-4">
-
-                        <div class="feature-icon mb-3">
-
-                            <i class="bi bi-capsule"></i>
-
-                        </div>
-
-                        <h4 class="card-title">
-
-                            Amoxicillin
-
-                        </h4>
-
-                        <p class="text-muted">
-
-                            An antibiotic used for certain
-                            bacterial infections.
-
-                        </p>
-
-                        <a
-                            href="medicine-details.html?medicine=amoxicillin"
-                            class="btn btn-outline-primary">
-
-                            View Details
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- CETIRIZINE -->
-
-            <div class="col-md-6 col-lg-4 medicine-card">
-
-                <div class="card h-100 shadow-sm border-0">
-
-                    <div class="card-body text-center p-4">
-
-                        <div class="feature-icon mb-3">
-
-                            <i class="bi bi-capsule"></i>
-
-                        </div>
-
-                        <h4 class="card-title">
-
-                            Cetirizine
-
-                        </h4>
-
-                        <p class="text-muted">
-
-                            Commonly used to relieve allergy
-                            symptoms.
-
-                        </p>
-
-                        <a
-                            href="medicine-details.html?medicine=cetirizine"
-                            class="btn btn-outline-primary">
-
-                            View Details
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- AZITHROMYCIN -->
-
-            <div class="col-md-6 col-lg-4 medicine-card">
-
-                <div class="card h-100 shadow-sm border-0">
-
-                    <div class="card-body text-center p-4">
-
-                        <div class="feature-icon mb-3">
-
-                            <i class="bi bi-capsule"></i>
-
-                        </div>
-
-                        <h4 class="card-title">
-
-                            Azithromycin
-
-                        </h4>
-
-                        <p class="text-muted">
-
-                            An antibiotic used for certain
-                            bacterial infections.
-
-                        </p>
-
-                        <a
-                            href="medicine-details.html?medicine=azithromycin"
-                            class="btn btn-outline-primary">
-
-                            View Details
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- OMEPRAZOLE -->
-
-            <div class="col-md-6 col-lg-4 medicine-card">
-
-                <div class="card h-100 shadow-sm border-0">
-
-                    <div class="card-body text-center p-4">
-
-                        <div class="feature-icon mb-3">
-
-                            <i class="bi bi-capsule"></i>
-
-                        </div>
-
-                        <h4 class="card-title">
-
-                            Omeprazole
-
-                        </h4>
-
-                        <p class="text-muted">
-
-                            Commonly used to reduce stomach
-                            acid production.
-
-                        </p>
-
-                        <a
-                            href="medicine-details.html?medicine=omeprazole"
-                            class="btn btn-outline-primary">
-
-                            View Details
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
+        <div
+            class="row g-4"
+            id="medicineContainer">
+
+            <!-- Medicine cards will be loaded by JavaScript -->
 
         </div>
 
 
-        <!-- NO RESULT MESSAGE -->
+        <!-- NO RESULT -->
 
         <div
             id="noMedicine"
-            class="text-center text-danger mt-4"
+            class="text-center text-danger mt-5"
             style="display: none;">
 
-            <i class="bi bi-search"></i>
+            <i class="bi bi-search fs-1"></i>
 
-            <p class="mt-2">
-                No medicine found.
+            <h4 class="mt-3">
+                No medicine found
+            </h4>
+
+            <p class="text-muted">
+                Try searching with another medicine name or category.
             </p>
 
         </div>
@@ -495,120 +250,21 @@
 
 
 
-<!-- Bootstrap JavaScript -->
+<!-- ================= BOOTSTRAP JS ================= -->
 
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
 </script>
 
 
-<!-- Custom JavaScript -->
 
-<script src="js/script.js"></script>
+<!-- ================= PROJECT JS ================= -->
 
+<script src="js/medicines-data.js"></script>
 
+<script src="js/medicine-app.js"></script>
 
-<!-- Medicine Search Script -->
-
-<script>
-
-function filterMedicines() {
-
-    const input =
-        document.getElementById("medicineListSearch");
-
-    const searchValue =
-        input.value.toLowerCase().trim();
-
-    const cards =
-        document.querySelectorAll(".medicine-card");
-
-    const noMedicine =
-        document.getElementById("noMedicine");
-
-    let found = false;
-
-
-    cards.forEach(function(card) {
-
-        const medicineName =
-            card.querySelector(".card-title")
-                .textContent
-                .toLowerCase();
-
-        const medicineDescription =
-            card.querySelector(".text-muted")
-                .textContent
-                .toLowerCase();
-
-
-        if (
-            medicineName.includes(searchValue) ||
-            medicineDescription.includes(searchValue)
-        ) {
-
-            card.style.display = "";
-
-            found = true;
-
-        } else {
-
-            card.style.display = "none";
-
-        }
-
-    });
-
-
-    if (found) {
-
-        noMedicine.style.display = "none";
-
-    } else {
-
-        noMedicine.style.display = "block";
-
-    }
-
-}
-
-
-/* Search when Enter is pressed */
-
-document
-    .getElementById("medicineListSearch")
-    .addEventListener("keypress", function(event) {
-
-        if (event.key === "Enter") {
-
-            filterMedicines();
-
-        }
-
-    });
-
-
-/* Read search value from homepage */
-
-const urlParams =
-    new URLSearchParams(window.location.search);
-
-const searchValue =
-    urlParams.get("search");
-
-
-if (searchValue) {
-
-    const searchBox =
-        document.getElementById("medicineListSearch");
-
-    searchBox.value = searchValue;
-
-    filterMedicines();
-
-}
-
-</script>
 
 </body>
+
 </html>
