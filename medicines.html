@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Medicines - MedInfo Portal</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+
+    <div class="container">
+
+        <a class="navbar-brand fw-bold" href="index.html">
+
+            <i class="bi bi-capsule-pill"></i>
+
+            MedInfo Portal
+
+        </a>
+
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarMenu">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <div class="collapse navbar-collapse" id="navbarMenu">
+
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="medicines.html">
+                        Medicines
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">
+                        About
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- ================= PAGE HEADER ================= -->
+
+<section class="py-5 bg-light">
+
+    <div class="container text-center">
+
+        <h1 class="fw-bold text-primary">
+
+            <i class="bi bi-capsule-pill"></i>
+
+            Medicine Information
+
+        </h1>
+
+        <p class="text-muted">
+
+            Search and explore information about commonly known medicines.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= SEARCH ================= -->
+
+<section class="py-4">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <div class="input-group input-group-lg">
+
+                    <input
+                        type="text"
+                        id="medicineListSearch"
+                        class="form-control"
+                        placeholder="Search medicine...">
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="filterMedicines()">
+
+                        <i class="bi bi-search"></i>
+
+                        Search
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= MEDICINE CARDS ================= -->
+
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="row g-4" id="medicineContainer">
+
+
+            <!-- PARACETAMOL -->
+
+            <div class="col-md-6 col-lg-4 medicine-card">
+
+                <div class="card h-100 shadow-sm border-0">
+
+                    <div class="card-body text-center p-4">
+
+                        <div class="feature-icon mb-3">
+
+                            <i class="bi bi-capsule"></i>
+
+                        </div>
+
+                        <h4 class="card-title">
+
+                            Paracetamol
+
+                        </h4>
+
+                        <p class="text-muted">
+
+                            Commonly used for pain and fever.
+
+                        </p>
+
+                        <a
+                            href="medicine-details.html?medicine=paracetamol"
+                            class="btn btn-outline-primary">
+
+                            View Details
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- IBUPROFEN -->
+
+            <div class="col-md-6 col-lg-4 medicine-card">
+
+                <div class="card h-100 shadow-sm border-0">
+
+                    <div class="card-body text-center p-4">
+
+                        <div class="feature-icon mb-3">
+
+                            <i class="bi bi-capsule"></i>
+
+                        </div>
+
+                        <h4 class="card-title">
+
+                            Ibuprofen
+
+                        </h4>
+
+                        <p class="text-muted">
+
+                            A medicine commonly used for pain,
+                            fever and inflammation.
+
+                        </p>
+
+                        <a
+                            href="medicine-details.html?medicine=ibuprofen"
+                            class="btn btn-outline-primary">
+
+                            View Details
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- AMOXICILLIN -->
+
+            <div class="col-md-6 col-lg-4 medicine-card">
+
+                <div class="card h-100 shadow-sm border-0">
+
+                    <div class="card-body text-center p-4">
+
+                        <div class="feature-icon mb-3">
+
+                            <i class="bi bi-capsule"></i>
+
+                        </div>
+
+                        <h4 class="card-title">
+
+                            Amoxicillin
+
+                        </h4>
+
+                        <p class="text-muted">
+
+                            An antibiotic used for certain
+                            bacterial infections.
+
+                        </p>
+
+                        <a
+                            href="medicine-details.html?medicine=amoxicillin"
+                            class="btn btn-outline-primary">
+
+                            View Details
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CETIRIZINE -->
+
+            <div class="col-md-6 col-lg-4 medicine-card">
+
+                <div class="card h-100 shadow-sm border-0">
+
+                    <div class="card-body text-center p-4">
+
+                        <div class="feature-icon mb-3">
+
+                            <i class="bi bi-capsule"></i>
+
+                        </div>
+
+                        <h4 class="card-title">
+
+                            Cetirizine
+
+                        </h4>
+
+                        <p class="text-muted">
+
+                            Commonly used to relieve allergy
+                            symptoms.
+
+                        </p>
+
+                        <a
+                            href="medicine-details.html?medicine=cetirizine"
+                            class="btn btn-outline-primary">
+
+                            View Details
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- AZITHROMYCIN -->
+
+            <div class="col-md-6 col-lg-4 medicine-card">
+
+                <div class="card h-100 shadow-sm border-0">
+
+                    <div class="card-body text-center p-4">
+
+                        <div class="feature-icon mb-3">
+
+                            <i class="bi bi-capsule"></i>
+
+                        </div>
+
+                        <h4 class="card-title">
+
+                            Azithromycin
+
+                        </h4>
+
+                        <p class="text-muted">
+
+                            An antibiotic used for certain
+                            bacterial infections.
+
+                        </p>
+
+                        <a
+                            href="medicine-details.html?medicine=azithromycin"
+                            class="btn btn-outline-primary">
+
+                            View Details
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- OMEPRAZOLE -->
+
+            <div class="col-md-6 col-lg-4 medicine-card">
+
+                <div class="card h-100 shadow-sm border-0">
+
+                    <div class="card-body text-center p-4">
+
+                        <div class="feature-icon mb-3">
+
+                            <i class="bi bi-capsule"></i>
+
+                        </div>
+
+                        <h4 class="card-title">
+
+                            Omeprazole
+
+                        </h4>
+
+                        <p class="text-muted">
+
+                            Commonly used to reduce stomach
+                            acid production.
+
+                        </p>
+
+                        <a
+                            href="medicine-details.html?medicine=omeprazole"
+                            class="btn btn-outline-primary">
+
+                            View Details
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- NO RESULT MESSAGE -->
+
+        <div
+            id="noMedicine"
+            class="text-center text-danger mt-4"
+            style="display: none;">
+
+            <i class="bi bi-search"></i>
+
+            <p class="mt-2">
+                No medicine found.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= DISCLAIMER ================= -->
+
+<section class="pb-5">
+
+    <div class="container">
+
+        <div class="alert alert-warning text-center">
+
+            <i class="bi bi-exclamation-triangle-fill"></i>
+
+            <strong>Disclaimer:</strong>
+
+            This website provides general educational information.
+            It is not a substitute for professional medical advice.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="bg-primary text-white text-center py-4">
+
+    <div class="container">
+
+        <p class="mb-1">
+
+            <i class="bi bi-capsule-pill"></i>
+
+            <strong>Medicine Information Portal</strong>
+
+        </p>
+
+        <p class="mb-0">
+
+            © 2026 Medicine Information Portal.
+            All Rights Reserved.
+
+        </p>
+
+    </div>
+
+</footer>
+
+
+
+<!-- Bootstrap JavaScript -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<!-- Custom JavaScript -->
+
+<script src="js/script.js"></script>
+
+
+
+<!-- Medicine Search Script -->
+
+<script>
+
+function filterMedicines() {
+
+    const input =
+        document.getElementById("medicineListSearch");
+
+    const searchValue =
+        input.value.toLowerCase().trim();
+
+    const cards =
+        document.querySelectorAll(".medicine-card");
+
+    const noMedicine =
+        document.getElementById("noMedicine");
+
+    let found = false;
+
+
+    cards.forEach(function(card) {
+
+        const medicineName =
+            card.querySelector(".card-title")
+                .textContent
+                .toLowerCase();
+
+        const medicineDescription =
+            card.querySelector(".text-muted")
+                .textContent
+                .toLowerCase();
+
+
+        if (
+            medicineName.includes(searchValue) ||
+            medicineDescription.includes(searchValue)
+        ) {
+
+            card.style.display = "";
+
+            found = true;
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+
+    if (found) {
+
+        noMedicine.style.display = "none";
+
+    } else {
+
+        noMedicine.style.display = "block";
+
+    }
+
+}
+
+
+/* Search when Enter is pressed */
+
+document
+    .getElementById("medicineListSearch")
+    .addEventListener("keypress", function(event) {
+
+        if (event.key === "Enter") {
+
+            filterMedicines();
+
+        }
+
+    });
+
+
+/* Read search value from homepage */
+
+const urlParams =
+    new URLSearchParams(window.location.search);
+
+const searchValue =
+    urlParams.get("search");
+
+
+if (searchValue) {
+
+    const searchBox =
+        document.getElementById("medicineListSearch");
+
+    searchBox.value = searchValue;
+
+    filterMedicines();
+
+}
+
+</script>
+
+</body>
+</html>
