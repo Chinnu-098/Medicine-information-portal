@@ -1,0 +1,288 @@
+/* =========================================
+   MEDICINE INFORMATION PORTAL
+   CUSTOM STYLESHEET
+========================================= */
+
+
+/* =========================================
+   GENERAL STYLES
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ffffff;
+    color: #212529;
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+.navbar {
+    padding: 14px 0;
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+}
+
+.navbar-brand i {
+    margin-right: 6px;
+}
+
+.nav-link {
+    font-weight: 500;
+    margin-left: 10px;
+    transition: 0.3s ease;
+}
+
+.nav-link:hover {
+    opacity: 0.8;
+}
+
+
+/* =========================================
+   HERO SECTION
+========================================= */
+
+.hero-section {
+    padding: 90px 0;
+    background: linear-gradient(
+        135deg,
+        #eaf6ff,
+        #ffffff
+    );
+}
+
+.hero-section h1 {
+    color: #0d6efd;
+    line-height: 1.2;
+}
+
+.hero-section p {
+    color: #555;
+    max-width: 650px;
+}
+
+.hero-section .btn {
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+
+/* Medicine Icon */
+
+.medicine-icon {
+    width: 220px;
+    height: 220px;
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #ffffff;
+    border-radius: 50%;
+
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.10);
+}
+
+.medicine-icon i {
+    font-size: 100px;
+    color: #0d6efd;
+}
+
+
+/* =========================================
+   SEARCH SECTION
+========================================= */
+
+.search-section {
+    background-color: #ffffff;
+}
+
+.search-section h2 {
+    color: #212529;
+}
+
+.search-section .form-control {
+    border-radius: 8px 0 0 8px;
+}
+
+.search-section .btn {
+    border-radius: 0 8px 8px 0;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+
+/* =========================================
+   FEATURE CARDS
+========================================= */
+
+.feature-card {
+    border: none;
+    border-radius: 12px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.14);
+}
+
+.feature-card h4 {
+    font-weight: 600;
+}
+
+.feature-card p {
+    margin-bottom: 0;
+}
+
+
+/* Feature Icons */
+
+.feature-icon {
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background-color: #eaf3ff;
+    color: #0d6efd;
+
+    font-size: 30px;
+}
+
+
+/* =========================================
+   DISCLAIMER
+========================================= */
+
+.alert {
+    border-radius: 10px;
+}
+
+.alert i {
+    margin-right: 5px;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+    margin-top: 20px;
+}
+
+footer p {
+    font-size: 14px;
+}
+
+footer i {
+    margin-right: 5px;
+}
+
+
+/* =========================================
+   BUTTON HOVER
+========================================= */
+
+.btn-primary {
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 768px) {
+
+    .hero-section {
+        padding: 60px 0;
+        text-align: center;
+    }
+
+    .hero-section h1 {
+        font-size: 2.3rem;
+    }
+
+    .hero-section p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .medicine-icon {
+        width: 170px;
+        height: 170px;
+        margin-top: 30px;
+    }
+
+    .medicine-icon i {
+        font-size: 75px;
+    }
+
+    .navbar-nav {
+        margin-top: 10px;
+    }
+
+    .nav-link {
+        margin-left: 0;
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE SCREEN
+========================================= */
+
+@media (max-width: 576px) {
+
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+
+    .hero-section p {
+        font-size: 15px;
+    }
+
+    .search-section .input-group {
+        flex-direction: column;
+    }
+
+    .search-section .form-control,
+    .search-section .btn {
+        border-radius: 8px;
+        width: 100%;
+    }
+
+    .search-section .btn {
+        margin-top: 8px;
+    }
+
+}
