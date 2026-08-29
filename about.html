@@ -4,39 +4,75 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="About MedInfo Portal">
 
     <title>About Us - MedInfo Portal</title>
 
+
     <!-- Bootstrap CSS -->
+
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
+
     <!-- Bootstrap Icons -->
+
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Google Font -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <!-- Main CSS -->
+
+    <link
+        rel="stylesheet"
+        href="css/style.css">
 
 </head>
+
 
 <body>
 
 
-<!-- ================= NAVBAR ================= -->
+<!-- ==================================================
+     NAVBAR
+================================================== -->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+<nav
+    class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
 
     <div class="container">
 
-        <a class="navbar-brand fw-bold" href="index.html">
 
-            <i class="bi bi-capsule-pill"></i>
+        <a
+            class="navbar-brand d-flex align-items-center gap-2"
+            href="index.html">
 
-            MedInfo Portal
+            <span class="brand-icon">
+
+                <i class="bi bi-capsule-pill"></i>
+
+            </span>
+
+            <span>
+
+                <strong>MedInfo</strong>
+                <small>Portal</small>
+
+            </span>
 
         </a>
 
@@ -45,40 +81,100 @@
             class="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#navbarMenu">
+            data-bs-target="#mainNavbar">
 
             <span class="navbar-toggler-icon"></span>
 
         </button>
 
 
-        <div class="collapse navbar-collapse" id="navbarMenu">
+        <div
+            class="collapse navbar-collapse"
+            id="mainNavbar">
 
-            <ul class="navbar-nav ms-auto">
+            <ul
+                class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+
 
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">
+
+                    <a
+                        class="nav-link"
+                        href="index.html">
+
                         Home
+
                     </a>
+
                 </li>
 
+
                 <li class="nav-item">
-                    <a class="nav-link" href="medicines.html">
+
+                    <a
+                        class="nav-link"
+                        href="medicines.html">
+
                         Medicines
+
                     </a>
+
                 </li>
 
+
                 <li class="nav-item">
-                    <a class="nav-link active" href="about.html">
+
+                    <a
+                        class="nav-link active"
+                        href="about.html">
+
                         About
+
                     </a>
+
                 </li>
 
+
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">
+
+                    <a
+                        class="nav-link"
+                        href="contact.html">
+
                         Contact
+
                     </a>
+
                 </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="feedback.html">
+
+                        Feedback
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item ms-lg-2">
+
+                    <a
+                        class="btn btn-primary px-4"
+                        href="login.html">
+
+                        <i class="bi bi-person"></i>
+
+                        Login
+
+                    </a>
+
+                </li>
+
 
             </ul>
 
@@ -90,29 +186,36 @@
 
 
 
-<!-- ================= ABOUT HEADER ================= -->
+<!-- ==================================================
+     PAGE HEADER
+================================================== -->
 
-<section class="py-5 bg-light">
+<section class="page-header">
 
     <div class="container text-center">
 
-        <div class="feature-icon mb-3">
 
-            <i class="bi bi-info-circle"></i>
+        <span class="section-label">
 
-        </div>
+            ABOUT MEDINFO
 
-        <h1 class="fw-bold text-primary">
+        </span>
 
-            About Medicine Information Portal
+
+        <h1 class="fw-bold mt-2">
+
+            About Our Portal
 
         </h1>
 
+
         <p class="text-muted">
 
-            Making medicine-related information simple and accessible.
+            Learn more about MedInfo Portal and
+            its purpose.
 
         </p>
+
 
     </div>
 
@@ -120,61 +223,167 @@
 
 
 
-<!-- ================= PROJECT DESCRIPTION ================= -->
+<!-- ==================================================
+     INTRODUCTION
+================================================== -->
 
 <section class="py-5">
 
     <div class="container">
 
+
         <div class="row align-items-center g-5">
 
 
+            <!-- LEFT -->
+
             <div class="col-lg-6">
 
-                <h2 class="fw-bold text-primary mb-3">
 
-                    What is this Portal?
+                <span class="section-label">
+
+                    WHO WE ARE
+
+                </span>
+
+
+                <h2 class="fw-bold mt-2 mb-3">
+
+                    Making Medicine Information
+                    Easier to Explore
 
                 </h2>
 
-                <p>
 
-                    The Medicine Information Portal is a web-based
-                    educational application designed to provide
-                    organized and easy-to-understand information
-                    about medicines.
+                <p class="text-muted">
 
-                </p>
-
-                <p>
-
-                    Users can search for medicines and view useful
-                    information such as their common uses, dosage
-                    guidance, possible side effects, precautions
-                    and storage instructions.
+                    MedInfo Portal is an educational
+                    medicine information website designed
+                    to help users explore basic information
+                    about commonly known medicines.
 
                 </p>
 
-                <p>
 
-                    The portal is designed to be useful for students,
-                    healthcare learners and the general public who
-                    want to learn basic information about medicines.
+                <p class="text-muted">
+
+                    The portal provides information such as
+                    medicine names, generic names, categories,
+                    common uses, general precautions,
+                    possible side effects and storage
+                    information.
 
                 </p>
+
+
+                <p class="text-muted">
+
+                    Our goal is to present information in a
+                    simple, organized and user-friendly way.
+
+                </p>
+
+
+                <a
+                    href="medicines.html"
+                    class="btn btn-primary mt-2">
+
+                    <i class="bi bi-capsule-pill"></i>
+
+                    Explore Medicines
+
+                </a>
 
             </div>
 
 
-            <div class="col-lg-6 text-center">
 
-                <div class="medicine-icon">
+            <!-- RIGHT -->
 
-                    <i class="bi bi-capsule-pill"></i>
+            <div class="col-lg-6">
+
+
+                <div class="about-visual-card">
+
+
+                    <div class="about-main-icon">
+
+                        <i class="bi bi-heart-pulse-fill"></i>
+
+                    </div>
+
+
+                    <h4 class="fw-bold mt-4">
+
+                        Simple. Informative. Accessible.
+
+                    </h4>
+
+
+                    <p class="text-muted">
+
+                        Designed as a clean educational
+                        platform for learning about
+                        medicine information.
+
+                    </p>
+
+
+                    <div class="row g-3 mt-3">
+
+
+                        <div class="col-4">
+
+                            <div class="about-stat">
+
+                                <i class="bi bi-capsule"></i>
+
+                                <strong>
+                                    Medicines
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-4">
+
+                            <div class="about-stat">
+
+                                <i class="bi bi-search"></i>
+
+                                <strong>
+                                    Search
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-4">
+
+                            <div class="about-stat">
+
+                                <i class="bi bi-shield-check"></i>
+
+                                <strong>
+                                    Awareness
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
 
                 </div>
 
             </div>
+
 
         </div>
 
@@ -184,35 +393,53 @@
 
 
 
-<!-- ================= OBJECTIVES ================= -->
+<!-- ==================================================
+     FEATURES
+================================================== -->
 
 <section class="py-5 bg-light">
 
     <div class="container">
 
+
         <div class="text-center mb-5">
 
-            <h2 class="fw-bold">
 
-                Project Objectives
+            <span class="section-label">
+
+                OUR FEATURES
+
+            </span>
+
+
+            <h2 class="fw-bold mt-2">
+
+                What You Can Do
 
             </h2>
 
+
             <p class="text-muted">
 
-                Main goals of the Medicine Information Portal
+                Explore the main features of the portal.
 
             </p>
 
+
         </div>
+
 
 
         <div class="row g-4">
 
 
-            <div class="col-md-4">
+            <!-- CARD 1 -->
 
-                <div class="card feature-card h-100 p-4 text-center">
+            <div class="col-md-6 col-lg-3">
+
+
+                <div class="feature-card h-100">
+
 
                     <div class="feature-icon">
 
@@ -220,75 +447,129 @@
 
                     </div>
 
-                    <h4 class="mt-3">
 
-                        Easy Search
+                    <h5 class="fw-bold">
 
-                    </h4>
+                        Search Medicines
+
+                    </h5>
+
 
                     <p class="text-muted">
 
-                        Provide a simple search interface that
-                        allows users to find medicine information
-                        quickly.
+                        Quickly search medicines by
+                        name, generic name or category.
 
                     </p>
+
 
                 </div>
 
             </div>
 
 
-            <div class="col-md-4">
 
-                <div class="card feature-card h-100 p-4 text-center">
+            <!-- CARD 2 -->
+
+            <div class="col-md-6 col-lg-3">
+
+
+                <div class="feature-card h-100">
+
 
                     <div class="feature-icon">
 
-                        <i class="bi bi-book"></i>
+                        <i class="bi bi-info-circle"></i>
 
                     </div>
 
-                    <h4 class="mt-3">
 
-                        Educational Information
+                    <h5 class="fw-bold">
 
-                    </h4>
+                        Medicine Details
+
+                    </h5>
+
 
                     <p class="text-muted">
 
-                        Present medicine-related information in
-                        a clear and student-friendly format.
+                        View organized educational
+                        information about medicines.
 
                     </p>
+
 
                 </div>
 
             </div>
 
 
-            <div class="col-md-4">
 
-                <div class="card feature-card h-100 p-4 text-center">
+            <!-- CARD 3 -->
+
+            <div class="col-md-6 col-lg-3">
+
+
+                <div class="feature-card h-100">
+
 
                     <div class="feature-icon">
 
-                        <i class="bi bi-phone"></i>
+                        <i class="bi bi-chat-heart"></i>
 
                     </div>
 
-                    <h4 class="mt-3">
 
-                        Responsive Design
+                    <h5 class="fw-bold">
 
-                    </h4>
+                        Give Feedback
+
+                    </h5>
+
 
                     <p class="text-muted">
 
-                        Make the website accessible on desktops,
-                        tablets and mobile devices.
+                        Share suggestions and feedback
+                        to improve the portal.
 
                     </p>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CARD 4 -->
+
+            <div class="col-md-6 col-lg-3">
+
+
+                <div class="feature-card h-100">
+
+
+                    <div class="feature-icon">
+
+                        <i class="bi bi-person-check"></i>
+
+                    </div>
+
+
+                    <h5 class="fw-bold">
+
+                        User Account
+
+                    </h5>
+
+
+                    <p class="text-muted">
+
+                        Create an account and manage
+                        your profile.
+
+                    </p>
+
 
                 </div>
 
@@ -303,160 +584,244 @@
 
 
 
-<!-- ================= TECHNOLOGIES ================= -->
+<!-- ==================================================
+     MISSION
+================================================== -->
 
 <section class="py-5">
 
     <div class="container">
 
-        <div class="text-center mb-5">
 
-            <h2 class="fw-bold text-primary">
+        <div class="row justify-content-center">
 
-                Technologies Used
 
-            </h2>
+            <div class="col-lg-9">
 
-            <p class="text-muted">
 
-                Technologies used to develop this project
+                <div class="mission-card text-center">
+
+
+                    <div class="mission-icon">
+
+                        <i class="bi bi-bullseye"></i>
+
+                    </div>
+
+
+                    <span class="section-label">
+
+                        OUR MISSION
+
+                    </span>
+
+
+                    <h2 class="fw-bold mt-2">
+
+                        Better Access to Basic
+                        Medicine Information
+
+                    </h2>
+
+
+                    <p class="text-muted mt-3 mb-0">
+
+                        We aim to create a simple educational
+                        environment where users can find
+                        basic medicine information without
+                        unnecessary complexity.
+
+                    </p>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     DISCLAIMER
+================================================== -->
+
+<section class="container pb-5">
+
+    <div class="medical-disclaimer">
+
+
+        <div class="disclaimer-icon">
+
+            <i class="bi bi-exclamation-triangle-fill"></i>
+
+        </div>
+
+
+        <div>
+
+            <h6 class="fw-bold">
+
+                Important Medical Disclaimer
+
+            </h6>
+
+
+            <p class="mb-0">
+
+                MedInfo Portal is an educational project.
+                The information provided on this website
+                is not a substitute for professional medical
+                advice, diagnosis or treatment. Always
+                consult a qualified healthcare professional
+                for medical decisions.
 
             </p>
 
         </div>
 
 
-        <div class="row justify-content-center g-4">
-
-
-            <div class="col-6 col-md-3">
-
-                <div class="card feature-card text-center p-4">
-
-                    <i class="bi bi-filetype-html fs-1 text-primary"></i>
-
-                    <h5 class="mt-3">
-                        HTML5
-                    </h5>
-
-                    <p class="text-muted mb-0">
-                        Website Structure
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="col-6 col-md-3">
-
-                <div class="card feature-card text-center p-4">
-
-                    <i class="bi bi-filetype-css fs-1 text-primary"></i>
-
-                    <h5 class="mt-3">
-                        CSS3
-                    </h5>
-
-                    <p class="text-muted mb-0">
-                        Website Styling
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="col-6 col-md-3">
-
-                <div class="card feature-card text-center p-4">
-
-                    <i class="bi bi-bootstrap fs-1 text-primary"></i>
-
-                    <h5 class="mt-3">
-                        Bootstrap
-                    </h5>
-
-                    <p class="text-muted mb-0">
-                        Responsive UI
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="col-6 col-md-3">
-
-                <div class="card feature-card text-center p-4">
-
-                    <i class="bi bi-filetype-js fs-1 text-primary"></i>
-
-                    <h5 class="mt-3">
-                        JavaScript
-                    </h5>
-
-                    <p class="text-muted mb-0">
-                        Website Functionality
-                    </p>
-
-                </div>
-
-            </div>
-
-
-        </div>
-
     </div>
 
 </section>
 
 
 
-<!-- ================= DISCLAIMER ================= -->
+<!-- ==================================================
+     FOOTER
+================================================== -->
 
-<section class="pb-5">
+<footer class="footer-section">
 
     <div class="container">
 
-        <div class="alert alert-warning text-center">
 
-            <i class="bi bi-exclamation-triangle-fill"></i>
+        <div class="row g-4">
 
-            <strong>Disclaimer:</strong>
 
-            This portal is created for educational and informational
-            purposes. It should not be used as a replacement for
-            professional medical advice, diagnosis or treatment.
+            <div class="col-lg-5">
+
+                <a
+                    href="index.html"
+                    class="footer-brand">
+
+                    <i class="bi bi-capsule-pill"></i>
+
+                    MedInfo Portal
+
+                </a>
+
+
+                <p class="mt-3">
+
+                    Simple and accessible medicine
+                    information for educational use.
+
+                </p>
+
+            </div>
+
+
+            <div class="col-6 col-lg-3">
+
+                <h6>
+
+                    Quick Links
+
+                </h6>
+
+
+                <ul class="footer-links">
+
+                    <li>
+
+                        <a href="index.html">
+                            Home
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="medicines.html">
+                            Medicines
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="about.html">
+                            About
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="contact.html">
+                            Contact
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="col-6 col-lg-4">
+
+                <h6>
+
+                    Get Started
+
+                </h6>
+
+
+                <p class="small">
+
+                    Explore medicine information or
+                    create your account.
+
+                </p>
+
+
+                <a
+                    href="register.html"
+                    class="btn btn-outline-light btn-sm">
+
+                    Create Account
+
+                </a>
+
+            </div>
+
 
         </div>
 
-    </div>
 
-</section>
-
+        <hr>
 
 
-<!-- ================= FOOTER ================= -->
+        <div class="text-center">
 
-<footer class="bg-primary text-white text-center py-4">
+            <small>
 
-    <div class="container">
+                © 2026 MedInfo Portal |
+                Educational Purpose Only
 
-        <p class="mb-1">
+            </small>
 
-            <i class="bi bi-capsule-pill"></i>
+        </div>
 
-            <strong>Medicine Information Portal</strong>
-
-        </p>
-
-        <p class="mb-0">
-
-            © 2026 Medicine Information Portal.
-            All Rights Reserved.
-
-        </p>
 
     </div>
 
@@ -464,7 +829,7 @@
 
 
 
-<!-- Bootstrap JavaScript -->
+<!-- Bootstrap JS -->
 
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
@@ -472,4 +837,5 @@
 
 
 </body>
+
 </html>
