@@ -4,39 +4,75 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Browse medicine information on MedInfo Portal">
 
     <title>Medicines - MedInfo Portal</title>
 
-    <!-- Bootstrap CSS -->
+
+    <!-- Bootstrap -->
+
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
+
     <!-- Bootstrap Icons -->
+
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Google Font -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <!-- Main CSS -->
+
+    <link
+        rel="stylesheet"
+        href="css/style.css">
 
 </head>
+
 
 <body>
 
 
-<!-- ================= NAVBAR ================= -->
+<!-- ==================================================
+     NAVBAR
+================================================== -->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+<nav
+    class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
 
     <div class="container">
 
-        <a class="navbar-brand fw-bold" href="index.html">
 
-            <i class="bi bi-capsule-pill"></i>
+        <a
+            class="navbar-brand d-flex align-items-center gap-2"
+            href="index.html">
 
-            MedInfo Portal
+            <span class="brand-icon">
+
+                <i class="bi bi-capsule-pill"></i>
+
+            </span>
+
+            <span>
+
+                <strong>MedInfo</strong>
+                <small>Portal</small>
+
+            </span>
 
         </a>
 
@@ -45,40 +81,100 @@
             class="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#navbarMenu">
+            data-bs-target="#mainNavbar">
 
             <span class="navbar-toggler-icon"></span>
 
         </button>
 
 
-        <div class="collapse navbar-collapse" id="navbarMenu">
+        <div
+            class="collapse navbar-collapse"
+            id="mainNavbar">
 
-            <ul class="navbar-nav ms-auto">
+            <ul
+                class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+
 
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">
+
+                    <a
+                        class="nav-link"
+                        href="index.html">
+
                         Home
+
                     </a>
+
                 </li>
 
+
                 <li class="nav-item">
-                    <a class="nav-link active" href="medicines.html">
+
+                    <a
+                        class="nav-link active"
+                        href="medicines.html">
+
                         Medicines
+
                     </a>
+
                 </li>
 
+
                 <li class="nav-item">
-                    <a class="nav-link" href="about.html">
+
+                    <a
+                        class="nav-link"
+                        href="about.html">
+
                         About
+
                     </a>
+
                 </li>
 
+
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">
+
+                    <a
+                        class="nav-link"
+                        href="contact.html">
+
                         Contact
+
                     </a>
+
                 </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="feedback.html">
+
+                        Feedback
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item ms-lg-2">
+
+                    <a
+                        class="btn btn-primary px-4"
+                        href="login.html">
+
+                        <i class="bi bi-person"></i>
+
+                        Login
+
+                    </a>
+
+                </li>
+
 
             </ul>
 
@@ -90,29 +186,36 @@
 
 
 
-<!-- ================= HEADER ================= -->
+<!-- ==================================================
+     PAGE HEADER
+================================================== -->
 
-<section class="py-5 bg-light">
+<section class="page-header">
 
     <div class="container text-center">
 
-        <div class="feature-icon mb-3">
 
-            <i class="bi bi-capsule-pill"></i>
+        <span class="section-label">
 
-        </div>
+            MEDICINE LIBRARY
 
-        <h1 class="fw-bold text-primary">
+        </span>
 
-            Medicine Information
+
+        <h1 class="fw-bold mt-2">
+
+            Explore Medicines
 
         </h1>
 
+
         <p class="text-muted">
 
-            Search and explore information about medicines.
+            Search and explore basic educational
+            information about medicines.
 
         </p>
+
 
     </div>
 
@@ -120,37 +223,104 @@
 
 
 
-<!-- ================= SEARCH ================= -->
+<!-- ==================================================
+     SEARCH & FILTER
+================================================== -->
 
 <section class="py-4">
 
     <div class="container">
 
-        <div class="row justify-content-center">
 
-            <div class="col-lg-8">
+        <div class="medicine-search-card">
 
-                <div class="input-group input-group-lg">
 
-                    <input
-                        type="text"
-                        id="medicineListSearch"
-                        class="form-control"
-                        placeholder="Search by medicine name, category or use...">
+            <div class="row g-3 align-items-end">
+
+
+                <!-- SEARCH -->
+
+                <div class="col-lg-7">
+
+                    <label
+                        for="medicineSearch"
+                        class="form-label fw-semibold">
+
+                        Search Medicine
+
+                    </label>
+
+
+                    <div class="input-group input-group-lg">
+
+                        <span class="input-group-text">
+
+                            <i class="bi bi-search"></i>
+
+                        </span>
+
+
+                        <input
+                            type="search"
+                            id="medicineSearch"
+                            class="form-control"
+                            placeholder="Search by medicine name, generic name or category...">
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CATEGORY -->
+
+                <div class="col-lg-3">
+
+                    <label
+                        for="categoryFilter"
+                        class="form-label fw-semibold">
+
+                        Category
+
+                    </label>
+
+
+                    <select
+                        id="categoryFilter"
+                        class="form-select form-select-lg">
+
+                        <option value="all">
+
+                            All Categories
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- RESET -->
+
+                <div class="col-lg-2">
 
                     <button
-                        class="btn btn-primary"
-                        onclick="searchMedicineList()">
+                        type="button"
+                        id="resetMedicineFilter"
+                        class="btn btn-outline-secondary btn-lg w-100">
 
-                        <i class="bi bi-search"></i>
+                        <i class="bi bi-arrow-counterclockwise"></i>
 
-                        Search
+                        Reset
 
                     </button>
 
                 </div>
 
+
             </div>
+
 
         </div>
 
@@ -160,89 +330,328 @@
 
 
 
-<!-- ================= MEDICINE LIST ================= -->
+<!-- ==================================================
+     MEDICINE RESULTS
+================================================== -->
 
-<section class="py-5">
+<section class="py-4 pb-5">
 
     <div class="container">
+
+
+        <!-- RESULT HEADER -->
+
+        <div
+            class="d-flex
+                   flex-column
+                   flex-md-row
+                   justify-content-between
+                   align-items-md-center
+                   gap-2
+                   mb-4">
+
+
+            <div>
+
+                <h5 class="fw-bold mb-1">
+
+                    Available Medicines
+
+                </h5>
+
+
+                <p
+                    class="text-muted mb-0">
+
+                    Showing
+                    <strong id="medicineResultCount">
+                        0
+                    </strong>
+                    medicines
+
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <span
+                    class="badge bg-primary-subtle text-primary p-2">
+
+                    <i class="bi bi-database"></i>
+
+                    Medicine Library
+
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- LOADING -->
+
+        <div
+            id="medicineLoading"
+            class="text-center py-5"
+            style="display:none;">
+
+
+            <div
+                class="spinner-border text-primary"
+                role="status">
+
+            </div>
+
+
+            <p class="text-muted mt-3">
+
+                Loading medicines...
+
+            </p>
+
+
+        </div>
+
+
+
+        <!-- MEDICINE CARDS -->
 
         <div
             class="row g-4"
             id="medicineContainer">
 
-            <!-- Medicine cards will be loaded by JavaScript -->
+
+            <!-- JavaScript will add medicines here -->
+
 
         </div>
 
 
-        <!-- NO RESULT -->
+
+        <!-- NO RESULTS -->
 
         <div
-            id="noMedicine"
-            class="text-center text-danger mt-5"
-            style="display: none;">
+            id="noMedicineResults"
+            class="text-center py-5"
+            style="display:none;">
 
-            <i class="bi bi-search fs-1"></i>
 
-            <h4 class="mt-3">
-                No medicine found
+            <div class="empty-state-icon">
+
+                <i class="bi bi-search"></i>
+
+            </div>
+
+
+            <h4 class="fw-bold mt-3">
+
+                No medicines found
+
             </h4>
 
+
             <p class="text-muted">
-                Try searching with another medicine name or category.
+
+                Try another medicine name or category.
+
+            </p>
+
+
+            <button
+                id="clearMedicineSearch"
+                class="btn btn-outline-primary">
+
+                Clear Search
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     DISCLAIMER
+================================================== -->
+
+<section class="container pb-5">
+
+    <div class="medical-disclaimer">
+
+
+        <div class="disclaimer-icon">
+
+            <i
+                class="bi bi-info-circle-fill">
+            </i>
+
+        </div>
+
+
+        <div>
+
+            <h6 class="fw-bold">
+
+                Educational Information
+
+            </h6>
+
+
+            <p class="mb-0">
+
+                Medicine information on this website
+                is provided for educational purposes.
+                Always consult a qualified healthcare
+                professional for personal medical advice.
+
             </p>
 
         </div>
 
+
     </div>
 
 </section>
 
 
 
-<!-- ================= DISCLAIMER ================= -->
+<!-- ==================================================
+     FOOTER
+================================================== -->
 
-<section class="pb-5">
+<footer class="footer-section">
 
     <div class="container">
 
-        <div class="alert alert-warning text-center">
 
-            <i class="bi bi-exclamation-triangle-fill"></i>
+        <div class="row g-4">
 
-            <strong>Disclaimer:</strong>
 
-            This website provides general educational information.
-            It is not a substitute for professional medical advice.
+            <div class="col-lg-5">
+
+                <a
+                    href="index.html"
+                    class="footer-brand">
+
+                    <i class="bi bi-capsule-pill"></i>
+
+                    MedInfo Portal
+
+                </a>
+
+
+                <p class="mt-3">
+
+                    Simple and accessible medicine
+                    information for educational use.
+
+                </p>
+
+            </div>
+
+
+            <div class="col-6 col-lg-3">
+
+                <h6>
+
+                    Quick Links
+
+                </h6>
+
+
+                <ul class="footer-links">
+
+                    <li>
+
+                        <a href="index.html">
+                            Home
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="medicines.html">
+                            Medicines
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="about.html">
+                            About
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="feedback.html">
+                            Feedback
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="col-6 col-lg-4">
+
+                <h6>
+
+                    Important
+
+                </h6>
+
+
+                <p class="small">
+
+                    This portal does not provide
+                    diagnosis or treatment recommendations.
+
+                </p>
+
+
+                <a
+                    href="contact.html"
+                    class="btn btn-outline-light btn-sm">
+
+                    Contact Us
+
+                </a>
+
+            </div>
+
 
         </div>
 
-    </div>
 
-</section>
-
+        <hr>
 
 
-<!-- ================= FOOTER ================= -->
+        <div class="text-center">
 
-<footer class="bg-primary text-white text-center py-4">
+            <small>
 
-    <div class="container">
+                © 2026 MedInfo Portal |
+                Educational Purpose Only
 
-        <p class="mb-1">
+            </small>
 
-            <i class="bi bi-capsule-pill"></i>
+        </div>
 
-            <strong>Medicine Information Portal</strong>
-
-        </p>
-
-        <p class="mb-0">
-
-            © 2026 Medicine Information Portal.
-            All Rights Reserved.
-
-        </p>
 
     </div>
 
@@ -250,7 +659,9 @@
 
 
 
-<!-- ================= BOOTSTRAP JS ================= -->
+<!-- ==================================================
+     BOOTSTRAP JS
+================================================== -->
 
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
@@ -258,9 +669,17 @@
 
 
 
-<!-- ================= PROJECT JS ================= -->
+<!-- ==================================================
+     MEDICINE DATA
+================================================== -->
 
 <script src="js/medicines-data.js"></script>
+
+
+
+<!-- ==================================================
+     MEDICINE APP
+================================================== -->
 
 <script src="js/medicine-app.js"></script>
 
