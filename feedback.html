@@ -4,38 +4,75 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Send feedback to MedInfo Portal">
 
     <title>Feedback - MedInfo Portal</title>
 
+
     <!-- Bootstrap CSS -->
+
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
+
     <!-- Bootstrap Icons -->
+
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Google Font -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <!-- Website CSS -->
+
+    <link
+        rel="stylesheet"
+        href="css/style.css">
 
 </head>
+
 
 <body>
 
 
-<!-- ================= NAVBAR ================= -->
+<!-- ==================================================
+     NAVBAR
+================================================== -->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+<nav
+    class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
 
     <div class="container">
 
-        <a class="navbar-brand fw-bold" href="index.html">
 
-            <i class="bi bi-capsule-pill"></i>
-            MedInfo Portal
+        <a
+            class="navbar-brand d-flex align-items-center gap-2"
+            href="index.html">
+
+            <span class="brand-icon">
+
+                <i class="bi bi-capsule-pill"></i>
+
+            </span>
+
+            <span>
+
+                <strong>MedInfo</strong>
+                <small>Portal</small>
+
+            </span>
 
         </a>
 
@@ -44,7 +81,7 @@
             class="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#navbarMenu">
+            data-bs-target="#mainNavbar">
 
             <span class="navbar-toggler-icon"></span>
 
@@ -53,40 +90,91 @@
 
         <div
             class="collapse navbar-collapse"
-            id="navbarMenu">
+            id="mainNavbar">
 
-            <ul class="navbar-nav ms-auto">
+            <ul
+                class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+
 
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">
+
+                    <a
+                        class="nav-link"
+                        href="index.html">
+
                         Home
+
                     </a>
+
                 </li>
 
+
                 <li class="nav-item">
-                    <a class="nav-link" href="medicines.html">
+
+                    <a
+                        class="nav-link"
+                        href="medicines.html">
+
                         Medicines
+
                     </a>
+
                 </li>
 
+
                 <li class="nav-item">
-                    <a class="nav-link" href="about.html">
+
+                    <a
+                        class="nav-link"
+                        href="about.html">
+
                         About
+
                     </a>
+
                 </li>
 
+
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">
+
+                    <a
+                        class="nav-link"
+                        href="contact.html">
+
                         Contact
+
                     </a>
+
                 </li>
 
+
                 <li class="nav-item">
-                    <a class="nav-link" href="profile.html">
-                        <i class="bi bi-person-circle"></i>
-                        Profile
+
+                    <a
+                        class="nav-link active"
+                        href="feedback.html">
+
+                        Feedback
+
                     </a>
+
                 </li>
+
+
+                <li class="nav-item ms-lg-2">
+
+                    <a
+                        class="btn btn-primary px-4"
+                        href="login.html">
+
+                        <i class="bi bi-person"></i>
+
+                        Login
+
+                    </a>
+
+                </li>
+
 
             </ul>
 
@@ -98,29 +186,35 @@
 
 
 
-<!-- ================= HEADER ================= -->
+<!-- ==================================================
+     PAGE HEADER
+================================================== -->
 
-<section class="py-5 bg-light">
+<section class="page-header">
 
     <div class="container text-center">
 
-        <div class="feature-icon mx-auto mb-3">
 
-            <i class="bi bi-star"></i>
+        <span class="section-label">
 
-        </div>
+            YOUR OPINION MATTERS
 
-        <h1 class="fw-bold text-primary">
+        </span>
+
+
+        <h1 class="fw-bold mt-2">
 
             Share Your Feedback
 
         </h1>
 
+
         <p class="text-muted">
 
-            Your feedback helps us improve the Medicine Information Portal.
+            Help us make MedInfo Portal better.
 
         </p>
+
 
     </div>
 
@@ -128,67 +222,131 @@
 
 
 
-<!-- ================= FEEDBACK FORM ================= -->
+<!-- ==================================================
+     FEEDBACK SECTION
+================================================== -->
 
 <section class="py-5">
 
     <div class="container">
 
-        <div class="row justify-content-center">
-
-            <div class="col-md-8 col-lg-7">
-
-                <div class="card border-0 shadow">
-
-                    <div class="card-body p-4 p-md-5">
+        <div class="row justify-content-center g-4">
 
 
-                        <!-- TITLE -->
+            <!-- LEFT INFO -->
 
-                        <div class="text-center mb-4">
-
-                            <h3 class="fw-bold">
-
-                                Rate Your Experience
-
-                            </h3>
-
-                            <p class="text-muted">
-
-                                Tell us what you think about our website.
-
-                            </p>
-
-                        </div>
+            <div class="col-lg-4">
 
 
-
-                        <!-- MESSAGE -->
-
-                        <div
-                            id="feedbackMessage"
-                            class="alert"
-                            style="display:none;">
-                        </div>
+                <div class="feedback-info-card">
 
 
+                    <div class="feedback-big-icon">
 
-                        <!-- FORM -->
+                        <i class="bi bi-chat-heart-fill"></i>
 
-                        <form id="feedbackForm">
+                    </div>
 
 
-                            <!-- NAME -->
+                    <h3 class="fw-bold mt-4">
 
-                            <div class="mb-3">
+                        We'd Love To Hear From You
 
-                                <label
-                                    for="feedbackName"
-                                    class="form-label fw-semibold">
+                    </h3>
 
-                                    Your Name
 
-                                </label>
+                    <p class="text-muted">
+
+                        Your feedback helps us improve
+                        the medicine information portal
+                        and create a better experience
+                        for everyone.
+
+                    </p>
+
+
+                    <div class="feedback-point">
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        Tell us what you liked
+
+                    </div>
+
+
+                    <div class="feedback-point">
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        Report an issue
+
+                    </div>
+
+
+                    <div class="feedback-point">
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        Suggest a new feature
+
+                    </div>
+
+
+                    <div class="feedback-point">
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        Suggest medicine information
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FORM -->
+
+            <div class="col-lg-7">
+
+
+                <div class="feedback-form-card">
+
+
+                    <div
+                        id="feedbackMessage"
+                        class="alert"
+                        style="display:none;">
+
+                    </div>
+
+
+                    <form id="feedbackForm">
+
+
+                        <!-- NAME -->
+
+                        <div class="mb-3">
+
+                            <label
+                                for="feedbackName"
+                                class="form-label fw-semibold">
+
+                                Your Name
+
+                            </label>
+
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+
+                                    <i class="bi bi-person"></i>
+
+                                </span>
+
 
                                 <input
                                     type="text"
@@ -199,19 +357,31 @@
 
                             </div>
 
+                        </div>
 
 
-                            <!-- EMAIL -->
 
-                            <div class="mb-3">
+                        <!-- EMAIL -->
 
-                                <label
-                                    for="feedbackEmail"
-                                    class="form-label fw-semibold">
+                        <div class="mb-3">
 
-                                    Email Address
+                            <label
+                                for="feedbackEmail"
+                                class="form-label fw-semibold">
 
-                                </label>
+                                Email Address
+
+                            </label>
+
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+
+                                    <i class="bi bi-envelope"></i>
+
+                                </span>
+
 
                                 <input
                                     type="email"
@@ -222,132 +392,219 @@
 
                             </div>
 
+                        </div>
 
 
-                            <!-- RATING -->
 
-                            <div class="mb-4 text-center">
+                        <!-- RATING -->
 
-                                <label
-                                    class="form-label fw-semibold d-block">
+                        <div class="mb-3">
 
-                                    Rate the Website
+                            <label
+                                class="form-label fw-semibold">
 
-                                </label>
+                                How would you rate our portal?
 
-
-                                <div
-                                    id="starRating"
-                                    class="star-rating">
-
-                                    <button
-                                        type="button"
-                                        class="star-btn"
-                                        data-rating="1">
-
-                                        ★
-
-                                    </button>
-
-                                    <button
-                                        type="button"
-                                        class="star-btn"
-                                        data-rating="2">
-
-                                        ★
-
-                                    </button>
-
-                                    <button
-                                        type="button"
-                                        class="star-btn"
-                                        data-rating="3">
-
-                                        ★
-
-                                    </button>
-
-                                    <button
-                                        type="button"
-                                        class="star-btn"
-                                        data-rating="4">
-
-                                        ★
-
-                                    </button>
-
-                                    <button
-                                        type="button"
-                                        class="star-btn"
-                                        data-rating="5">
-
-                                        ★
-
-                                    </button>
-
-                                </div>
+                            </label>
 
 
-                                <p
-                                    id="ratingText"
-                                    class="text-muted mt-2">
+                            <div
+                                class="rating-wrapper"
+                                id="ratingWrapper">
 
-                                    Select a rating
 
-                                </p>
+                                <button
+                                    type="button"
+                                    class="rating-star"
+                                    data-rating="1">
 
-                                <input
-                                    type="hidden"
-                                    id="rating"
-                                    value="">
+                                    <i class="bi bi-star"></i>
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="rating-star"
+                                    data-rating="2">
+
+                                    <i class="bi bi-star"></i>
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="rating-star"
+                                    data-rating="3">
+
+                                    <i class="bi bi-star"></i>
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="rating-star"
+                                    data-rating="4">
+
+                                    <i class="bi bi-star"></i>
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="rating-star"
+                                    data-rating="5">
+
+                                    <i class="bi bi-star"></i>
+
+                                </button>
+
 
                             </div>
 
 
+                            <input
+                                type="hidden"
+                                id="feedbackRating"
+                                value="0">
 
-                            <!-- FEEDBACK -->
 
-                            <div class="mb-4">
+                            <small
+                                id="ratingText"
+                                class="text-muted">
 
-                                <label
-                                    for="feedbackText"
-                                    class="form-label fw-semibold">
+                                Select a rating
 
-                                    Your Feedback
+                            </small>
 
-                                </label>
+                        </div>
 
-                                <textarea
-                                    id="feedbackText"
-                                    class="form-control"
-                                    rows="5"
-                                    placeholder="Write your feedback here..."
-                                    required></textarea>
+
+
+                        <!-- SUBJECT -->
+
+                        <div class="mb-3">
+
+                            <label
+                                for="feedbackSubject"
+                                class="form-label fw-semibold">
+
+                                Feedback Type
+
+                            </label>
+
+
+                            <select
+                                id="feedbackSubject"
+                                class="form-select"
+                                required>
+
+                                <option value="">
+
+                                    Select feedback type
+
+                                </option>
+
+                                <option value="Suggestion">
+
+                                    Suggestion
+
+                                </option>
+
+                                <option value="Website Issue">
+
+                                    Website Issue
+
+                                </option>
+
+                                <option value="Medicine Information">
+
+                                    Medicine Information
+
+                                </option>
+
+                                <option value="User Experience">
+
+                                    User Experience
+
+                                </option>
+
+                                <option value="Other">
+
+                                    Other
+
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- MESSAGE -->
+
+                        <div class="mb-4">
+
+                            <label
+                                for="feedbackText"
+                                class="form-label fw-semibold">
+
+                                Your Feedback
+
+                            </label>
+
+
+                            <textarea
+                                id="feedbackText"
+                                class="form-control"
+                                rows="6"
+                                maxlength="1000"
+                                placeholder="Write your feedback here..."
+                                required></textarea>
+
+
+                            <div
+                                class="text-end mt-1">
+
+                                <small
+                                    class="text-muted">
+
+                                    <span id="characterCount">
+                                        0
+                                    </span>
+                                    / 1000
+
+                                </small>
 
                             </div>
 
+                        </div>
 
 
-                            <!-- SUBMIT -->
 
-                            <button
-                                type="submit"
-                                class="btn btn-primary w-100 py-2">
+                        <!-- SUBMIT -->
 
-                                <i class="bi bi-send"></i>
+                        <button
+                            type="submit"
+                            class="btn btn-primary w-100 py-2">
 
-                                Submit Feedback
+                            <i class="bi bi-send"></i>
 
-                            </button>
+                            Submit Feedback
+
+                        </button>
 
 
-                        </form>
+                    </form>
 
-                    </div>
 
                 </div>
 
             </div>
+
 
         </div>
 
@@ -357,26 +614,207 @@
 
 
 
-<!-- ================= FOOTER ================= -->
+<!-- ==================================================
+     DISCLAIMER
+================================================== -->
 
-<footer class="bg-primary text-white text-center py-4">
+<section class="container pb-5">
+
+    <div class="medical-disclaimer">
+
+
+        <div class="disclaimer-icon">
+
+            <i class="bi bi-info-circle-fill"></i>
+
+        </div>
+
+
+        <div>
+
+            <h6 class="fw-bold">
+
+                Privacy Note
+
+            </h6>
+
+
+            <p class="mb-0">
+
+                This demo portal stores feedback
+                locally in the browser for project
+                demonstration purposes.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
+<footer class="footer-section">
 
     <div class="container">
 
-        <p class="mb-1">
 
-            <i class="bi bi-capsule-pill"></i>
+        <div class="row g-4">
 
-            <strong>Medicine Information Portal</strong>
 
-        </p>
+            <div class="col-lg-5">
 
-        <p class="mb-0">
+                <a
+                    href="index.html"
+                    class="footer-brand">
 
-            © 2026 Medicine Information Portal.
-            All Rights Reserved.
+                    <i class="bi bi-capsule-pill"></i>
 
-        </p>
+                    MedInfo Portal
+
+                </a>
+
+
+                <p class="mt-3">
+
+                    Simple medicine information
+                    for educational purposes.
+
+                </p>
+
+            </div>
+
+
+            <div class="col-6 col-lg-3">
+
+                <h6>
+
+                    Quick Links
+
+                </h6>
+
+
+                <ul class="footer-links">
+
+                    <li>
+
+                        <a href="index.html">
+
+                            Home
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="medicines.html">
+
+                            Medicines
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="about.html">
+
+                            About
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="contact.html">
+
+                            Contact
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="col-6 col-lg-4">
+
+                <h6>
+
+                    Account
+
+                </h6>
+
+
+                <ul class="footer-links">
+
+                    <li>
+
+                        <a href="login.html">
+
+                            Login
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="register.html">
+
+                            Register
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="profile.html">
+
+                            Profile
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+        </div>
+
+
+        <hr>
+
+
+        <div class="text-center">
+
+            <small>
+
+                © 2026 MedInfo Portal |
+                Educational Purpose Only
+
+            </small>
+
+        </div>
+
 
     </div>
 
@@ -391,11 +829,370 @@
 </script>
 
 
-<!-- Feedback JavaScript -->
+<!-- Feedback JS -->
 
 <script src="js/feedback.js"></script>
 
 
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        const form =
+            document.getElementById(
+                "feedbackForm"
+            );
+
+
+        const nameInput =
+            document.getElementById(
+                "feedbackName"
+            );
+
+
+        const emailInput =
+            document.getElementById(
+                "feedbackEmail"
+            );
+
+
+        const ratingInput =
+            document.getElementById(
+                "feedbackRating"
+            );
+
+
+        const subjectInput =
+            document.getElementById(
+                "feedbackSubject"
+            );
+
+
+        const textInput =
+            document.getElementById(
+                "feedbackText"
+            );
+
+
+        const message =
+            document.getElementById(
+                "feedbackMessage"
+            );
+
+
+        const ratingText =
+            document.getElementById(
+                "ratingText"
+            );
+
+
+        const stars =
+            document.querySelectorAll(
+                ".rating-star"
+            );
+
+
+        const characterCount =
+            document.getElementById(
+                "characterCount"
+            );
+
+
+
+        /* =================================
+           LOAD USER INFORMATION
+        ================================= */
+
+        try {
+
+            const currentUser =
+                JSON.parse(
+                    localStorage.getItem(
+                        "medinfo_current_user"
+                    )
+                );
+
+
+            if (currentUser) {
+
+                nameInput.value =
+                    currentUser.name || "";
+
+
+                emailInput.value =
+                    currentUser.email || "";
+
+            }
+
+        } catch (error) {
+
+            console.log(
+                "User information not available."
+            );
+
+        }
+
+
+
+        /* =================================
+           STAR RATING
+        ================================= */
+
+        stars.forEach(
+            function (star) {
+
+                star.addEventListener(
+                    "click",
+                    function () {
+
+                        const rating =
+                            Number(
+                                this.dataset.rating
+                            );
+
+
+                        ratingInput.value =
+                            rating;
+
+
+                        stars.forEach(
+                            function (
+                                item,
+                                index
+                            ) {
+
+                                const icon =
+                                    item.querySelector(
+                                        "i"
+                                    );
+
+
+                                if (
+                                    index < rating
+                                ) {
+
+                                    icon.className =
+                                        "bi bi-star-fill";
+
+                                } else {
+
+                                    icon.className =
+                                        "bi bi-star";
+
+                                }
+
+                            }
+                        );
+
+
+                        ratingText.textContent =
+                            rating +
+                            " out of 5 selected.";
+
+                    }
+                );
+
+            }
+        );
+
+
+
+        /* =================================
+           CHARACTER COUNT
+        ================================= */
+
+        textInput.addEventListener(
+            "input",
+            function () {
+
+                characterCount.textContent =
+                    this.value.length;
+
+            }
+        );
+
+
+
+        /* =================================
+           SUBMIT FEEDBACK
+        ================================= */
+
+        form.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+
+                const rating =
+                    Number(
+                        ratingInput.value
+                    );
+
+
+                if (rating < 1) {
+
+                    showFeedbackMessage(
+                        "Please select a rating.",
+                        "danger"
+                    );
+
+                    return;
+
+                }
+
+
+                const feedback = {
+
+                    id:
+                        "feedback_" +
+                        Date.now(),
+
+                    name:
+                        nameInput.value.trim(),
+
+                    email:
+                        emailInput.value.trim(),
+
+                    rating:
+                        rating,
+
+                    type:
+                        subjectInput.value,
+
+                    message:
+                        textInput.value.trim(),
+
+                    status:
+                        "New",
+
+                    createdAt:
+                        new Date().toISOString()
+
+                };
+
+
+                let feedbackList = [];
+
+
+                try {
+
+                    feedbackList =
+                        JSON.parse(
+                            localStorage.getItem(
+                                "medinfo_feedback"
+                            )
+                        ) || [];
+
+                } catch (error) {
+
+                    feedbackList = [];
+
+                }
+
+
+                feedbackList.push(
+                    feedback
+                );
+
+
+                localStorage.setItem(
+                    "medinfo_feedback",
+                    JSON.stringify(
+                        feedbackList
+                    )
+                );
+
+
+                showFeedbackMessage(
+                    "Thank you! Your feedback has been submitted successfully.",
+                    "success"
+                );
+
+
+                form.reset();
+
+
+                ratingInput.value =
+                    "0";
+
+
+                ratingText.textContent =
+                    "Select a rating";
+
+
+                characterCount.textContent =
+                    "0";
+
+
+                stars.forEach(
+                    function (star) {
+
+                        const icon =
+                            star.querySelector(
+                                "i"
+                            );
+
+                        icon.className =
+                            "bi bi-star";
+
+                    }
+                );
+
+
+                setTimeout(
+                    function () {
+
+                        message.style.display =
+                            "none";
+
+                    },
+                    4000
+                );
+
+            }
+        );
+
+
+    }
+);
+
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+function showFeedbackMessage(
+    text,
+    type
+) {
+
+    const message =
+        document.getElementById(
+            "feedbackMessage"
+        );
+
+
+    message.className =
+        "alert alert-" + type;
+
+
+    message.textContent =
+        text;
+
+
+    message.style.display =
+        "block";
+
+}
+
+</script>
+
+
 </body>
 
-</html
+</html>
