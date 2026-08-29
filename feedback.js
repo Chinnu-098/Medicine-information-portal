@@ -1,333 +1,689 @@
-/* =========================================
-   FEEDBACK SYSTEM
-========================================= */
+/* =====================================================
+   MEDINFO PORTAL - FEEDBACK
+   File: js/feedback.js
+   ===================================================== */
 
-let selectedRating = 0;
+const FEEDBACK_KEY = "medinfo_feedback";
 
 
-/* =========================================
-   GET FEEDBACKS
-========================================= */
+/* =====================================================
+   GET FEEDBACK
+   ===================================================== */
 
-function getFeedbacks() {
+function getFeedback() {
 
-    return JSON.parse(
-        localStorage.getItem("medicinePortalFeedbacks")
-    ) || [];
+    try {
 
+        return JSON.parse(
+            localStorage.getItem(FEEDBACK_KEY)
+        ) || [];
+
+    } catch (error) {
+
+        console.error(
+            "Unable to load feedback:",
+            error
+        );
+
+        return [];
+
+    }
 }
 
 
-/* =========================================
-   SAVE FEEDBACKS
-========================================= */
+/* =====================================================
+   SAVE FEEDBACK
+   ===================================================== */
 
-function saveFeedbacks(feedbacks) {
+function saveFeedback(feedbackList) {
 
     localStorage.setItem(
-        "medicinePortalFeedbacks",
-        JSON.stringify(feedbacks)
+        FEEDBACK_KEY,
+        JSON.stringify(feedbackList)
     );
 
 }
 
 
-/* =========================================
-   SHOW MESSAGE
-========================================= */
+/* =====================================================
+   CREATE FEEDBACK
+   ===================================================== */
 
-function showFeedbackMessage(
+function createFeedback(data) {
+
+    const feedbackList =
+        getFeedback();
+
+
+    const currentUser =
+        typeof getCurrentUser === "function"
+            ? getCurrentUser()
+            : null;
+
+
+    const feedback = {
+
+        id:
+            "feedback_" +
+            Date.now(),
+
+        name:
+            data.name.trim(),
+
+        email:
+            data.email.trim().toLowerCase(),
+
+        category:
+            data.category,
+
+        rating:
+            Number(data.rating),
+
+        message:
+            data.message.trim(),
+
+        userId:
+            currentUser
+                ? currentUser.id
+                : null,
+
+        status:
+            "New",
+
+        createdAt:
+            new Date().toISOString()
+
+    };
+
+
+    feedbackList.unshift(
+        feedback
+    );
+
+
+    saveFeedback(
+        feedbackList
+    );
+
+
+    return feedback;
+
+}
+
+
+/* =====================================================
+   SETUP FEEDBACK FORM
+   ===================================================== */
+
+function setupFeedbackForm() {
+
+    const form =
+        document.getElementById(
+            "feedbackForm"
+        );
+
+
+    if (!form) {
+        return;
+    }
+
+
+    const ratingInput =
+        document.getElementById(
+            "feedbackRating"
+        );
+
+
+    const ratingStars =
+        document.querySelectorAll(
+            "[data-rating]"
+        );
+
+
+    /* =========================================
+       LOAD CURRENT USER
+    ========================================= */
+
+    try {
+
+        const user =
+            typeof getCurrentUser === "function"
+                ? getCurrentUser()
+                : null;
+
+
+        if (user) {
+
+            const nameInput =
+                document.getElementById(
+                    "feedbackName"
+                );
+
+
+            const emailInput =
+                document.getElementById(
+                    "feedbackEmail"
+                );
+
+
+            if (nameInput) {
+
+                nameInput.value =
+                    user.name || "";
+
+            }
+
+
+            if (emailInput) {
+
+                emailInput.value =
+                    user.email || "";
+
+            }
+
+        }
+
+    } catch (error) {
+
+        console.log(
+            "User information not available."
+        );
+
+    }
+
+
+    /* =========================================
+       STAR RATING
+    ========================================= */
+
+    ratingStars.forEach(
+        function (star) {
+
+            star.addEventListener(
+                "click",
+                function () {
+
+                    const rating =
+                        Number(
+                            this.dataset.rating
+                        );
+
+
+                    if (ratingInput) {
+
+                        ratingInput.value =
+                            rating;
+
+                    }
+
+
+                    ratingStars.forEach(
+                        function (item) {
+
+                            const itemRating =
+                                Number(
+                                    item.dataset.rating
+                                );
+
+
+                            const icon =
+                                item.querySelector(
+                                    "i"
+                                );
+
+
+                            if (
+                                itemRating <=
+                                rating
+                            ) {
+
+                                item.classList.add(
+                                    "selected"
+                                );
+
+
+                                if (icon) {
+
+                                    icon.className =
+                                        "bi bi-star-fill";
+
+                                }
+
+                            } else {
+
+                                item.classList.remove(
+                                    "selected"
+                                );
+
+
+                                if (icon) {
+
+                                    icon.className =
+                                        "bi bi-star";
+
+                                }
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =========================================
+       FORM SUBMIT
+    ========================================= */
+
+    form.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            const name =
+                document.getElementById(
+                    "feedbackName"
+                )?.value || "";
+
+
+            const email =
+                document.getElementById(
+                    "feedbackEmail"
+                )?.value || "";
+
+
+            const category =
+                document.getElementById(
+                    "feedbackCategory"
+                )?.value || "General";
+
+
+            const message =
+                document.getElementById(
+                    "feedbackMessage"
+                )?.value || "";
+
+
+            const rating =
+                Number(
+                    ratingInput?.value || 0
+                );
+
+
+            const messageBox =
+                document.getElementById(
+                    "feedbackAlert"
+                );
+
+
+            /* =================================
+               VALIDATION
+            ================================= */
+
+            if (name.trim().length < 2) {
+
+                displayFeedbackAlert(
+                    messageBox,
+                    "Please enter your name.",
+                    "danger"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !email.includes("@") ||
+                !email.includes(".")
+            ) {
+
+                displayFeedbackAlert(
+                    messageBox,
+                    "Please enter a valid email address.",
+                    "danger"
+                );
+
+                return;
+
+            }
+
+
+            if (rating < 1 || rating > 5) {
+
+                displayFeedbackAlert(
+                    messageBox,
+                    "Please select a rating from 1 to 5.",
+                    "danger"
+                );
+
+                return;
+
+            }
+
+
+            if (message.trim().length < 5) {
+
+                displayFeedbackAlert(
+                    messageBox,
+                    "Please write a little more feedback.",
+                    "danger"
+                );
+
+                return;
+
+            }
+
+
+            /* =================================
+               SAVE
+            ================================= */
+
+            createFeedback({
+
+                name: name,
+
+                email: email,
+
+                category: category,
+
+                rating: rating,
+
+                message: message
+
+            });
+
+
+            /* =================================
+               SUCCESS
+            ================================= */
+
+            displayFeedbackAlert(
+                messageBox,
+                "Thank you! Your feedback has been submitted successfully.",
+                "success"
+            );
+
+
+            form.reset();
+
+
+            if (ratingInput) {
+
+                ratingInput.value = "";
+
+            }
+
+
+            ratingStars.forEach(
+                function (star) {
+
+                    star.classList.remove(
+                        "selected"
+                    );
+
+
+                    const icon =
+                        star.querySelector("i");
+
+
+                    if (icon) {
+
+                        icon.className =
+                            "bi bi-star";
+
+                    }
+
+                }
+            );
+
+
+            setTimeout(
+                function () {
+
+                    if (messageBox) {
+
+                        messageBox.style.display =
+                            "none";
+
+                    }
+
+                },
+                4500
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   DISPLAY ALERT
+   ===================================================== */
+
+function displayFeedbackAlert(
+    element,
     message,
     type
 ) {
 
-    const alertBox =
-        document.getElementById(
-            "feedbackMessage"
-        );
+    if (!element) {
 
-    if (!alertBox) return;
+        alert(message);
 
-    alertBox.className =
+        return;
+
+    }
+
+
+    element.className =
         "alert alert-" + type;
 
-    alertBox.textContent =
+
+    element.textContent =
         message;
 
-    alertBox.style.display =
+
+    element.style.display =
         "block";
 
 }
 
 
-/* =========================================
-   STAR RATING
-========================================= */
+/* =====================================================
+   CHARACTER COUNTER
+   ===================================================== */
 
-function initializeStars() {
+function setupFeedbackCharacterCounter() {
 
-    const stars =
-        document.querySelectorAll(
-            ".star-btn"
-        );
-
-    const ratingText =
+    const textarea =
         document.getElementById(
-            "ratingText"
+            "feedbackMessage"
         );
 
-    stars.forEach(function(star) {
 
-        star.addEventListener(
-            "click",
-            function() {
+    const counter =
+        document.getElementById(
+            "feedbackCharacterCount"
+        );
 
-                selectedRating =
-                    parseInt(
-                        this.dataset.rating
-                    );
 
-                document.getElementById(
-                    "rating"
-                ).value =
-                    selectedRating;
+    if (
+        !textarea ||
+        !counter
+    ) {
 
-                updateStarDisplay();
+        return;
 
-                const messages = {
+    }
 
-                    1: "Very Poor 😞",
-                    2: "Poor 😕",
-                    3: "Average 🙂",
-                    4: "Good 😊",
-                    5: "Excellent 🤩"
 
-                };
+    function updateCounter() {
 
-                ratingText.textContent =
-                    messages[selectedRating];
+        counter.textContent =
+            textarea.value.length;
+
+    }
+
+
+    textarea.addEventListener(
+        "input",
+        updateCounter
+    );
+
+
+    updateCounter();
+
+}
+
+
+/* =====================================================
+   LOAD FEEDBACK FOR CURRENT USER
+   ===================================================== */
+
+function getMyFeedback() {
+
+    const user =
+        typeof getCurrentUser === "function"
+            ? getCurrentUser()
+            : null;
+
+
+    if (!user) {
+
+        return [];
+
+    }
+
+
+    return getFeedback().filter(
+        function (item) {
+
+            return (
+                item.userId ===
+                user.id
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   DELETE FEEDBACK
+   ===================================================== */
+
+function deleteFeedback(
+    feedbackId
+) {
+
+    const feedbackList =
+        getFeedback();
+
+
+    const updatedList =
+        feedbackList.filter(
+            function (item) {
+
+                return item.id !== feedbackId;
 
             }
         );
 
-    });
+
+    saveFeedback(
+        updatedList
+    );
+
+
+    return true;
 
 }
 
 
-/* =========================================
-   UPDATE STARS
-========================================= */
+/* =====================================================
+   ADMIN FEEDBACK HELPERS
+   ===================================================== */
 
-function updateStarDisplay() {
+function getFeedbackCount() {
 
-    const stars =
-        document.querySelectorAll(
-            ".star-btn"
-        );
+    return getFeedback().length;
 
-    stars.forEach(function(star) {
+}
 
-        const value =
-            parseInt(
-                star.dataset.rating
-            );
 
-        if (
-            value <= selectedRating
-        ) {
+function getNewFeedbackCount() {
 
-            star.style.color =
-                "gold";
+    return getFeedback().filter(
+        function (item) {
 
-        } else {
-
-            star.style.color =
-                "#cccccc";
+            return item.status === "New";
 
         }
-
-    });
-
-}
-
-
-/* =========================================
-   AUTO FILL USER
-========================================= */
-
-function autoFillUserData() {
-
-    const currentUser =
-        JSON.parse(
-            localStorage.getItem(
-                "medicinePortalCurrentUser"
-            )
-        );
-
-    if (!currentUser) return;
-
-    const nameField =
-        document.getElementById(
-            "feedbackName"
-        );
-
-    const emailField =
-        document.getElementById(
-            "feedbackEmail"
-        );
-
-    if (nameField) {
-
-        nameField.value =
-            currentUser.name;
-
-    }
-
-    if (emailField) {
-
-        emailField.value =
-            currentUser.email;
-
-    }
+    ).length;
 
 }
 
 
-/* =========================================
-   SUBMIT FEEDBACK
-========================================= */
+function updateFeedbackStatus(
+    feedbackId,
+    status
+) {
 
-function submitFeedback(event) {
+    const feedbackList =
+        getFeedback();
 
-    event.preventDefault();
-
-
-    const name =
-        document.getElementById(
-            "feedbackName"
-        ).value.trim();
-
-    const email =
-        document.getElementById(
-            "feedbackEmail"
-        ).value.trim();
 
     const feedback =
-        document.getElementById(
-            "feedbackText"
-        ).value.trim();
+        feedbackList.find(
+            function (item) {
 
+                return item.id === feedbackId;
 
-    if (
-        name === "" ||
-        email === "" ||
-        feedback === ""
-    ) {
-
-        showFeedbackMessage(
-            "Please fill all fields.",
-            "danger"
+            }
         );
 
-        return;
+
+    if (!feedback) {
+
+        return false;
 
     }
 
 
-    if (
-        selectedRating === 0
-    ) {
-
-        showFeedbackMessage(
-            "Please select a rating.",
-            "warning"
-        );
-
-        return;
-
-    }
+    feedback.status =
+        status;
 
 
-    const feedbacks =
-        getFeedbacks();
-
-
-    const newFeedback = {
-
-        id: Date.now(),
-
-        name: name,
-
-        email: email,
-
-        rating: selectedRating,
-
-        feedback: feedback,
-
-        createdAt:
-            new Date().toLocaleString()
-
-    };
-
-
-    feedbacks.push(
-        newFeedback
-    );
-
-    saveFeedbacks(
-        feedbacks
+    saveFeedback(
+        feedbackList
     );
 
 
-    showFeedbackMessage(
-        "Thank you! Feedback submitted successfully.",
-        "success"
-    );
-
-
-    document.getElementById(
-        "feedbackForm"
-    ).reset();
-
-
-    selectedRating = 0;
-
-    updateStarDisplay();
-
-    document.getElementById(
-        "ratingText"
-    ).textContent =
-        "Select a rating";
+    return true;
 
 }
 
 
-/* =========================================
+/* =====================================================
    INITIALIZE
-========================================= */
+   ===================================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
-    function() {
+    function () {
 
-        initializeStars();
+        setupFeedbackForm();
 
-        autoFillUserData();
-
-        const form =
-            document.getElementById(
-                "feedbackForm"
-            );
-
-        if (form) {
-
-            form.addEventListener(
-                "submit",
-                submitFeedback
-            );
-
-        }
+        setupFeedbackCharacterCounter();
 
     }
 );
