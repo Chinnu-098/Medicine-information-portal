@@ -1,378 +1,1126 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Medicine Information Portal</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="MedInfo Portal - Medicine Information Portal">
+
+    <title>MedInfo Portal - Medicine Information</title>
+
 
     <!-- Bootstrap CSS -->
+
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
+
     <!-- Bootstrap Icons -->
+
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Google Font -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <!-- Website CSS -->
+
+    <link
+        rel="stylesheet"
+        href="css/style.css">
+
 </head>
+
 
 <body>
 
-    <!-- ================= NAVBAR ================= -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
-        <div class="container">
 
-            <a class="navbar-brand fw-bold" href="index.html">
+<!-- ==================================================
+     NAVBAR
+================================================== -->
+
+<nav
+    class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+
+    <div class="container">
+
+
+        <!-- Logo -->
+
+        <a
+            class="navbar-brand d-flex align-items-center gap-2"
+            href="index.html">
+
+            <span class="brand-icon">
+
                 <i class="bi bi-capsule-pill"></i>
-                MedInfo Portal
-            </a>
 
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarMenu">
+            </span>
 
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <span>
 
-            <div class="collapse navbar-collapse" id="navbarMenu">
+                <strong>MedInfo</strong>
+                <small>Portal</small>
 
-                <ul class="navbar-nav ms-auto">
+            </span>
 
-                    <li class="nav-item">
-                        <a class="nav-link active" href="index.html">
-                            Home
-                        </a>
-                    </li>
+        </a>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="medicines.html">
-                            Medicines
-                        </a>
-                    </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">
-                            About
-                        </a>
-                    </li>
+        <!-- Mobile Button -->
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">
-                            Contact
-                        </a>
-                    </li>
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar"
+            aria-controls="mainNavbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
 
-                </ul>
-            </div>
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <!-- Navigation -->
+
+        <div
+            class="collapse navbar-collapse"
+            id="mainNavbar">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link active"
+                        href="index.html">
+
+                        Home
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="medicines.html">
+
+                        Medicines
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="about.html">
+
+                        About
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="contact.html">
+
+                        Contact
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="feedback.html">
+
+                        Feedback
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item ms-lg-2">
+
+                    <a
+                        class="btn btn-primary px-4"
+                        href="login.html">
+
+                        <i class="bi bi-box-arrow-in-right"></i>
+
+                        Login
+
+                    </a>
+
+                </li>
+
+
+            </ul>
+
         </div>
-    </nav>
+
+    </div>
+
+</nav>
 
 
-    <!-- ================= HERO SECTION ================= -->
-    <section class="hero-section">
-        <div class="container">
 
-            <div class="row align-items-center">
+<!-- ==================================================
+     HERO SECTION
+================================================== -->
 
-                <div class="col-lg-7">
+<section class="hero-section">
 
-                    <h1 class="display-4 fw-bold">
-                        Medicine Information Portal
-                    </h1>
+    <div class="container">
 
-                    <p class="lead mt-3">
-                        Find reliable and easy-to-understand information
-                        about medicines, their uses, dosage, side effects,
-                        precautions and storage instructions.
-                    </p>
+        <div class="row align-items-center g-5">
 
-                    <a href="medicines.html" class="btn btn-primary btn-lg mt-3">
+
+            <!-- Hero Text -->
+
+            <div class="col-lg-6">
+
+
+                <span class="hero-badge">
+
+                    <i class="bi bi-heart-pulse-fill"></i>
+
+                    Your Health Information Companion
+
+                </span>
+
+
+                <h1 class="hero-title mt-3">
+
+                    Understand Your
+                    <span>Medicines</span>
+                    Better
+
+                </h1>
+
+
+                <p class="hero-text">
+
+                    Explore reliable and easy-to-understand
+                    medicine information including uses,
+                    dosage information, precautions and
+                    common side effects.
+
+                </p>
+
+
+                <div
+                    class="d-flex flex-wrap gap-3 mt-4">
+
+                    <a
+                        href="medicines.html"
+                        class="btn btn-primary btn-lg px-4">
+
                         <i class="bi bi-search"></i>
+
                         Explore Medicines
+
+                    </a>
+
+
+                    <a
+                        href="about.html"
+                        class="btn btn-outline-primary btn-lg px-4">
+
+                        Learn More
+
+                        <i class="bi bi-arrow-right"></i>
+
                     </a>
 
                 </div>
 
-                <div class="col-lg-5 text-center mt-4 mt-lg-0">
 
-                    <div class="medicine-icon">
-                        <i class="bi bi-capsule-pill"></i>
+                <!-- Small Features -->
+
+                <div
+                    class="row mt-4 g-3">
+
+
+                    <div class="col-6">
+
+                        <div class="hero-feature">
+
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            Easy Information
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-6">
+
+                        <div class="hero-feature">
+
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            Simple Search
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-6">
+
+                        <div class="hero-feature">
+
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            Educational
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-6">
+
+                        <div class="hero-feature">
+
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            User Friendly
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Hero Visual -->
+
+            <div class="col-lg-6">
+
+
+                <div class="hero-visual">
+
+
+                    <div class="medicine-illustration">
+
+
+                        <div class="floating-card card-one">
+
+                            <i
+                                class="bi bi-capsule-pill">
+                            </i>
+
+                            <span>
+
+                                Medicines
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="floating-card card-two">
+
+                            <i
+                                class="bi bi-shield-check">
+                            </i>
+
+                            <span>
+
+                                Precautions
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="floating-card card-three">
+
+                            <i
+                                class="bi bi-info-circle">
+                            </i>
+
+                            <span>
+
+                                Information
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="main-pill">
+
+                            <div class="pill-left"></div>
+
+                            <div class="pill-right"></div>
+
+                        </div>
+
+
+                        <div class="medical-cross">
+
+                            <i class="bi bi-plus-lg"></i>
+
+                        </div>
+
+
                     </div>
 
                 </div>
 
             </div>
 
+
         </div>
-    </section>
+
+    </div>
+
+</section>
 
 
-    <!-- ================= SEARCH SECTION ================= -->
-    <section class="search-section py-5">
 
-        <div class="container">
+<!-- ==================================================
+     STATS SECTION
+================================================== -->
 
-            <div class="text-center mb-4">
+<section class="stats-section">
 
-                <h2 class="fw-bold">
-                    Search for a Medicine
+    <div class="container">
+
+        <div class="row g-3">
+
+
+            <div class="col-6 col-lg-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-capsule"></i>
+
+                    </div>
+
+                    <h3 id="homeMedicineCount">
+
+                        0
+
+                    </h3>
+
+                    <p>
+
+                        Medicines
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-lg-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-search"></i>
+
+                    </div>
+
+                    <h3>
+
+                        Easy
+
+                    </h3>
+
+                    <p>
+
+                        Search
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-lg-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-people"></i>
+
+                    </div>
+
+                    <h3>
+
+                        User
+
+                    </h3>
+
+                    <p>
+
+                        Friendly
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-lg-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-shield-check"></i>
+
+                    </div>
+
+                    <h3>
+
+                        Safe
+
+                    </h3>
+
+                    <p>
+
+                        Educational
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     POPULAR MEDICINES
+================================================== -->
+
+<section class="py-5">
+
+    <div class="container">
+
+
+        <div
+            class="section-heading text-center mb-5">
+
+            <span class="section-label">
+
+                MEDICINE LIBRARY
+
+            </span>
+
+            <h2>
+
+                Popular Medicines
+
+            </h2>
+
+            <p>
+
+                Quickly explore some medicines
+                available in our information library.
+
+            </p>
+
+        </div>
+
+
+        <div
+            class="row g-4"
+            id="popularMedicineContainer">
+
+
+            <!-- Medicine cards are loaded by JS -->
+
+
+        </div>
+
+
+        <div class="text-center mt-4">
+
+            <a
+                href="medicines.html"
+                class="btn btn-primary px-4">
+
+                View All Medicines
+
+                <i class="bi bi-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     WHY MEDINFO
+================================================== -->
+
+<section class="why-section py-5">
+
+    <div class="container">
+
+
+        <div
+            class="row align-items-center g-5">
+
+
+            <div class="col-lg-5">
+
+
+                <span class="section-label">
+
+                    WHY MEDINFO?
+
+                </span>
+
+
+                <h2 class="fw-bold mt-2">
+
+                    Medicine information
+                    made simple.
+
                 </h2>
 
-                <p class="text-muted">
-                    Quickly find information about your medicine.
+
+                <p class="text-muted mt-3">
+
+                    MedInfo Portal is designed to make
+                    basic medicine information easier
+                    to understand and explore.
+
+                </p>
+
+
+                <a
+                    href="about.html"
+                    class="btn btn-outline-primary mt-2">
+
+                    About MedInfo
+
+                    <i class="bi bi-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+
+
+            <div class="col-lg-7">
+
+
+                <div class="row g-4">
+
+
+                    <div class="col-md-6">
+
+                        <div class="feature-card">
+
+                            <div class="feature-icon">
+
+                                <i
+                                    class="bi bi-lightning-charge-fill">
+                                </i>
+
+                            </div>
+
+                            <h5>
+
+                                Quick Search
+
+                            </h5>
+
+                            <p>
+
+                                Find medicines quickly
+                                using the search and
+                                category filters.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <div class="feature-card">
+
+                            <div class="feature-icon">
+
+                                <i
+                                    class="bi bi-file-text-fill">
+                                </i>
+
+                            </div>
+
+                            <h5>
+
+                                Detailed Information
+
+                            </h5>
+
+                            <p>
+
+                                View important educational
+                                information about medicines
+                                in one place.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <div class="feature-card">
+
+                            <div class="feature-icon">
+
+                                <i
+                                    class="bi bi-phone-fill">
+                                </i>
+
+                            </div>
+
+                            <h5>
+
+                                Responsive Design
+
+                            </h5>
+
+                            <p>
+
+                                Access the portal comfortably
+                                on mobile, tablet and desktop.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <div class="feature-card">
+
+                            <div class="feature-icon">
+
+                                <i
+                                    class="bi bi-chat-heart-fill">
+                                </i>
+
+                            </div>
+
+                            <h5>
+
+                                User Feedback
+
+                            </h5>
+
+                            <p>
+
+                                Share your experience and
+                                help us improve the portal.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     DISCLAIMER
+================================================== -->
+
+<section class="container py-4">
+
+    <div class="medical-disclaimer">
+
+
+        <div class="disclaimer-icon">
+
+            <i
+                class="bi bi-exclamation-triangle-fill">
+            </i>
+
+        </div>
+
+
+        <div>
+
+            <h6>
+
+                Important Information
+
+            </h6>
+
+            <p>
+
+                MedInfo Portal is intended for
+                educational and informational purposes
+                only. The information provided should
+                not replace advice from a qualified
+                healthcare professional.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
+<footer class="footer-section">
+
+    <div class="container">
+
+
+        <div class="row g-4">
+
+
+            <!-- About -->
+
+            <div class="col-lg-4">
+
+
+                <a
+                    href="index.html"
+                    class="footer-brand">
+
+                    <i class="bi bi-capsule-pill"></i>
+
+                    MedInfo Portal
+
+                </a>
+
+
+                <p class="mt-3">
+
+                    A simple medicine information portal
+                    created for educational purposes.
+
+                </p>
+
+
+                <div class="social-links">
+
+                    <a href="#"
+                       aria-label="Facebook">
+
+                        <i class="bi bi-facebook"></i>
+
+                    </a>
+
+                    <a href="#"
+                       aria-label="Instagram">
+
+                        <i class="bi bi-instagram"></i>
+
+                    </a>
+
+                    <a href="#"
+                       aria-label="Twitter">
+
+                        <i class="bi bi-twitter-x"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Quick Links -->
+
+            <div class="col-6 col-lg-2">
+
+                <h6>
+
+                    Quick Links
+
+                </h6>
+
+
+                <ul class="footer-links">
+
+                    <li>
+
+                        <a href="index.html">
+                            Home
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="medicines.html">
+                            Medicines
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="about.html">
+                            About
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="contact.html">
+                            Contact
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+
+            <!-- Account -->
+
+            <div class="col-6 col-lg-3">
+
+                <h6>
+
+                    Account
+
+                </h6>
+
+
+                <ul class="footer-links">
+
+                    <li>
+
+                        <a href="login.html">
+                            Login
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="register.html">
+                            Register
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="profile.html">
+                            My Profile
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="feedback.html">
+                            Feedback
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+
+            <!-- Contact -->
+
+            <div class="col-lg-3">
+
+                <h6>
+
+                    Contact
+
+                </h6>
+
+
+                <p class="footer-contact">
+
+                    <i class="bi bi-envelope"></i>
+
+                    info@medinfo.com
+
+                </p>
+
+
+                <p class="footer-contact">
+
+                    <i class="bi bi-geo-alt"></i>
+
+                    India
+
                 </p>
 
             </div>
 
-            <div class="row justify-content-center">
-
-                <div class="col-md-8">
-
-                    <div class="input-group input-group-lg">
-
-                        <input
-                            type="text"
-                            id="medicineSearch"
-                            class="form-control"
-                            placeholder="Enter medicine name...">
-
-                        <button
-                            class="btn btn-primary"
-                            onclick="searchMedicine()">
-
-                            <i class="bi bi-search"></i>
-                            Search
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
 
         </div>
 
-    </section>
+
+        <hr>
 
 
-    <!-- ================= FEATURES ================= -->
-    <section class="py-5 bg-light">
-
-        <div class="container">
-
-            <div class="text-center mb-5">
-
-                <h2 class="fw-bold">
-                    What You Can Find
-                </h2>
-
-                <p class="text-muted">
-                    Important information available for each medicine
-                </p>
-
-            </div>
+        <div
+            class="d-flex flex-column
+                   flex-md-row
+                   justify-content-between
+                   gap-2">
 
 
-            <div class="row g-4">
+            <small>
 
-                <!-- Uses -->
-                <div class="col-md-4">
+                © 2026 MedInfo Portal.
+                All rights reserved.
 
-                    <div class="card feature-card h-100 text-center p-4">
-
-                        <div class="feature-icon">
-                            <i class="bi bi-heart-pulse"></i>
-                        </div>
-
-                        <h4 class="mt-3">
-                            Uses
-                        </h4>
-
-                        <p class="text-muted">
-                            Learn about the common uses and purposes
-                            of different medicines.
-                        </p>
-
-                    </div>
-
-                </div>
+            </small>
 
 
-                <!-- Dosage -->
-                <div class="col-md-4">
+            <small>
 
-                    <div class="card feature-card h-100 text-center p-4">
+                Educational Purpose Only
 
-                        <div class="feature-icon">
-                            <i class="bi bi-prescription2"></i>
-                        </div>
+            </small>
 
-                        <h4 class="mt-3">
-                            Dosage
-                        </h4>
-
-                        <p class="text-muted">
-                            Understand general dosage information
-                            provided for educational purposes.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Side Effects -->
-                <div class="col-md-4">
-
-                    <div class="card feature-card h-100 text-center p-4">
-
-                        <div class="feature-icon">
-                            <i class="bi bi-exclamation-triangle"></i>
-                        </div>
-
-                        <h4 class="mt-3">
-                            Side Effects
-                        </h4>
-
-                        <p class="text-muted">
-                            Learn about commonly reported side effects
-                            and important precautions.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Precautions -->
-                <div class="col-md-4">
-
-                    <div class="card feature-card h-100 text-center p-4">
-
-                        <div class="feature-icon">
-                            <i class="bi bi-shield-check"></i>
-                        </div>
-
-                        <h4 class="mt-3">
-                            Precautions
-                        </h4>
-
-                        <p class="text-muted">
-                            Find important precautions and safety
-                            information about medicines.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Storage -->
-                <div class="col-md-4">
-
-                    <div class="card feature-card h-100 text-center p-4">
-
-                        <div class="feature-icon">
-                            <i class="bi bi-box-seam"></i>
-                        </div>
-
-                        <h4 class="mt-3">
-                            Storage
-                        </h4>
-
-                        <p class="text-muted">
-                            Get information about proper medicine
-                            storage conditions.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Information -->
-                <div class="col-md-4">
-
-                    <div class="card feature-card h-100 text-center p-4">
-
-                        <div class="feature-icon">
-                            <i class="bi bi-info-circle"></i>
-                        </div>
-
-                        <h4 class="mt-3">
-                            Medicine Details
-                        </h4>
-
-                        <p class="text-muted">
-                            Access organized and easy-to-read
-                            medicine information.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
 
         </div>
 
-    </section>
+    </div>
+
+</footer>
 
 
-    <!-- ================= DISCLAIMER ================= -->
-    <section class="py-4">
 
-        <div class="container">
+<!-- ==================================================
+     BOOTSTRAP JS
+================================================== -->
 
-            <div class="alert alert-warning text-center">
-
-                <i class="bi bi-info-circle-fill"></i>
-
-                <strong>Educational Purpose:</strong>
-                This portal is intended for educational and informational
-                purposes only. Always consult a qualified healthcare
-                professional for medical advice.
-
-            </div>
-
-        </div>
-
-    </section>
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
 
 
-    <!-- ================= FOOTER ================= -->
-    <footer class="bg-primary text-white text-center py-4">
+<!-- ==================================================
+     MEDICINE DATA
+================================================== -->
 
-        <div class="container">
-
-            <p class="mb-1">
-                <i class="bi bi-capsule-pill"></i>
-                <strong>Medicine Information Portal</strong>
-            </p>
-
-            <p class="mb-0">
-                © 2026 Medicine Information Portal. All Rights Reserved.
-            </p>
-
-        </div>
-
-    </footer>
+<script src="js/medicines-data.js"></script>
 
 
-    <!-- Bootstrap JavaScript -->
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-    </script>
+<!-- ==================================================
+     WEBSITE SCRIPT
+================================================== -->
 
-    <!-- Custom JavaScript -->
-    <script src="js/script.js"></script>
+<script src="js/script.js"></script>
+
+
+<!-- ==================================================
+     HOME PAGE MEDICINES
+================================================== -->
+
+<script src="js/medicine-app.js"></script>
+
 
 </body>
+
 </html>
