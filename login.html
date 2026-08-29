@@ -4,92 +4,64 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Login - MedInfo Portal</title>
 
-    <!-- Bootstrap CSS -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
-    <!-- Bootstrap Icons -->
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="css/style.css">
 
 </head>
 
-<body>
+
+<body class="auth-page">
 
 
-<!-- ================= NAVBAR ================= -->
+<!-- NAVBAR -->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+<nav class="navbar navbar-expand-lg bg-white shadow-sm">
 
     <div class="container">
 
-        <a class="navbar-brand fw-bold" href="index.html">
+        <a
+            class="navbar-brand d-flex align-items-center gap-2"
+            href="index.html">
 
-            <i class="bi bi-capsule-pill"></i>
-            MedInfo Portal
+            <span class="brand-icon">
+
+                <i class="bi bi-capsule-pill"></i>
+
+            </span>
+
+            <strong>MedInfo Portal</strong>
 
         </a>
 
 
-        <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarMenu">
+        <a
+            href="index.html"
+            class="btn btn-outline-primary">
 
-            <span class="navbar-toggler-icon"></span>
+            <i class="bi bi-house"></i>
 
-        </button>
+            Home
 
-
-        <div
-            class="collapse navbar-collapse"
-            id="navbarMenu">
-
-            <ul class="navbar-nav ms-auto">
-
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">
-                        Home
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="medicines.html">
-                        Medicines
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="about.html">
-                        About
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="contact.html">
-                        Contact
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link active" href="login.html">
-                        Login
-                    </a>
-                </li>
-
-            </ul>
-
-        </div>
+        </a>
 
     </div>
 
@@ -97,124 +69,159 @@
 
 
 
-<!-- ================= LOGIN SECTION ================= -->
+<!-- LOGIN -->
 
-<section class="py-5 bg-light">
+<section class="auth-section">
 
     <div class="container">
 
         <div class="row justify-content-center">
 
-            <div class="col-md-7 col-lg-5">
-
-                <div class="card border-0 shadow">
-
-                    <div class="card-body p-4 p-md-5">
+            <div class="col-sm-10 col-md-7 col-lg-5">
 
 
-                        <!-- TITLE -->
-
-                        <div class="text-center mb-4">
-
-                            <div class="feature-icon mx-auto mb-3">
-
-                                <i class="bi bi-person-circle"></i>
-
-                            </div>
-
-                            <h2 class="fw-bold text-primary">
-
-                                Welcome Back
-
-                            </h2>
-
-                            <p class="text-muted">
-
-                                Login to your account
-
-                            </p>
-
-                        </div>
+                <div class="auth-card">
 
 
+                    <!-- ICON -->
 
-                        <!-- MESSAGE -->
+                    <div class="auth-icon">
 
-                        <div
-                            id="loginMessage"
-                            class="alert"
-                            style="display: none;">
-                        </div>
+                        <i
+                            class="bi bi-person-circle">
+                        </i>
+
+                    </div>
+
+
+                    <div class="text-center mb-4">
+
+                        <h2 class="fw-bold">
+
+                            Welcome Back
+
+                        </h2>
+
+                        <p class="text-muted">
+
+                            Login to your MedInfo account
+
+                        </p>
+
+                    </div>
 
 
 
-                        <!-- LOGIN FORM -->
+                    <!-- ALERT -->
 
-                        <form id="loginForm">
+                    <div
+                        id="loginMessage"
+                        class="alert"
+                        style="display:none;">
+
+                    </div>
 
 
-                            <!-- EMAIL -->
 
-                            <div class="mb-3">
+                    <!-- FORM -->
 
-                                <label
-                                    for="email"
-                                    class="form-label fw-semibold">
+                    <form id="loginForm">
 
-                                    Email Address
 
-                                </label>
+                        <!-- EMAIL -->
+
+                        <div class="mb-3">
+
+                            <label
+                                for="loginEmail"
+                                class="form-label fw-semibold">
+
+                                Email Address
+
+                            </label>
+
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+
+                                    <i class="bi bi-envelope"></i>
+
+                                </span>
+
 
                                 <input
                                     type="email"
-                                    id="email"
+                                    id="loginEmail"
                                     class="form-control"
                                     placeholder="Enter your email"
+                                    autocomplete="email"
                                     required>
 
                             </div>
 
+                        </div>
 
 
-                            <!-- PASSWORD -->
 
-                            <div class="mb-4">
+                        <!-- PASSWORD -->
 
-                                <label
-                                    for="password"
-                                    class="form-label fw-semibold">
+                        <div class="mb-3">
 
-                                    Password
+                            <label
+                                for="loginPassword"
+                                class="form-label fw-semibold">
 
-                                </label>
+                                Password
 
-                                <div class="input-group">
+                            </label>
 
-                                    <input
-                                        type="password"
-                                        id="password"
-                                        class="form-control"
-                                        placeholder="Enter your password"
-                                        required>
 
-                                    <button
-                                        type="button"
-                                        class="btn btn-outline-secondary"
-                                        onclick="togglePassword('password', this)">
+                            <div class="input-group">
 
-                                        <i class="bi bi-eye"></i>
+                                <span class="input-group-text">
 
-                                    </button>
+                                    <i class="bi bi-lock"></i>
 
-                                </div>
+                                </span>
+
+
+                                <input
+                                    type="password"
+                                    id="loginPassword"
+                                    class="form-control"
+                                    placeholder="Enter your password"
+                                    autocomplete="current-password"
+                                    required>
+
+
+                                <button
+                                    type="button"
+                                    class="btn btn-outline-secondary"
+                                    id="togglePassword"
+                                    aria-label="Show password">
+
+                                    <i
+                                        class="bi bi-eye">
+                                    </i>
+
+                                </button>
 
                             </div>
 
+                        </div>
 
 
-                            <!-- REMEMBER ME -->
 
-                            <div class="form-check mb-4">
+                        <!-- REMEMBER -->
+
+                        <div
+                            class="d-flex
+                                   justify-content-between
+                                   align-items-center
+                                   mb-4">
+
+                            <div class="form-check">
 
                                 <input
                                     class="form-check-input"
@@ -232,74 +239,90 @@
                             </div>
 
 
-
-                            <!-- LOGIN BUTTON -->
-
-                            <button
-                                type="submit"
-                                class="btn btn-primary w-100 py-2">
-
-                                <i class="bi bi-box-arrow-in-right"></i>
-
-                                Login
-
-                            </button>
-
-
-                        </form>
-
-
-
-                        <!-- REGISTER -->
-
-                        <div class="text-center mt-4">
-
-                            <p class="mb-0">
-
-                                Don't have an account?
-
-                                <a
-                                    href="register.html"
-                                    class="text-primary fw-semibold">
-
-                                    Create Account
-
-                                </a>
-
-                            </p>
-
-                        </div>
-
-
-
-                        <!-- ADMIN LOGIN -->
-
-                        <hr class="my-4">
-
-                        <div class="text-center">
-
-                            <p class="text-muted mb-2">
-
-                                Are you an administrator?
-
-                            </p>
-
                             <a
-                                href="admin/login.html"
-                                class="btn btn-outline-primary">
+                                href="#"
+                                class="small text-decoration-none"
+                                onclick="showForgotMessage(event)">
 
-                                <i class="bi bi-shield-lock"></i>
-
-                                Admin Login
+                                Forgot password?
 
                             </a>
 
                         </div>
 
 
+
+                        <!-- LOGIN -->
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary w-100 py-2">
+
+                            <i
+                                class="bi bi-box-arrow-in-right">
+                            </i>
+
+                            Login
+
+                        </button>
+
+
+                    </form>
+
+
+
+                    <!-- REGISTER -->
+
+                    <div class="text-center mt-4">
+
+                        <span class="text-muted">
+
+                            Don't have an account?
+
+                        </span>
+
+
+                        <a
+                            href="register.html"
+                            class="fw-semibold text-decoration-none">
+
+                            Create Account
+
+                        </a>
+
                     </div>
 
+
+                    <!-- ADMIN -->
+
+                    <div
+                        class="text-center mt-4 pt-3 border-top">
+
+                        <small class="text-muted">
+
+                            Are you an administrator?
+
+                        </small>
+
+
+                        <br>
+
+
+                        <a
+                            href="admin/login.html"
+                            class="small fw-semibold text-decoration-none">
+
+                            Admin Login
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+
                 </div>
+
 
             </div>
 
@@ -311,26 +334,18 @@
 
 
 
-<!-- ================= FOOTER ================= -->
+<!-- FOOTER -->
 
-<footer class="bg-primary text-white text-center py-4">
+<footer class="footer-section py-4">
 
-    <div class="container">
+    <div class="container text-center">
 
-        <p class="mb-1">
+        <small>
 
-            <i class="bi bi-capsule-pill"></i>
+            © 2026 MedInfo Portal |
+            Educational Purpose Only
 
-            <strong>Medicine Information Portal</strong>
-
-        </p>
-
-        <p class="mb-0">
-
-            © 2026 Medicine Information Portal.
-            All Rights Reserved.
-
-        </p>
+        </small>
 
     </div>
 
@@ -338,16 +353,183 @@
 
 
 
-<!-- Bootstrap JavaScript -->
+<!-- BOOTSTRAP -->
 
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
 </script>
 
 
-<!-- Authentication JavaScript -->
+<!-- AUTH -->
 
 <script src="js/auth.js"></script>
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        const form =
+            document.getElementById(
+                "loginForm"
+            );
+
+
+        const message =
+            document.getElementById(
+                "loginMessage"
+            );
+
+
+        const password =
+            document.getElementById(
+                "loginPassword"
+            );
+
+
+        const toggle =
+            document.getElementById(
+                "togglePassword"
+            );
+
+
+
+        /* SHOW / HIDE PASSWORD */
+
+        toggle.addEventListener(
+            "click",
+            function () {
+
+                if (
+                    password.type === "password"
+                ) {
+
+                    password.type = "text";
+
+                    toggle.innerHTML =
+                        '<i class="bi bi-eye-slash"></i>';
+
+                } else {
+
+                    password.type = "password";
+
+                    toggle.innerHTML =
+                        '<i class="bi bi-eye"></i>';
+
+                }
+
+            }
+        );
+
+
+
+        /* LOGIN */
+
+        form.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+
+                const email =
+                    document
+                        .getElementById("loginEmail")
+                        .value
+                        .trim();
+
+
+                const passwordValue =
+                    password.value;
+
+
+                const result =
+                    loginUser(
+                        email,
+                        passwordValue
+                    );
+
+
+                if (result.success) {
+
+
+                    message.className =
+                        "alert alert-success";
+
+
+                    message.textContent =
+                        "Login successful! Redirecting...";
+
+
+                    message.style.display =
+                        "block";
+
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                "profile.html";
+
+                        },
+                        700
+                    );
+
+
+                } else {
+
+
+                    message.className =
+                        "alert alert-danger";
+
+
+                    message.textContent =
+                        result.message;
+
+
+                    message.style.display =
+                        "block";
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+
+/* FORGOT PASSWORD MESSAGE */
+
+function showForgotMessage(event) {
+
+    event.preventDefault();
+
+
+    const message =
+        document.getElementById(
+            "loginMessage"
+        );
+
+
+    message.className =
+        "alert alert-info";
+
+
+    message.textContent =
+        "For this demo project, password recovery is not connected yet. Please use your registered password.";
+
+
+    message.style.display =
+        "block";
+
+}
+
+</script>
 
 
 </body>
