@@ -1,138 +1,1581 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Add Medicine - MedInfo Portal</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
+    <title>Add Medicine | Medicine Information Portal</title>
+
+    <!-- Bootstrap -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
+    <!-- Bootstrap Icons -->
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/admin.css">
+    <!-- Admin CSS -->
+    <link
+        rel="stylesheet"
+        href="../css/admin.css">
 
 </head>
+
 
 <body class="admin-dashboard-page">
 
 
-<!-- ================= SIDEBAR ================= -->
+<!-- ==========================================
+     MOBILE NAVBAR
+     ========================================== -->
 
-<div class="admin-sidebar" id="adminSidebar">
+<nav class="navbar navbar-dark admin-mobile-navbar d-lg-none">
 
-    <div class="sidebar-header">
+    <div class="container-fluid">
 
-        <a href="dashboard.html"
-           class="text-white text-decoration-none fw-bold">
+        <button
+            class="btn btn-outline-light"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#adminSidebar">
+
+            <i class="bi bi-list fs-4"></i>
+
+        </button>
+
+
+        <span class="navbar-brand fw-bold">
+
+            <i class="bi bi-capsule-pill me-2"></i>
+
+            Medicine Portal
+
+        </span>
+
+    </div>
+
+</nav>
+
+
+
+<div class="d-flex">
+
+
+<!-- ==========================================
+     SIDEBAR
+     ========================================== -->
+
+<aside
+    class="admin-sidebar offcanvas-lg offcanvas-start"
+    tabindex="-1"
+    id="adminSidebar">
+
+
+    <!-- BRAND -->
+
+    <div class="sidebar-brand">
+
+        <div class="sidebar-logo">
 
             <i class="bi bi-capsule-pill"></i>
-            MedInfo Portal
+
+        </div>
+
+
+        <div>
+
+            <h5 class="mb-0">
+
+                Medicine Portal
+
+            </h5>
+
+
+            <small>
+
+                Admin Panel
+
+            </small>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- PROFILE -->
+
+    <div class="sidebar-profile">
+
+        <div class="profile-avatar">
+
+            <i class="bi bi-person-fill"></i>
+
+        </div>
+
+
+        <div>
+
+            <strong data-admin-name>
+
+                Admin
+
+            </strong>
+
+
+            <small
+                class="d-block"
+                data-admin-email>
+
+                admin@medicineportal.com
+
+            </small>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- NAVIGATION -->
+
+    <div class="sidebar-section-title">
+
+        MAIN MENU
+
+    </div>
+
+
+    <ul class="nav flex-column admin-nav">
+
+
+        <li class="nav-item">
+
+            <a
+                href="dashboard.html"
+                class="nav-link">
+
+                <i class="bi bi-speedometer2"></i>
+
+                Dashboard
+
+            </a>
+
+        </li>
+
+
+        <li class="nav-item">
+
+            <a
+                href="medicines.html"
+                class="nav-link">
+
+                <i class="bi bi-capsule"></i>
+
+                Medicines
+
+            </a>
+
+        </li>
+
+
+        <li class="nav-item">
+
+            <a
+                href="add-medicine.html"
+                class="nav-link active">
+
+                <i class="bi bi-plus-circle"></i>
+
+                Add Medicine
+
+            </a>
+
+        </li>
+
+
+        <div class="sidebar-section-title">
+
+            MANAGEMENT
+
+        </div>
+
+
+        <li class="nav-item">
+
+            <a
+                href="users.html"
+                class="nav-link">
+
+                <i class="bi bi-people"></i>
+
+                Users
+
+            </a>
+
+        </li>
+
+
+        <li class="nav-item">
+
+            <a
+                href="feedback.html"
+                class="nav-link">
+
+                <i class="bi bi-chat-left-text"></i>
+
+                Feedback
+
+            </a>
+
+        </li>
+
+
+    </ul>
+
+
+
+    <!-- BOTTOM -->
+
+    <div class="sidebar-bottom">
+
+
+        <a
+            href="../index.html"
+            class="nav-link">
+
+            <i class="bi bi-globe2"></i>
+
+            View Website
 
         </a>
 
+
+        <button
+            type="button"
+            class="nav-link logout-button"
+            onclick="logoutAdmin()">
+
+            <i class="bi bi-box-arrow-right"></i>
+
+            Logout
+
+        </button>
+
+
     </div>
 
 
-    <div class="admin-profile text-center">
+</aside>
 
-        <div class="admin-avatar">
-            <i class="bi bi-person-fill"></i>
+
+
+<!-- ==========================================
+     MAIN CONTENT
+     ========================================== -->
+
+<main class="admin-main flex-grow-1">
+
+
+    <!-- TOPBAR -->
+
+    <header class="admin-topbar">
+
+
+        <div>
+
+            <h3 class="fw-bold mb-1">
+
+                Add Medicine
+
+            </h3>
+
+
+            <p class="text-muted mb-0">
+
+                Add complete medicine information
+                to the portal.
+
+            </p>
+
         </div>
 
-        <h6 id="sidebarAdminName">
-            Admin
-        </h6>
 
-        <small>Administrator</small>
+        <div class="topbar-actions">
+
+
+            <span
+                class="admin-date"
+                id="currentDate">
+
+            </span>
+
+
+            <div class="dropdown">
+
+
+                <button
+                    class="btn btn-light border rounded-circle"
+                    data-bs-toggle="dropdown">
+
+                    <i class="bi bi-person"></i>
+
+                </button>
+
+
+                <ul
+                    class="dropdown-menu
+                           dropdown-menu-end">
+
+
+                    <li>
+
+                        <span
+                            class="dropdown-item-text">
+
+                            <strong data-admin-name>
+
+                                Admin
+
+                            </strong>
+
+                        </span>
+
+                    </li>
+
+
+                    <li>
+
+                        <hr
+                            class="dropdown-divider">
+
+                    </li>
+
+
+                    <li>
+
+                        <button
+                            class="dropdown-item text-danger"
+                            onclick="logoutAdmin()">
+
+                            <i
+                                class="bi bi-box-arrow-right me-2">
+                            </i>
+
+                            Logout
+
+                        </button>
+
+                    </li>
+
+
+                </ul>
+
+
+            </div>
+
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- ==========================================
+         PAGE MESSAGE
+         ========================================== -->
+
+    <div
+        id="pageMessage"
+        class="alert d-none"
+        role="alert">
 
     </div>
 
 
-    <ul class="sidebar-menu">
 
-        <li>
-            <a href="dashboard.html">
-                <i class="bi bi-speedometer2"></i>
-                Dashboard
-            </a>
-        </li>
+    <!-- ==========================================
+         FORM
+         ========================================== -->
 
-        <li>
-            <a href="medicines.html">
-                <i class="bi bi-capsule"></i>
-                Medicines
-            </a>
-        </li>
+    <form
+        id="medicineForm"
+        novalidate>
 
-        <li>
-            <a href="add-medicine.html" class="active">
-                <i class="bi bi-plus-circle"></i>
-                Add Medicine
-            </a>
-        </li>
 
-        <li>
-            <a href="users.html">
-                <i class="bi bi-people"></i>
-                Users
-            </a>
-        </li>
+        <div class="row g-4">
 
-        <li>
-            <a href="feedback.html">
-                <i class="bi bi-star"></i>
-                Feedback
-            </a>
-        </li>
 
-        <li class="sidebar-divider"></li>
+            <!-- ==================================
+                 BASIC INFORMATION
+                 ================================== -->
 
-        <li>
-            <a href="../index.html">
-                <i class="bi bi-house"></i>
-                Visit Website
-            </a>
-        </li>
+            <div class="col-12">
 
-        <li>
-            <a href="#"
-               onclick="logoutAdmin(); return false;">
-                <i class="bi bi-box-arrow-right"></i>
-                Logout
-            </a>
-        </li>
 
-    </ul>
+                <div
+                    class="admin-panel-card">
+
+
+                    <div
+                        class="panel-header">
+
+
+                        <div>
+
+                            <h5
+                                class="fw-bold mb-1">
+
+                                <i
+                                    class="bi bi-info-circle text-primary me-2">
+                                </i>
+
+                                Basic Information
+
+                            </h5>
+
+
+                            <p
+                                class="text-muted small mb-0">
+
+                                Enter the main details
+                                of the medicine.
+
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="row g-3">
+
+
+                        <!-- Medicine Name -->
+
+                        <div class="col-md-6">
+
+
+                            <label
+                                for="medicineName"
+                                class="form-label fw-semibold">
+
+                                Medicine Name
+                                <span class="text-danger">*</span>
+
+                            </label>
+
+
+                            <input
+                                type="text"
+                                id="medicineName"
+                                class="form-control"
+                                placeholder="e.g. Paracetamol"
+                                required>
+
+
+                            <div
+                                class="invalid-feedback">
+
+                                Please enter medicine name.
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- Generic Name -->
+
+                        <div class="col-md-6">
+
+
+                            <label
+                                for="genericName"
+                                class="form-label fw-semibold">
+
+                                Generic Name
+
+                            </label>
+
+
+                            <input
+                                type="text"
+                                id="genericName"
+                                class="form-control"
+                                placeholder="e.g. Acetaminophen">
+
+
+                        </div>
+
+
+
+                        <!-- Category -->
+
+                        <div class="col-md-4">
+
+
+                            <label
+                                for="category"
+                                class="form-label fw-semibold">
+
+                                Category
+                                <span class="text-danger">*</span>
+
+                            </label>
+
+
+                            <select
+                                id="category"
+                                class="form-select"
+                                required>
+
+
+                                <option value="">
+
+                                    Select Category
+
+                                </option>
+
+
+                                <option value="Pain Relief">
+
+                                    Pain Relief
+
+                                </option>
+
+
+                                <option value="Fever">
+
+                                    Fever
+
+                                </option>
+
+
+                                <option value="Antibiotics">
+
+                                    Antibiotics
+
+                                </option>
+
+
+                                <option value="Allergy">
+
+                                    Allergy
+
+                                </option>
+
+
+                                <option value="Cold & Cough">
+
+                                    Cold & Cough
+
+                                </option>
+
+
+                                <option value="Vitamins">
+
+                                    Vitamins
+
+                                </option>
+
+
+                                <option value="Digestive">
+
+                                    Digestive
+
+                                </option>
+
+
+                                <option value="Diabetes">
+
+                                    Diabetes
+
+                                </option>
+
+
+                                <option value="Blood Pressure">
+
+                                    Blood Pressure
+
+                                </option>
+
+
+                                <option value="Other">
+
+                                    Other
+
+                                </option>
+
+
+                            </select>
+
+
+                            <div
+                                class="invalid-feedback">
+
+                                Please select a category.
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- Form -->
+
+                        <div class="col-md-4">
+
+
+                            <label
+                                for="medicineFormType"
+                                class="form-label fw-semibold">
+
+                                Medicine Form
+
+                            </label>
+
+
+                            <select
+                                id="medicineFormType"
+                                class="form-select">
+
+
+                                <option value="Tablet">
+
+                                    Tablet
+
+                                </option>
+
+
+                                <option value="Capsule">
+
+                                    Capsule
+
+                                </option>
+
+
+                                <option value="Syrup">
+
+                                    Syrup
+
+                                </option>
+
+
+                                <option value="Injection">
+
+                                    Injection
+
+                                </option>
+
+
+                                <option value="Cream">
+
+                                    Cream
+
+                                </option>
+
+
+                                <option value="Drops">
+
+                                    Drops
+
+                                </option>
+
+
+                                <option value="Other">
+
+                                    Other
+
+                                </option>
+
+
+                            </select>
+
+
+                        </div>
+
+
+
+                        <!-- Strength -->
+
+                        <div class="col-md-4">
+
+
+                            <label
+                                for="strength"
+                                class="form-label fw-semibold">
+
+                                Strength
+
+                            </label>
+
+
+                            <input
+                                type="text"
+                                id="strength"
+                                class="form-control"
+                                placeholder="e.g. 500 mg">
+
+
+                        </div>
+
+
+
+                        <!-- Manufacturer -->
+
+                        <div class="col-md-6">
+
+
+                            <label
+                                for="manufacturer"
+                                class="form-label fw-semibold">
+
+                                Manufacturer
+
+                            </label>
+
+
+                            <input
+                                type="text"
+                                id="manufacturer"
+                                class="form-control"
+                                placeholder="e.g. ABC Pharmaceuticals">
+
+
+                        </div>
+
+
+
+                        <!-- Image URL -->
+
+                        <div class="col-md-6">
+
+
+                            <label
+                                for="medicineImage"
+                                class="form-label fw-semibold">
+
+                                Medicine Image URL
+
+                            </label>
+
+
+                            <input
+                                type="url"
+                                id="medicineImage"
+                                class="form-control"
+                                placeholder="https://example.com/image.jpg">
+
+
+                            <div class="form-text">
+
+                                Add a publicly accessible image URL.
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==================================
+                 MEDICAL INFORMATION
+                 ================================== -->
+
+            <div class="col-12">
+
+
+                <div
+                    class="admin-panel-card">
+
+
+                    <div
+                        class="panel-header">
+
+
+                        <div>
+
+                            <h5
+                                class="fw-bold mb-1">
+
+                                <i
+                                    class="bi bi-heart-pulse text-danger me-2">
+                                </i>
+
+                                Medical Information
+
+                            </h5>
+
+
+                            <p
+                                class="text-muted small mb-0">
+
+                                Provide useful information
+                                about the medicine.
+
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="row g-3">
+
+
+                        <!-- Uses -->
+
+                        <div class="col-md-6">
+
+
+                            <label
+                                for="uses"
+                                class="form-label fw-semibold">
+
+                                Uses
+
+                                <span class="text-danger">*</span>
+
+                            </label>
+
+
+                            <textarea
+                                id="uses"
+                                class="form-control"
+                                rows="6"
+                                placeholder="What is this medicine used for?"
+                                required></textarea>
+
+
+                            <div
+                                class="invalid-feedback">
+
+                                Please enter medicine uses.
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- Dosage -->
+
+                        <div class="col-md-6">
+
+
+                            <label
+                                for="dosage"
+                                class="form-label fw-semibold">
+
+                                Dosage Information
+
+                            </label>
+
+
+                            <textarea
+                                id="dosage"
+                                class="form-control"
+                                rows="6"
+                                placeholder="Enter general dosage information."></textarea>
+
+
+                            <div class="form-text">
+
+                                Add general educational
+                                information only.
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- Side Effects -->
+
+                        <div class="col-md-6">
+
+
+                            <label
+                                for="sideEffects"
+                                class="form-label fw-semibold">
+
+                                Side Effects
+
+                            </label>
+
+
+                            <textarea
+                                id="sideEffects"
+                                class="form-control"
+                                rows="6"
+                                placeholder="List common side effects."></textarea>
+
+
+                        </div>
+
+
+
+                        <!-- Precautions -->
+
+                        <div class="col-md-6">
+
+
+                            <label
+                                for="precautions"
+                                class="form-label fw-semibold">
+
+                                Precautions / Warnings
+
+                            </label>
+
+
+                            <textarea
+                                id="precautions"
+                                class="form-control"
+                                rows="6"
+                                placeholder="Enter precautions and warnings."></textarea>
+
+
+                        </div>
+
+
+
+                        <!-- Storage -->
+
+                        <div class="col-md-6">
+
+
+                            <label
+                                for="storage"
+                                class="form-label fw-semibold">
+
+                                Storage Instructions
+
+                            </label>
+
+
+                            <textarea
+                                id="storage"
+                                class="form-control"
+                                rows="4"
+                                placeholder="e.g. Store in a cool, dry place."></textarea>
+
+
+                        </div>
+
+
+
+                        <!-- Description -->
+
+                        <div class="col-md-6">
+
+
+                            <label
+                                for="description"
+                                class="form-label fw-semibold">
+
+                                Medicine Description
+
+                            </label>
+
+
+                            <textarea
+                                id="description"
+                                class="form-control"
+                                rows="4"
+                                placeholder="Write a short description of the medicine."></textarea>
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==================================
+                 SAFETY NOTICE
+                 ================================== -->
+
+            <div class="col-12">
+
+
+                <div
+                    class="alert alert-warning">
+
+
+                    <i
+                        class="bi bi-exclamation-triangle-fill me-2">
+                    </i>
+
+
+                    <strong>Important:</strong>
+
+                    Medicine information on this portal
+                    is for educational purposes only.
+                    Users should consult a qualified
+                    healthcare professional for
+                    diagnosis, dosage and treatment
+                    decisions.
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==================================
+                 BUTTONS
+                 ================================== -->
+
+            <div class="col-12">
+
+
+                <div
+                    class="admin-panel-card">
+
+
+                    <div
+                        class="d-flex
+                               flex-wrap
+                               justify-content-end
+                               gap-2">
+
+
+                        <a
+                            href="medicines.html"
+                            class="btn btn-outline-secondary">
+
+                            <i
+                                class="bi bi-x-lg me-1">
+                            </i>
+
+                            Cancel
+
+                        </a>
+
+
+                        <button
+                            type="reset"
+                            class="btn btn-outline-warning">
+
+                            <i
+                                class="bi bi-arrow-clockwise me-1">
+                            </i>
+
+                            Clear
+
+                        </button>
+
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                            id="saveMedicineButton">
+
+                            <i
+                                class="bi bi-check-lg me-1">
+                            </i>
+
+                            Save Medicine
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </form>
+
+
+
+    <!-- FOOTER -->
+
+    <footer
+        class="admin-footer mt-5">
+
+        <p class="mb-0 text-muted">
+
+            © <span id="footerYear"></span>
+
+            Medicine Information Portal.
+            Admin Panel
+
+        </p>
+
+    </footer>
+
+
+</main>
 
 </div>
 
 
 
-<!-- ================= MAIN ================= -->
+<!-- ==========================================
+     BOOTSTRAP JS
+     ========================================== -->
 
-<div class="admin-main">
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
 
 
-    <!-- TOPBAR -->
+<!-- ADMIN JS -->
 
-    <nav class="admin-topbar">
+<script src="../js/admin.js"></script>
 
-        <button
-            class="btn btn-primary d-lg-none me-3"
-            onclick="toggleAdminSidebar()">
 
-            <i class="bi bi-list"></i>
+<!-- ADMIN MEDICINE JS -->
 
-        </button>
+<script src="../js/admin-medicine.js"></script>
 
-        <div>
 
-            <h4 class="mb-0
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        /* ==========================================
+           AUTH CHECK
+           ========================================== */
+
+        if (
+            typeof requireAdminAuth ===
+            "function"
+        ) {
+
+            if (!requireAdminAuth()) {
+
+                return;
+
+            }
+
+        }
+
+
+
+        /* ==========================================
+           DATE
+           ========================================== */
+
+        const dateElement =
+            document.getElementById(
+                "currentDate"
+            );
+
+
+        if (dateElement) {
+
+            dateElement.textContent =
+                new Date().toLocaleDateString(
+                    "en-IN",
+                    {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric"
+                    }
+                );
+
+        }
+
+
+
+        /* ==========================================
+           YEAR
+           ========================================== */
+
+        document.getElementById(
+            "footerYear"
+        ).textContent =
+            new Date().getFullYear();
+
+
+
+        /* ==========================================
+           FORM
+           ========================================== */
+
+        const form =
+            document.getElementById(
+                "medicineForm"
+            );
+
+
+        form.addEventListener(
+            "submit",
+            function (event) {
+
+
+                event.preventDefault();
+
+
+                form.classList.add(
+                    "was-validated"
+                );
+
+
+                if (
+                    !form.checkValidity()
+                ) {
+
+                    showMessage(
+                        "Please fill all required fields.",
+                        "danger"
+                    );
+
+                    return;
+
+                }
+
+
+
+                /* ==============================
+                   CREATE MEDICINE OBJECT
+                   ============================== */
+
+                const medicine = {
+
+                    id:
+                        "MED-" +
+                        Date.now(),
+
+                    name:
+                        getValue(
+                            "medicineName"
+                        ),
+
+                    genericName:
+                        getValue(
+                            "genericName"
+                        ),
+
+                    category:
+                        getValue(
+                            "category"
+                        ),
+
+                    form:
+                        getValue(
+                            "medicineFormType"
+                        ),
+
+                    strength:
+                        getValue(
+                            "strength"
+                        ),
+
+                    manufacturer:
+                        getValue(
+                            "manufacturer"
+                        ),
+
+                    image:
+                        getValue(
+                            "medicineImage"
+                        ),
+
+                    uses:
+                        getValue(
+                            "uses"
+                        ),
+
+                    dosage:
+                        getValue(
+                            "dosage"
+                        ),
+
+                    sideEffects:
+                        getValue(
+                            "sideEffects"
+                        ),
+
+                    precautions:
+                        getValue(
+                            "precautions"
+                        ),
+
+                    storage:
+                        getValue(
+                            "storage"
+                        ),
+
+                    description:
+                        getValue(
+                            "description"
+                        ),
+
+                    createdAt:
+                        new Date().toISOString()
+
+                };
+
+
+
+                /* ==============================
+                   GET EXISTING MEDICINES
+                   ============================== */
+
+                let medicines = [];
+
+
+                try {
+
+                    medicines =
+                        JSON.parse(
+                            localStorage.getItem(
+                                "medicines"
+                            )
+                        ) || [];
+
+                }
+                catch (error) {
+
+                    medicines = [];
+
+                }
+
+
+
+                /* ==============================
+                   ADD MEDICINE
+                   ============================== */
+
+                medicines.push(
+                    medicine
+                );
+
+
+                localStorage.setItem(
+                    "medicines",
+                    JSON.stringify(
+                        medicines
+                    )
+                );
+
+
+
+                /* ==============================
+                   SUCCESS
+                   ============================== */
+
+                showMessage(
+                    "Medicine added successfully!",
+                    "success"
+                );
+
+
+                /* ==============================
+                   BUTTON
+                   ============================== */
+
+                const button =
+                    document.getElementById(
+                        "saveMedicineButton"
+                    );
+
+
+                button.disabled =
+                    true;
+
+
+                button.innerHTML = `
+
+                    <span
+                        class="spinner-border
+                               spinner-border-sm
+                               me-2">
+                    </span>
+
+                    Saved Successfully
+
+                `;
+
+
+
+                /* ==============================
+                   REDIRECT
+                   ============================== */
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "medicines.html";
+
+                    },
+                    1200
+                );
+
+
+            }
+        );
+
+
+
+        /* ==========================================
+           RESET FORM
+           ========================================== */
+
+        form.addEventListener(
+            "reset",
+            function () {
+
+                setTimeout(
+                    function () {
+
+                        form.classList.remove(
+                            "was-validated"
+                        );
+
+                    },
+                    0
+                );
+
+            }
+        );
+
+
+    }
+);
+
+
+
+/* ================================================
+   GET VALUE
+   ================================================ */
+
+function getValue(
+    id
+) {
+
+    const element =
+        document.getElementById(
+            id
+        );
+
+
+    return element
+        ? element.value.trim()
+        : "";
+
+}
+
+
+
+/* ================================================
+   MESSAGE
+   ================================================ */
+
+function showMessage(
+    message,
+    type
+) {
+
+
+    const box =
+        document.getElementById(
+            "pageMessage"
+        );
+
+
+    box.className =
+        "alert alert-" +
+        type;
+
+
+    box.innerHTML = `
+
+        <i
+            class="bi bi-check-circle-fill me-2">
+        </i>
+
+        ${escapeHtml(message)}
+
+    `;
+
+
+    box.classList.remove(
+        "d-none"
+    );
+
+
+    window.scrollTo(
+        {
+            top: 0,
+            behavior: "smooth"
+        }
+    );
+
+}
+
+
+
+/* ================================================
+   ESCAPE HTML
+   ================================================ */
+
+function escapeHtml(
+    value
+) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        value ?? "";
+
+
+    return div.innerHTML;
+
+}
+
+</script>
+
+
+</body>
+
+</html>
+```
