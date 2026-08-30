@@ -2,109 +2,200 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+        content="width=device-width, initial-scale=1.0">
 
-    <title>Login - MedInfo Portal</title>
+    <title>Admin Login | Medicine Information Portal</title>
 
+    <!-- Bootstrap -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
+    <!-- Bootstrap Icons -->
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <link
-        rel="stylesheet"
-        href="css/style.css">
-
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="../css/admin.css">
 </head>
 
 
-<body class="auth-page">
+<body class="admin-auth-page">
 
 
-<!-- NAVBAR -->
+    <!-- ================================================
+         LOGIN CONTAINER
+         ================================================ -->
 
-<nav class="navbar navbar-expand-lg bg-white shadow-sm">
+    <div class="container-fluid min-vh-100">
 
-    <div class="container">
-
-        <a
-            class="navbar-brand d-flex align-items-center gap-2"
-            href="index.html">
-
-            <span class="brand-icon">
-
-                <i class="bi bi-capsule-pill"></i>
-
-            </span>
-
-            <strong>MedInfo Portal</strong>
-
-        </a>
+        <div class="row min-vh-100">
 
 
-        <a
-            href="index.html"
-            class="btn btn-outline-primary">
+            <!-- ==========================================
+                 LEFT SIDE
+                 ========================================== -->
 
-            <i class="bi bi-house"></i>
+            <div class="col-lg-6 d-none d-lg-flex admin-login-intro">
 
-            Home
+                <div class="admin-intro-content">
 
-        </a>
+                    <div class="admin-logo mb-4">
 
-    </div>
-
-</nav>
-
-
-
-<!-- LOGIN -->
-
-<section class="auth-section">
-
-    <div class="container">
-
-        <div class="row justify-content-center">
-
-            <div class="col-sm-10 col-md-7 col-lg-5">
-
-
-                <div class="auth-card">
-
-
-                    <!-- ICON -->
-
-                    <div class="auth-icon">
-
-                        <i
-                            class="bi bi-person-circle">
-                        </i>
+                        <i class="bi bi-capsule-pill"></i>
 
                     </div>
 
 
+                    <h1 class="display-5 fw-bold">
+
+                        Medicine Information Portal
+
+                    </h1>
+
+
+                    <p class="lead mt-3">
+
+                        Admin Management System
+
+                    </p>
+
+
+                    <p class="mt-4 text-white-50">
+
+                        Manage medicines, users, feedback
+                        and portal information from one
+                        centralized dashboard.
+
+                    </p>
+
+
+                    <div class="row mt-5 g-3">
+
+
+                        <div class="col-6">
+
+                            <div class="intro-feature">
+
+                                <i class="bi bi-speedometer2"></i>
+
+                                <span>
+                                    Dashboard
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-6">
+
+                            <div class="intro-feature">
+
+                                <i class="bi bi-capsule"></i>
+
+                                <span>
+                                    Medicines
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-6">
+
+                            <div class="intro-feature">
+
+                                <i class="bi bi-people"></i>
+
+                                <span>
+                                    Users
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-6">
+
+                            <div class="intro-feature">
+
+                                <i class="bi bi-chat-left-text"></i>
+
+                                <span>
+                                    Feedback
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 RIGHT SIDE
+                 ========================================== -->
+
+            <div
+                class="col-lg-6 d-flex align-items-center justify-content-center bg-light">
+
+                <div class="admin-auth-card">
+
+
+                    <!-- Mobile Logo -->
+
+                    <div class="text-center d-lg-none mb-4">
+
+                        <div class="admin-mobile-logo">
+
+                            <i class="bi bi-capsule-pill"></i>
+
+                        </div>
+
+
+                        <h4 class="fw-bold mt-2">
+
+                            Medicine Information Portal
+
+                        </h4>
+
+                    </div>
+
+
+
+                    <!-- Header -->
+
                     <div class="text-center mb-4">
 
-                        <h2 class="fw-bold">
+                        <div class="admin-login-icon">
 
-                            Welcome Back
+                            <i class="bi bi-shield-lock-fill"></i>
+
+                        </div>
+
+
+                        <h2 class="fw-bold mt-3">
+
+                            Admin Login
 
                         </h2>
 
+
                         <p class="text-muted">
 
-                            Login to your MedInfo account
+                            Sign in to access the admin dashboard.
 
                         </p>
 
@@ -112,28 +203,32 @@
 
 
 
-                    <!-- ALERT -->
+                    <!-- Message -->
 
                     <div
-                        id="loginMessage"
-                        class="alert"
-                        style="display:none;">
+                        id="adminMessage"
+                        class="alert d-none"
+                        role="alert">
 
                     </div>
 
 
 
-                    <!-- FORM -->
+                    <!-- ==================================
+                         LOGIN FORM
+                         ================================== -->
 
-                    <form id="loginForm">
+                    <form
+                        id="adminLoginForm"
+                        novalidate>
 
 
-                        <!-- EMAIL -->
+                        <!-- Email -->
 
                         <div class="mb-3">
 
                             <label
-                                for="loginEmail"
+                                for="adminEmail"
                                 class="form-label fw-semibold">
 
                                 Email Address
@@ -152,9 +247,10 @@
 
                                 <input
                                     type="email"
-                                    id="loginEmail"
                                     class="form-control"
-                                    placeholder="Enter your email"
+                                    id="adminEmail"
+                                    name="email"
+                                    placeholder="Enter admin email"
                                     autocomplete="email"
                                     required>
 
@@ -164,12 +260,12 @@
 
 
 
-                        <!-- PASSWORD -->
+                        <!-- Password -->
 
                         <div class="mb-3">
 
                             <label
-                                for="loginPassword"
+                                for="adminPassword"
                                 class="form-label fw-semibold">
 
                                 Password
@@ -188,9 +284,10 @@
 
                                 <input
                                     type="password"
-                                    id="loginPassword"
                                     class="form-control"
-                                    placeholder="Enter your password"
+                                    id="adminPassword"
+                                    name="password"
+                                    placeholder="Enter password"
                                     autocomplete="current-password"
                                     required>
 
@@ -202,7 +299,8 @@
                                     aria-label="Show password">
 
                                     <i
-                                        class="bi bi-eye">
+                                        class="bi bi-eye"
+                                        id="passwordIcon">
                                     </i>
 
                                 </button>
@@ -213,24 +311,21 @@
 
 
 
-                        <!-- REMEMBER -->
+                        <!-- Remember -->
 
                         <div
-                            class="d-flex
-                                   justify-content-between
-                                   align-items-center
-                                   mb-4">
+                            class="d-flex justify-content-between align-items-center mb-4">
 
                             <div class="form-check">
 
                                 <input
                                     class="form-check-input"
                                     type="checkbox"
-                                    id="rememberMe">
+                                    id="rememberAdmin">
 
                                 <label
-                                    class="form-check-label"
-                                    for="rememberMe">
+                                    class="form-check-label text-muted"
+                                    for="rememberAdmin">
 
                                     Remember me
 
@@ -239,90 +334,117 @@
                             </div>
 
 
-                            <a
-                                href="#"
-                                class="small text-decoration-none"
-                                onclick="showForgotMessage(event)">
+                            <span class="small text-muted">
 
-                                Forgot password?
+                                Admin Access
 
-                            </a>
+                            </span>
 
                         </div>
 
 
 
-                        <!-- LOGIN -->
+                        <!-- Login Button -->
 
                         <button
                             type="submit"
-                            class="btn btn-primary w-100 py-2">
+                            class="btn btn-primary w-100 py-2"
+                            id="adminLoginButton">
 
-                            <i
-                                class="bi bi-box-arrow-in-right">
-                            </i>
+                            <i class="bi bi-box-arrow-in-right me-2"></i>
 
-                            Login
+                            Login to Dashboard
 
                         </button>
-
 
                     </form>
 
 
 
-                    <!-- REGISTER -->
+                    <!-- ==================================
+                         DEMO LOGIN
+                         ================================== -->
+
+                    <div class="demo-login-box mt-4">
+
+                        <div class="d-flex">
+
+                            <i
+                                class="bi bi-info-circle-fill me-2">
+                            </i>
+
+
+                            <div>
+
+                                <strong>
+                                    Demo Admin Account
+                                </strong>
+
+
+                                <div class="small mt-1">
+
+                                    Email:
+                                    admin@medicineportal.com
+
+                                </div>
+
+
+                                <div class="small">
+
+                                    Password:
+                                    admin123
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ==================================
+                         LINKS
+                         ================================== -->
 
                     <div class="text-center mt-4">
 
-                        <span class="text-muted">
+                        <p class="mb-2 text-muted">
 
-                            Don't have an account?
+                            Don't have an admin account?
 
-                        </span>
+                        </p>
 
 
                         <a
                             href="register.html"
-                            class="fw-semibold text-decoration-none">
+                            class="btn btn-outline-primary">
 
-                            Create Account
+                            <i class="bi bi-person-plus me-1"></i>
+
+                            Create Admin Account
 
                         </a>
 
                     </div>
 
 
-                    <!-- ADMIN -->
-
-                    <div
-                        class="text-center mt-4 pt-3 border-top">
-
-                        <small class="text-muted">
-
-                            Are you an administrator?
-
-                        </small>
-
-
-                        <br>
-
+                    <div class="text-center mt-3">
 
                         <a
-                            href="admin/login.html"
-                            class="small fw-semibold text-decoration-none">
+                            href="../index.html"
+                            class="text-decoration-none">
 
-                            Admin Login
+                            <i class="bi bi-arrow-left me-1"></i>
 
-                            <i class="bi bi-arrow-right"></i>
+                            Back to Website
 
                         </a>
 
                     </div>
 
-
                 </div>
-
 
             </div>
 
@@ -330,206 +452,225 @@
 
     </div>
 
-</section>
 
 
+    <!-- ================================================
+         SCRIPT
+         ================================================ -->
 
-<!-- FOOTER -->
-
-<footer class="footer-section py-4">
-
-    <div class="container text-center">
-
-        <small>
-
-            © 2026 MedInfo Portal |
-            Educational Purpose Only
-
-        </small>
-
-    </div>
-
-</footer>
+    <script src="../js/admin.js"></script>
 
 
+    <script>
 
-<!-- BOOTSTRAP -->
-
-<script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-</script>
-
-
-<!-- AUTH -->
-
-<script src="js/auth.js"></script>
-
-
-<script>
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-
-        const form =
-            document.getElementById(
-                "loginForm"
-            );
-
-
-        const message =
-            document.getElementById(
-                "loginMessage"
-            );
-
-
-        const password =
-            document.getElementById(
-                "loginPassword"
-            );
-
-
-        const toggle =
-            document.getElementById(
-                "togglePassword"
-            );
-
-
-
-        /* SHOW / HIDE PASSWORD */
-
-        toggle.addEventListener(
-            "click",
+        document.addEventListener(
+            "DOMContentLoaded",
             function () {
 
+
+                /* =====================================
+                   IF ALREADY LOGGED IN
+                   ===================================== */
+
+                if (typeof isAdminLoggedIn === "function") {
+
+                    if (isAdminLoggedIn()) {
+
+                        window.location.href =
+                            "dashboard.html";
+
+                        return;
+
+                    }
+
+                }
+
+
+
+                /* =====================================
+                   PASSWORD TOGGLE
+                   ===================================== */
+
+                const toggleButton =
+                    document.getElementById(
+                        "togglePassword"
+                    );
+
+
+                const passwordInput =
+                    document.getElementById(
+                        "adminPassword"
+                    );
+
+
+                const passwordIcon =
+                    document.getElementById(
+                        "passwordIcon"
+                    );
+
+
                 if (
-                    password.type === "password"
+                    toggleButton &&
+                    passwordInput
                 ) {
 
-                    password.type = "text";
-
-                    toggle.innerHTML =
-                        '<i class="bi bi-eye-slash"></i>';
-
-                } else {
-
-                    password.type = "password";
-
-                    toggle.innerHTML =
-                        '<i class="bi bi-eye"></i>';
-
-                }
-
-            }
-        );
-
-
-
-        /* LOGIN */
-
-        form.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
-
-
-                const email =
-                    document
-                        .getElementById("loginEmail")
-                        .value
-                        .trim();
-
-
-                const passwordValue =
-                    password.value;
-
-
-                const result =
-                    loginUser(
-                        email,
-                        passwordValue
-                    );
-
-
-                if (result.success) {
-
-
-                    message.className =
-                        "alert alert-success";
-
-
-                    message.textContent =
-                        "Login successful! Redirecting...";
-
-
-                    message.style.display =
-                        "block";
-
-
-                    setTimeout(
+                    toggleButton.addEventListener(
+                        "click",
                         function () {
 
-                            window.location.href =
-                                "profile.html";
+                            if (
+                                passwordInput.type ===
+                                "password"
+                            ) {
 
-                        },
-                        700
+                                passwordInput.type =
+                                    "text";
+
+                                passwordIcon.className =
+                                    "bi bi-eye-slash";
+
+                            } else {
+
+                                passwordInput.type =
+                                    "password";
+
+                                passwordIcon.className =
+                                    "bi bi-eye";
+
+                            }
+
+                        }
+                    );
+
+                }
+
+
+
+                /* =====================================
+                   FORM VALIDATION
+                   ===================================== */
+
+                const form =
+                    document.getElementById(
+                        "adminLoginForm"
                     );
 
 
-                } else {
-
-
-                    message.className =
-                        "alert alert-danger";
-
-
-                    message.textContent =
-                        result.message;
-
-
-                    message.style.display =
-                        "block";
-
+                if (!form) {
+                    return;
                 }
+
+
+                form.addEventListener(
+                    "submit",
+                    function (event) {
+
+                        event.preventDefault();
+
+
+                        if (!form.checkValidity()) {
+
+                            event.stopPropagation();
+
+                            form.classList.add(
+                                "was-validated"
+                            );
+
+                            return;
+
+                        }
+
+
+                        const email =
+                            document.getElementById(
+                                "adminEmail"
+                            ).value;
+
+
+                        const password =
+                            document.getElementById(
+                                "adminPassword"
+                            ).value;
+
+
+                        const button =
+                            document.getElementById(
+                                "adminLoginButton"
+                            );
+
+
+                        const result =
+                            loginAdmin(
+                                email,
+                                password
+                            );
+
+
+                        const message =
+                            document.getElementById(
+                                "adminMessage"
+                            );
+
+
+                        if (result.success) {
+
+                            message.className =
+                                "alert alert-success";
+
+                            message.textContent =
+                                result.message;
+
+                            message.classList.remove(
+                                "d-none"
+                            );
+
+
+                            button.disabled =
+                                true;
+
+
+                            button.innerHTML = `
+
+                                <span
+                                    class="spinner-border spinner-border-sm me-2">
+                                </span>
+
+                                Logging in...
+
+                            `;
+
+
+                            setTimeout(
+                                function () {
+
+                                    window.location.href =
+                                        "dashboard.html";
+
+                                },
+                                600
+                            );
+
+                        } else {
+
+                            message.className =
+                                "alert alert-danger";
+
+                            message.textContent =
+                                result.message;
+
+                            message.classList.remove(
+                                "d-none"
+                            );
+
+                        }
+
+                    }
+                );
 
             }
         );
 
-    }
-);
-
-
-
-/* FORGOT PASSWORD MESSAGE */
-
-function showForgotMessage(event) {
-
-    event.preventDefault();
-
-
-    const message =
-        document.getElementById(
-            "loginMessage"
-        );
-
-
-    message.className =
-        "alert alert-info";
-
-
-    message.textContent =
-        "For this demo project, password recovery is not connected yet. Please use your registered password.";
-
-
-    message.style.display =
-        "block";
-
-}
-
-</script>
+    </script>
 
 
 </body>
