@@ -1,160 +1,125 @@
-/* =========================================
-   MEDINFO PORTAL
-   ADMIN MEDICINE MANAGEMENT
-========================================= */
+```javascript
+/* =========================================================
+   ADMIN MEDICINE
+   Medicine Information Portal
+   ========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const form =
+            document.getElementById(
+                "addMedicineForm"
+            );
 
 
-/* =========================================
-   GET MEDICINES
-========================================= */
+        if (!form) {
+
+            return;
+
+        }
+
+
+        form.addEventListener(
+            "submit",
+            addMedicine
+        );
+
+
+        /* Image preview */
+
+        const imageInput =
+            document.getElementById(
+                "medicineImage"
+            );
+
+
+        if (imageInput) {
+
+            imageInput.addEventListener(
+                "input",
+                previewMedicineImage
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   GET STORED MEDICINES
+   ========================================================= */
 
 function getMedicines() {
 
-    return JSON.parse(
-        localStorage.getItem(
-            "medicinePortalMedicines"
-        )
-    ) || [];
+    try {
 
-}
-
-
-/* =========================================
-   SAVE MEDICINES
-========================================= */
-
-function saveMedicines(medicines) {
-
-    localStorage.setItem(
-        "medicinePortalMedicines",
-        JSON.stringify(medicines)
-    );
-
-}
+        const data =
+            localStorage.getItem(
+                "medicines"
+            );
 
 
-/* =========================================
-   SHOW MESSAGE
-========================================= */
+        if (!data) {
 
-function showMedicineMessage(
-    message,
-    type
-) {
+            return [];
 
-    const messageBox =
-        document.getElementById(
-            "medicineMessage"
+        }
+
+
+        const medicines =
+            JSON.parse(data);
+
+
+        return Array.isArray(medicines)
+            ? medicines
+            : [];
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error reading medicines:",
+            error
         );
 
-    if (!messageBox) {
-        return;
+
+        return [];
+
     }
-
-
-    messageBox.className =
-        "alert alert-" + type;
-
-
-    messageBox.textContent =
-        message;
-
-
-    messageBox.style.display =
-        "block";
-
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
 
 }
 
 
-/* =========================================
+/* =========================================================
    ADD MEDICINE
-========================================= */
+   ========================================================= */
 
 function addMedicine(event) {
 
     event.preventDefault();
 
 
-    /* Get form values */
-
-    const name =
+    const form =
         document.getElementById(
-            "medicineName"
-        ).value.trim();
+            "addMedicineForm"
+        );
 
 
-    const category =
-        document.getElementById(
-            "medicineCategory"
-        ).value;
+    if (form) {
 
+        form.classList.add(
+            "was-validated"
+        );
 
-    const genericName =
-        document.getElementById(
-            "genericName"
-        ).value.trim();
+    }
 
-
-    const brandName =
-        document.getElementById(
-            "brandName"
-        ).value.trim();
-
-
-    const uses =
-        document.getElementById(
-            "medicineUses"
-        ).value.trim();
-
-
-    const dosage =
-        document.getElementById(
-            "medicineDosage"
-        ).value.trim();
-
-
-    const medicineForm =
-        document.getElementById(
-            "medicineForm"
-        ).value;
-
-
-    const sideEffects =
-        document.getElementById(
-            "sideEffects"
-        ).value.trim();
-
-
-    const precautions =
-        document.getElementById(
-            "precautions"
-        ).value.trim();
-
-
-    const storage =
-        document.getElementById(
-            "storage"
-        ).value.trim();
-
-
-
-    /* =================================
-       VALIDATION
-    ================================= */
 
     if (
-        name === "" ||
-        category === "" ||
-        uses === "" ||
-        dosage === "" ||
-        sideEffects === "" ||
-        precautions === ""
+        form &&
+        !form.checkValidity()
     ) {
 
         showMedicineMessage(
@@ -162,103 +127,208 @@ function addMedicine(event) {
             "danger"
         );
 
+
+        window.scrollTo(
+            {
+                top: 0,
+                behavior: "smooth"
+            }
+        );
+
+
         return;
 
     }
 
 
+    const name =
+        getMedicineValue(
+            "medicineName"
+        );
 
-    /* =================================
-       GET EXISTING MEDICINES
-    ================================= */
+
+    const genericName =
+        getMedicineValue(
+            "genericName"
+        );
+
+
+    const category =
+        getMedicineValue(
+            "category"
+        );
+
+
+    const medicineForm =
+        getMedicineValue(
+            "medicineFormType"
+        );
+
+
+    const strength =
+        getMedicineValue(
+            "strength"
+        );
+
+
+    const manufacturer =
+        getMedicineValue(
+            "manufacturer"
+        );
+
+
+    const image =
+        getMedicineValue(
+            "medicineImage"
+        );
+
+
+    const uses =
+        getMedicineValue(
+            "uses"
+        );
+
+
+    const dosage =
+        getMedicineValue(
+            "dosage"
+        );
+
+
+    const sideEffects =
+        getMedicineValue(
+            "sideEffects"
+        );
+
+
+    const precautions =
+        getMedicineValue(
+            "precautions"
+        );
+
+
+    const storage =
+        getMedicineValue(
+            "storage"
+        );
+
+
+    const description =
+        getMedicineValue(
+            "description"
+        );
+
+
+    /* =====================================================
+       CREATE UNIQUE ID
+       ===================================================== */
+
+    const id =
+        createMedicineId();
+
+
+    /* =====================================================
+       CREATE MEDICINE OBJECT
+       ===================================================== */
+
+    const medicine = {
+
+        id: id,
+
+        name: name,
+
+        genericName:
+            genericName,
+
+        category:
+            category,
+
+        form:
+            medicineForm,
+
+        strength:
+            strength,
+
+        manufacturer:
+            manufacturer,
+
+        image:
+            image ||
+            getDefaultMedicineImage(),
+
+        uses:
+            uses,
+
+        dosage:
+            dosage,
+
+        sideEffects:
+            sideEffects,
+
+        precautions:
+            precautions,
+
+        storage:
+            storage ||
+            "Store in a cool, dry place away from direct sunlight.",
+
+        description:
+            description,
+
+        createdAt:
+            new Date().toISOString(),
+
+        updatedAt:
+            new Date().toISOString()
+
+    };
+
+
+    /* =====================================================
+       SAVE
+       ===================================================== */
 
     const medicines =
         getMedicines();
 
 
+    medicines.push(
+        medicine
+    );
 
-    /* =================================
-       DUPLICATE CHECK
-    ================================= */
 
-    const duplicate =
-        medicines.some(
-            function(medicine) {
+    try {
 
-                return medicine.name
-                    .toLowerCase() ===
-                    name.toLowerCase();
-
-            }
+        localStorage.setItem(
+            "medicines",
+            JSON.stringify(
+                medicines
+            )
         );
 
+    }
+    catch (error) {
 
-    if (duplicate) {
+        console.error(
+            "Unable to save medicine:",
+            error
+        );
+
 
         showMedicineMessage(
-            "This medicine already exists.",
-            "warning"
+            "Unable to save medicine.",
+            "danger"
         );
+
 
         return;
 
     }
 
 
-
-    /* =================================
-       CREATE MEDICINE OBJECT
-    ================================= */
-
-    const newMedicine = {
-
-        id: Date.now(),
-
-        name: name,
-
-        category: category,
-
-        genericName: genericName,
-
-        brandName: brandName,
-
-        uses: uses,
-
-        dosage: dosage,
-
-        form: medicineForm,
-
-        sideEffects: sideEffects,
-
-        precautions: precautions,
-
-        storage: storage,
-
-        createdAt:
-            new Date().toLocaleString()
-
-    };
-
-
-
-    /* =================================
-       SAVE
-    ================================= */
-
-    medicines.push(
-        newMedicine
-    );
-
-
-    saveMedicines(
-        medicines
-    );
-
-
-
-    /* =================================
-       SUCCESS MESSAGE
-    ================================= */
+    /* =====================================================
+       SUCCESS
+       ===================================================== */
 
     showMedicineMessage(
         "Medicine added successfully!",
@@ -266,25 +336,44 @@ function addMedicine(event) {
     );
 
 
-
-    /* =================================
+    /* =====================================================
        RESET FORM
-    ================================= */
+       ===================================================== */
 
-    document
-        .getElementById(
-            "addMedicineForm"
-        )
-        .reset();
+    if (form) {
+
+        form.reset();
+
+        form.classList.remove(
+            "was-validated"
+        );
+
+    }
 
 
+    /* Remove preview */
 
-    /* =================================
+    const preview =
+        document.getElementById(
+            "medicineImagePreview"
+        );
+
+
+    if (preview) {
+
+        preview.classList.add(
+            "d-none"
+        );
+
+    }
+
+
+    /* =====================================================
        REDIRECT
-    ================================= */
+       ===================================================== */
 
     setTimeout(
-        function() {
+        function () {
 
             window.location.href =
                 "medicines.html";
@@ -296,28 +385,282 @@ function addMedicine(event) {
 }
 
 
-/* =========================================
-   FORM EVENT
-========================================= */
+/* =========================================================
+   GET FIELD VALUE
+   ========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
+function getMedicineValue(
+    id
+) {
 
-        const form =
-            document.getElementById(
-                "addMedicineForm"
+
+    const element =
+        document.getElementById(id);
+
+
+    if (!element) {
+
+        return "";
+
+    }
+
+
+    return element.value.trim();
+
+}
+
+
+/* =========================================================
+   CREATE MEDICINE ID
+   ========================================================= */
+
+function createMedicineId() {
+
+    return (
+        "MED-" +
+        Date.now().toString(36).toUpperCase() +
+        "-" +
+        Math.random()
+            .toString(36)
+            .substring(2, 7)
+            .toUpperCase()
+    );
+
+}
+
+
+/* =========================================================
+   DEFAULT IMAGE
+   ========================================================= */
+
+function getDefaultMedicineImage() {
+
+    return "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80";
+
+}
+
+
+/* =========================================================
+   IMAGE PREVIEW
+   ========================================================= */
+
+function previewMedicineImage() {
+
+
+    const input =
+        document.getElementById(
+            "medicineImage"
+        );
+
+
+    const preview =
+        document.getElementById(
+            "medicineImagePreview"
+        );
+
+
+    const image =
+        document.getElementById(
+            "previewImage"
+        );
+
+
+    if (
+        !input ||
+        !preview ||
+        !image
+    ) {
+
+        return;
+
+    }
+
+
+    const url =
+        input.value.trim();
+
+
+    if (!url) {
+
+        preview.classList.add(
+            "d-none"
+        );
+
+        return;
+
+    }
+
+
+    image.src =
+        url;
+
+
+    image.onload =
+        function () {
+
+            preview.classList.remove(
+                "d-none"
+            );
+
+        };
+
+
+    image.onerror =
+        function () {
+
+            preview.classList.add(
+                "d-none"
+            );
+
+        };
+
+}
+
+
+/* =========================================================
+   SHOW MESSAGE
+   ========================================================= */
+
+function showMedicineMessage(
+    message,
+    type = "info"
+) {
+
+
+    let box =
+        document.getElementById(
+            "pageMessage"
+        );
+
+
+    /*
+     * If message box doesn't exist,
+     * create one automatically.
+     */
+
+    if (!box) {
+
+        box =
+            document.createElement(
+                "div"
             );
 
 
-        if (form) {
+        box.id =
+            "pageMessage";
 
-            form.addEventListener(
-                "submit",
-                addMedicine
+
+        box.className =
+            "alert";
+
+
+        const main =
+            document.querySelector(
+                "main"
+            );
+
+
+        if (main) {
+
+            main.prepend(
+                box
             );
 
         }
+    }
+
+
+    if (!box) {
+
+        return;
 
     }
-);
+
+
+    box.className =
+        "alert alert-" +
+        type;
+
+
+    if (type === "success") {
+
+        box.innerHTML = `
+
+            <i
+                class="bi bi-check-circle-fill me-2">
+            </i>
+
+            ${escapeMedicineHTML(message)}
+
+        `;
+
+    }
+    else {
+
+        box.innerHTML = `
+
+            <i
+                class="bi bi-exclamation-circle-fill me-2">
+            </i>
+
+            ${escapeMedicineHTML(message)}
+
+        `;
+
+    }
+
+
+    box.classList.remove(
+        "d-none"
+    );
+
+
+    window.scrollTo(
+        {
+            top: 0,
+            behavior: "smooth"
+        }
+    );
+
+
+    if (type !== "success") {
+
+        setTimeout(
+            function () {
+
+                box.classList.add(
+                    "d-none"
+                );
+
+            },
+            3500
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+   ========================================================= */
+
+function escapeMedicineHTML(
+    value
+) {
+
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        value ?? "";
+
+
+    return div.innerHTML;
+
+}
+```
