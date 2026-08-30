@@ -1,929 +1,555 @@
 /* =====================================================
-   MEDICINE INFORMATION PORTAL
-   File: js/medicines-data.js
+   MEDICINE DATABASE
+   Educational / demo information
    ===================================================== */
 
-const MEDICINES_KEY = "medinfo_medicines";
-
-
-/* =====================================================
-   DEMO MEDICINES
-   ===================================================== */
-
-const DEFAULT_MEDICINES = [
-
-    {
-        id: "MED001",
-        name: "Paracetamol",
-        genericName: "Paracetamol",
-        image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80",
-
-        category: "Pain Relief",
-        form: "Tablet",
-        strength: "500 mg",
-
-        uses: [
-            "Fever",
-            "Headache",
-            "Mild to moderate pain",
-            "Body aches"
-        ],
-
-        dosage: "Use only according to the product label or advice of a healthcare professional.",
-
-        howToUse: "Take as directed on the package or by a healthcare professional. Do not exceed the recommended amount.",
-
-        sideEffects: [
-            "Nausea",
-            "Stomach discomfort",
-            "Skin rash"
-        ],
-
-        precautions: [
-            "Do not exceed the recommended amount.",
-            "Check other medicines for paracetamol before combining products.",
-            "Ask a healthcare professional if you have liver problems."
-        ],
-
-        warnings: "Seek professional advice if symptoms persist or worsen.",
-
-        contraindications: [
-            "Known allergy to paracetamol",
-            "Certain serious liver conditions"
-        ],
-
-        storage: "Store in a cool, dry place away from direct sunlight and keep out of reach of children.",
-
-        manufacturer: "Generic Manufacturer",
-
-        prescriptionRequired: false,
-
-        description:
-            "Paracetamol is commonly used to reduce fever and relieve mild to moderate pain.",
-
-        createdAt: "2026-01-01T00:00:00.000Z"
-    },
-
-
-    {
-        id: "MED002",
-        name: "Ibuprofen",
-        genericName: "Ibuprofen",
-        image: "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?auto=format&fit=crop&w=800&q=80",
-
-        category: "Pain Relief",
-        form: "Tablet",
-        strength: "200 mg",
-
-        uses: [
-            "Mild pain",
-            "Fever",
-            "Inflammation",
-            "Headache"
-        ],
-
-        dosage: "Follow the package directions or advice from a healthcare professional.",
-
-        howToUse: "Take with water and follow the directions provided with the medicine.",
-
-        sideEffects: [
-            "Stomach discomfort",
-            "Nausea",
-            "Heartburn"
-        ],
-
-        precautions: [
-            "Ask a healthcare professional if you have stomach problems.",
-            "Tell your healthcare professional about other medicines you take.",
-            "Do not use more than the recommended amount."
-        ],
-
-        warnings: "NSAID medicines may not be suitable for everyone. Professional advice may be needed.",
-
-        contraindications: [
-            "Certain serious allergic reactions to NSAIDs",
-            "Some stomach or kidney conditions"
-        ],
-
-        storage: "Keep tightly closed in a cool, dry place away from direct sunlight.",
-
-        manufacturer: "Generic Manufacturer",
-
-        prescriptionRequired: false,
-
-        description:
-            "Ibuprofen is an NSAID commonly used for pain, fever and inflammation.",
-
-        createdAt: "2026-01-01T00:00:00.000Z"
-    },
-
-
-    {
-        id: "MED003",
-        name: "Amoxicillin",
-        genericName: "Amoxicillin",
-        image: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=800&q=80",
-
-        category: "Antibiotics",
-        form: "Capsule",
-        strength: "500 mg",
-
-        uses: [
-            "Certain bacterial infections",
-            "Some respiratory infections",
-            "Some ear infections"
-        ],
-
-        dosage: "Use only when prescribed and follow the exact directions given by the healthcare professional.",
-
-        howToUse: "Take exactly as prescribed. Complete the prescribed course unless your healthcare professional tells you otherwise.",
-
-        sideEffects: [
-            "Nausea",
-            "Diarrhea",
-            "Skin rash"
-        ],
-
-        precautions: [
-            "Tell your healthcare professional if you have a penicillin allergy.",
-            "Use antibiotics only when prescribed.",
-            "Do not share antibiotics with other people."
-        ],
-
-        warnings: "Antibiotics do not treat viral infections such as common colds.",
-
-        contraindications: [
-            "Known serious allergy to penicillin or related antibiotics"
-        ],
-
-        storage: "Store according to the package instructions and keep away from children.",
-
-        manufacturer: "Generic Manufacturer",
-
-        prescriptionRequired: true,
-
-        description:
-            "Amoxicillin is an antibiotic used to treat certain bacterial infections.",
-
-        createdAt: "2026-01-01T00:00:00.000Z"
-    },
-
-
-    {
-        id: "MED004",
-        name: "Cetirizine",
-        genericName: "Cetirizine Hydrochloride",
-        image: "https://images.unsplash.com/photo-1550572017-edd951aa8ca9?auto=format&fit=crop&w=800&q=80",
-
-        category: "Allergy",
-        form: "Tablet",
-        strength: "10 mg",
-
-        uses: [
-            "Sneezing",
-            "Runny nose",
-            "Itching",
-            "Allergy symptoms"
-        ],
-
-        dosage: "Follow the package directions or advice of a healthcare professional.",
-
-        howToUse: "Take according to the medicine label or professional advice.",
-
-        sideEffects: [
-            "Drowsiness",
-            "Dry mouth",
-            "Fatigue"
-        ],
-
-        precautions: [
-            "May cause drowsiness in some people.",
-            "Be careful with activities requiring alertness if you feel sleepy.",
-            "Ask a healthcare professional if you take other medicines."
-        ],
-
-        warnings: "Individual response can vary. Follow the product instructions.",
-
-        contraindications: [
-            "Known allergy to cetirizine or related medicines"
-        ],
-
-        storage: "Store in a cool, dry place away from moisture and direct sunlight.",
-
-        manufacturer: "Generic Manufacturer",
-
-        prescriptionRequired: false,
-
-        description:
-            "Cetirizine is an antihistamine commonly used to relieve allergy symptoms.",
-
-        createdAt: "2026-01-01T00:00:00.000Z"
-    },
-
-
-    {
-        id: "MED005",
-        name: "Azithromycin",
-        genericName: "Azithromycin",
-        image: "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?auto=format&fit=crop&w=800&q=80",
-
-        category: "Antibiotics",
-        form: "Tablet",
-        strength: "250 mg",
-
-        uses: [
-            "Certain bacterial infections",
-            "Certain respiratory infections",
-            "Some skin infections"
-        ],
-
-        dosage: "Use only as prescribed by a qualified healthcare professional.",
-
-        howToUse: "Follow the exact prescription and instructions provided by your healthcare professional.",
-
-        sideEffects: [
-            "Nausea",
-            "Diarrhea",
-            "Abdominal discomfort"
-        ],
-
-        precautions: [
-            "Use only when prescribed.",
-            "Tell your healthcare professional about other medicines you take.",
-            "Do not use leftover antibiotics."
-        ],
-
-        warnings: "Antibiotics should not be used for viral illnesses unless specifically directed.",
-
-        contraindications: [
-            "Certain serious allergies to macrolide antibiotics"
-        ],
-
-        storage: "Store according to the package instructions.",
-
-        manufacturer: "Generic Manufacturer",
-
-        prescriptionRequired: true,
-
-        description:
-            "Azithromycin is an antibiotic used for certain bacterial infections.",
-
-        createdAt: "2026-01-01T00:00:00.000Z"
-    },
-
-
-    {
-        id: "MED006",
-        name: "Omeprazole",
-        genericName: "Omeprazole",
-        image: "https://images.unsplash.com/photo-1550572017-edd951aa8ca9?auto=format&fit=crop&w=800&q=80",
-
-        category: "Digestive Health",
-        form: "Capsule",
-        strength: "20 mg",
-
-        uses: [
-            "Heartburn",
-            "Acid reflux",
-            "Certain stomach conditions"
-        ],
-
-        dosage: "Follow the product label or professional advice.",
-
-        howToUse: "Use according to the instructions supplied with the medicine.",
-
-        sideEffects: [
-            "Headache",
-            "Nausea",
-            "Abdominal discomfort"
-        ],
-
-        precautions: [
-            "Tell a healthcare professional about persistent digestive symptoms.",
-            "Follow the recommended duration of use.",
-            "Discuss long-term use with a healthcare professional."
-        ],
-
-        warnings: "Persistent or severe symptoms should be evaluated by a healthcare professional.",
-
-        contraindications: [
-            "Known allergy to omeprazole or related medicines"
-        ],
-
-        storage: "Store in a cool, dry place away from direct sunlight.",
-
-        manufacturer: "Generic Manufacturer",
-
-        prescriptionRequired: false,
-
-        description:
-            "Omeprazole reduces the amount of acid produced in the stomach.",
-
-        createdAt: "2026-01-01T00:00:00.000Z"
-    },
-
-
-    {
-        id: "MED007",
-        name: "Loratadine",
-        genericName: "Loratadine",
-        image: "https://images.unsplash.com/photo-1550572017-edd951aa8ca9?auto=format&fit=crop&w=800&q=80",
-
-        category: "Allergy",
-        form: "Tablet",
-        strength: "10 mg",
-
-        uses: [
-            "Sneezing",
-            "Runny nose",
-            "Itching",
-            "Allergy symptoms"
-        ],
-
-        dosage: "Follow the package directions or professional advice.",
-
-        howToUse: "Take according to the instructions on the product label.",
-
-        sideEffects: [
-            "Headache",
-            "Drowsiness",
-            "Dry mouth"
-        ],
-
-        precautions: [
-            "Follow the recommended amount.",
-            "Tell a healthcare professional about other medicines you use.",
-            "Stop and seek advice if an unusual reaction occurs."
-        ],
-
-        warnings: "Follow the package instructions and professional guidance.",
-
-        contraindications: [
-            "Known allergy to loratadine"
-        ],
-
-        storage: "Keep in a cool, dry place away from moisture.",
-
-        manufacturer: "Generic Manufacturer",
-
-        prescriptionRequired: false,
-
-        description:
-            "Loratadine is an antihistamine used to relieve common allergy symptoms.",
-
-        createdAt: "2026-01-01T00:00:00.000Z"
-    },
-
-
-    {
-        id: "MED008",
-        name: "Metformin",
-        genericName: "Metformin",
-        image: "https://images.unsplash.com/photo-1550572017-edd951aa8ca9?auto=format&fit=crop&w=800&q=80",
-
-        category: "Diabetes",
-        form: "Tablet",
-        strength: "500 mg",
-
-        uses: [
-            "Type 2 diabetes",
-            "Blood glucose management"
-        ],
-
-        dosage: "Use only according to a prescription or advice from a qualified healthcare professional.",
-
-        howToUse: "Take exactly as prescribed. Do not change the dose without professional advice.",
-
-        sideEffects: [
-            "Nausea",
-            "Diarrhea",
-            "Stomach discomfort"
-        ],
-
-        precautions: [
-            "Tell your healthcare professional about kidney problems.",
-            "Do not change your prescribed dose yourself.",
-            "Attend recommended health check-ups."
-        ],
-
-        warnings: "This is a prescription medicine and should be used under professional supervision.",
-
-        contraindications: [
-            "Certain severe kidney conditions",
-            "Known allergy to metformin"
-        ],
-
-        storage: "Store at room temperature according to the product instructions.",
-
-        manufacturer: "Generic Manufacturer",
-
-        prescriptionRequired: true,
-
-        description:
-            "Metformin is a prescription medicine commonly used in the management of type 2 diabetes.",
-
-        createdAt: "2026-01-01T00:00:00.000Z"
-    },
-
-
-    {
-        id: "MED009",
-        name: "Amlodipine",
-        genericName: "Amlodipine",
-        image: "https://images.unsplash.com/photo-1550572017-edd951aa8ca9?auto=format&fit=crop&w=800&q=80",
-
-        category: "Blood Pressure",
-        form: "Tablet",
-        strength: "5 mg",
-
-        uses: [
-            "High blood pressure",
-            "Certain heart-related conditions"
-        ],
-
-        dosage: "Use only as prescribed by a healthcare professional.",
-
-        howToUse: "Take exactly as prescribed and at the recommended time.",
-
-        sideEffects: [
-            "Headache",
-            "Dizziness",
-            "Swelling of ankles"
-        ],
-
-        precautions: [
-            "Do not stop prescribed treatment without professional advice.",
-            "Tell your healthcare professional if you experience significant dizziness.",
-            "Keep regular health check-ups."
-        ],
-
-        warnings: "Prescription medicine. Dose changes should be made only by a healthcare professional.",
-
-        contraindications: [
-            "Known allergy to amlodipine"
-        ],
-
-        storage: "Store in a cool, dry place away from direct sunlight.",
-
-        manufacturer: "Generic Manufacturer",
-
-        prescriptionRequired: true,
-
-        description:
-            "Amlodipine is a prescription medicine used to help manage high blood pressure and certain heart conditions.",
-
-        createdAt: "2026-01-01T00:00:00.000Z"
-    },
-
-
-    {
-        id: "MED010",
-        name: "ORS",
-        genericName: "Oral Rehydration Salts",
-        image: "https://images.unsplash.com/photo-1603398938378-e54eab446dde?auto=format&fit=crop&w=800&q=80",
-
-        category: "Hydration",
-        form: "Powder",
-        strength: "As labelled",
-
-        uses: [
-            "Replacement of fluids",
-            "Replacement of electrolytes",
-            "Dehydration associated with diarrhea"
-        ],
-
-        dosage: "Prepare and use exactly according to the instructions on the packet.",
-
-        howToUse: "Mix and prepare exactly as instructed on the product packaging.",
-
-        sideEffects: [
-            "Usually well tolerated when prepared correctly"
-        ],
-
-        precautions: [
-            "Use the correct amount of water specified on the packet.",
-            "Do not store prepared solution longer than instructed.",
-            "Seek medical help for severe dehydration."
-        ],
-
-        warnings: "Severe dehydration or worsening illness requires prompt medical attention.",
-
-        contraindications: [
-            "Certain conditions requiring restricted fluid or electrolyte intake"
-        ],
-
-        storage: "Keep unopened packets in a cool, dry place. Follow the packet instructions after preparation.",
-
-        manufacturer: "Generic Manufacturer",
-
-        prescriptionRequired: false,
-
-        description:
-            "Oral rehydration salts are used to help replace fluids and electrolytes lost from the body.",
-
-        createdAt: "2026-01-01T00:00:00.000Z"
-    }
+const MEDICINES = [
+
+{
+id:"MED001",
+name:"Paracetamol",
+genericName:"Paracetamol / Acetaminophen",
+category:"Pain Relief",
+type:"Tablet",
+image:"https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80",
+
+uses:[
+"Relief of mild to moderate pain",
+"Reduction of fever",
+"Headache and body aches"
+],
+
+howItWorks:
+"Paracetamol works mainly in the central nervous system to reduce pain and fever.",
+
+dosage:
+"Use only according to the product label or instructions from a doctor or pharmacist. The appropriate amount depends on age, formulation and medical circumstances.",
+
+sideEffects:[
+"Nausea",
+"Stomach discomfort",
+"Skin reaction may rarely occur"
+],
+
+precautions:[
+"Do not exceed the recommended amount.",
+"Check other medicines because some also contain paracetamol.",
+"People with liver disease should seek professional advice."
+],
+
+warnings:
+"Too much paracetamol can seriously damage the liver.",
+
+storage:
+"Store according to the product label, generally in a cool, dry place away from children.",
+
+manufacturer:"Example Pharmaceutical Ltd.",
+prescription:false
+},
+
+
+{
+id:"MED002",
+name:"Ibuprofen",
+genericName:"Ibuprofen",
+category:"Pain Relief",
+type:"Tablet",
+image:"https://images.unsplash.com/photo-1550572017-edd951b55104?auto=format&fit=crop&w=800&q=80",
+
+uses:[
+"Pain relief",
+"Fever reduction",
+"Inflammation-related pain"
+],
+
+howItWorks:
+"Ibuprofen is an NSAID that reduces substances involved in pain, fever and inflammation.",
+
+dosage:
+"Use only the dose stated on the product label or prescribed by a healthcare professional. Dose varies with age, formulation and health conditions.",
+
+sideEffects:[
+"Stomach upset",
+"Nausea",
+"Heartburn",
+"Dizziness"
+],
+
+precautions:[
+"Take according to label directions.",
+"People with stomach ulcers, kidney problems or certain heart conditions should seek medical advice.",
+"Do not combine with other NSAIDs unless advised."
+],
+
+warnings:
+"NSAIDs can cause stomach bleeding and other serious effects in some people.",
+
+storage:"Keep tightly closed in a cool, dry place away from children.",
+
+manufacturer:"Example Pharmaceutical Ltd.",
+prescription:false
+},
+
+
+{
+id:"MED003",
+name:"Amoxicillin",
+genericName:"Amoxicillin",
+category:"Antibiotics",
+type:"Capsule",
+image:"https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=800&q=80",
+
+uses:[
+"Treatment of certain bacterial infections",
+"Respiratory bacterial infections",
+"Certain ear and throat infections"
+],
+
+howItWorks:
+"Amoxicillin is a penicillin-type antibiotic that interferes with bacterial cell-wall formation.",
+
+dosage:
+"Take only when prescribed and follow the complete instructions from the prescriber. The dose depends on the infection, age and formulation.",
+
+sideEffects:[
+"Nausea",
+"Diarrhea",
+"Stomach discomfort",
+"Skin rash"
+],
+
+precautions:[
+"Tell your doctor about penicillin or antibiotic allergies.",
+"Complete the prescribed course unless your healthcare professional tells you otherwise.",
+"Do not use antibiotics for viral infections unless specifically prescribed."
+],
+
+warnings:
+"Serious allergic reactions can occur. Seek urgent medical attention for severe allergic symptoms.",
+
+storage:"Follow the product label. Some liquid formulations may have special storage requirements.",
+
+manufacturer:"Example Pharma Ltd.",
+prescription:true
+},
+
+
+{
+id:"MED004",
+name:"Cetirizine",
+genericName:"Cetirizine",
+category:"Allergy",
+type:"Tablet",
+image:"https://images.unsplash.com/photo-1603398938378-e54eab446dde?auto=format&fit=crop&w=800&q=80",
+
+uses:[
+"Allergic rhinitis symptoms",
+"Sneezing",
+"Runny nose",
+"Itching and hives"
+],
+
+howItWorks:
+"Cetirizine is an antihistamine that blocks histamine activity involved in allergic symptoms.",
+
+dosage:
+"Follow the package label or healthcare professional's instructions. Dosage depends on age and formulation.",
+
+sideEffects:[
+"Drowsiness",
+"Dry mouth",
+"Headache",
+"Tiredness"
+],
+
+precautions:[
+"May cause drowsiness in some people.",
+"Be careful with activities requiring alertness until you know how it affects you.",
+"Ask a healthcare professional if you have kidney problems."
+],
+
+warnings:
+"Do not assume a medicine is suitable simply because it is available without prescription.",
+
+storage:"Store in a dry place at the temperature specified on the label.",
+
+manufacturer:"Example Healthcare Ltd.",
+prescription:false
+},
+
+
+{
+id:"MED005",
+name:"Azithromycin",
+genericName:"Azithromycin",
+category:"Antibiotics",
+type:"Tablet",
+image:"https://images.unsplash.com/photo-1471864190281-a93a3070b6de?auto=format&fit=crop&w=800&q=80",
+
+uses:[
+"Certain bacterial respiratory infections",
+"Certain bacterial skin infections",
+"Other susceptible bacterial infections"
+],
+
+howItWorks:
+"Azithromycin is a macrolide antibiotic that interferes with bacterial protein production.",
+
+dosage:
+"Use only as prescribed. The schedule varies according to the infection and formulation.",
+
+sideEffects:[
+"Diarrhea",
+"Nausea",
+"Abdominal discomfort",
+"Headache"
+],
+
+precautions:[
+"Tell your doctor about liver disease and heart rhythm problems.",
+"Take exactly as prescribed.",
+"Do not use antibiotics for ordinary viral colds."
+],
+
+warnings:
+"Certain medicines and medical conditions can increase the risk of abnormal heart rhythm.",
+
+storage:"Follow the medicine label for storage instructions.",
+
+manufacturer:"Example Pharma Ltd.",
+prescription:true
+},
+
+
+{
+id:"MED006",
+name:"Omeprazole",
+genericName:"Omeprazole",
+category:"Digestive Health",
+type:"Capsule",
+image:"https://images.unsplash.com/photo-1628771065518-0d82f1938462?auto=format&fit=crop&w=800&q=80",
+
+uses:[
+"Heartburn",
+"Acid reflux",
+"Certain stomach ulcers",
+"Excess stomach acid conditions"
+],
+
+howItWorks:
+"Omeprazole reduces the amount of acid produced by the stomach.",
+
+dosage:
+"Follow the product label or prescription. The appropriate dose and duration depend on the condition.",
+
+sideEffects:[
+"Headache",
+"Abdominal discomfort",
+"Nausea",
+"Diarrhea"
+],
+
+precautions:[
+"Long-term use should be monitored by a healthcare professional.",
+"Tell your doctor about persistent or unusual digestive symptoms.",
+"Follow instructions regarding timing and food."
+],
+
+warnings:
+"Persistent digestive symptoms should be evaluated by a healthcare professional.",
+
+storage:"Store in a dry place away from excessive heat and moisture.",
+
+manufacturer:"Example Healthcare Ltd.",
+prescription:false
+},
+
+
+{
+id:"MED007",
+name:"Loratadine",
+genericName:"Loratadine",
+category:"Allergy",
+type:"Tablet",
+image:"https://images.unsplash.com/photo-1585435557343-3b092031a831?auto=format&fit=crop&w=800&q=80",
+
+uses:[
+"Hay fever symptoms",
+"Sneezing",
+"Runny nose",
+"Hives"
+],
+
+howItWorks:
+"Loratadine is an antihistamine that reduces the effects of histamine.",
+
+dosage:
+"Use according to the package label or advice from a healthcare professional.",
+
+sideEffects:[
+"Headache",
+"Dry mouth",
+"Tiredness"
+],
+
+precautions:[
+"Check the label for age restrictions.",
+"Tell a healthcare professional about other medicines you take.",
+"Do not exceed the recommended amount."
+],
+
+warnings:
+"Some people can still experience drowsiness.",
+
+storage:"Keep in a cool, dry place away from children.",
+
+manufacturer:"Example Healthcare Ltd.",
+prescription:false
+},
+
+
+{
+id:"MED008",
+name:"Metformin",
+genericName:"Metformin",
+category:"Diabetes",
+type:"Tablet",
+image:"https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80",
+
+uses:[
+"Management of type 2 diabetes",
+"Helps improve blood glucose control"
+],
+
+howItWorks:
+"Metformin mainly reduces glucose production by the liver and improves the body's response to insulin.",
+
+dosage:
+"Take only as prescribed. The dose is individualized according to blood glucose, kidney function and other factors.",
+
+sideEffects:[
+"Nausea",
+"Diarrhea",
+"Abdominal discomfort",
+"Reduced appetite"
+],
+
+precautions:[
+"Kidney function may need monitoring.",
+"Take exactly as prescribed.",
+"Tell your healthcare professional about other medicines and medical conditions."
+],
+
+warnings:
+"A rare but serious complication called lactic acidosis can occur in certain circumstances.",
+
+storage:"Store according to the product label.",
+
+manufacturer:"Example Diabetes Care Ltd.",
+prescription:true
+},
+
+
+{
+id:"MED009",
+name:"Amlodipine",
+genericName:"Amlodipine",
+category:"Blood Pressure",
+type:"Tablet",
+image:"https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80",
+
+uses:[
+"High blood pressure",
+"Certain types of angina"
+],
+
+howItWorks:
+"Amlodipine is a calcium-channel blocker that relaxes blood vessels and helps lower blood pressure.",
+
+dosage:
+"Use only according to the prescription. The appropriate dose depends on the individual patient.",
+
+sideEffects:[
+"Headache",
+"Dizziness",
+"Flushing",
+"Ankle swelling"
+],
+
+precautions:[
+"Monitor blood pressure as advised.",
+"Stand up slowly if you feel dizzy.",
+"Do not stop prescribed treatment without medical advice."
+],
+
+warnings:
+"Seek medical advice if swelling, dizziness or other concerning symptoms persist.",
+
+storage:"Store at room temperature according to the label.",
+
+manufacturer:"Example Cardio Pharma Ltd.",
+prescription:true
+},
+
+
+{
+id:"MED010",
+name:"ORS",
+genericName:"Oral Rehydration Salts",
+category:"Hydration",
+type:"Oral Solution",
+image:"https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=800&q=80",
+
+uses:[
+"Helps replace fluids and electrolytes lost during diarrhea or vomiting",
+"Prevention of dehydration"
+],
+
+howItWorks:
+"ORS provides glucose and electrolytes that help the intestine absorb water and salts.",
+
+dosage:
+"Prepare and use exactly according to the packet instructions. Do not make the solution stronger or weaker than directed.",
+
+sideEffects:[
+"Usually well tolerated when prepared correctly",
+"Incorrect preparation can cause problems"
+],
+
+precautions:[
+"Use the exact amount of water specified on the packet.",
+"Seek medical care for severe dehydration or persistent symptoms.",
+"Infants and children may require professional assessment."
+],
+
+warnings:
+"ORS does not treat the underlying cause of severe illness or dehydration.",
+
+storage:"Store the unopened product in a dry place. Prepared solution should be used according to packet instructions.",
+
+manufacturer:"Example Health Products Ltd.",
+prescription:false
+},
+
+
+{
+id:"MED011",
+name:"Diclofenac",
+genericName:"Diclofenac",
+category:"Pain Relief",
+type:"Tablet",
+image:"https://images.unsplash.com/photo-1471864190281-a93a3070b6de?auto=format&fit=crop&w=800&q=80",
+
+uses:[
+"Short-term relief of certain pain",
+"Inflammation-related conditions"
+],
+
+howItWorks:
+"Diclofenac is an NSAID that reduces substances involved in pain and inflammation.",
+
+dosage:
+"Use only according to a healthcare professional's instructions or the product label.",
+
+sideEffects:[
+"Indigestion",
+"Stomach pain",
+"Nausea",
+"Dizziness"
+],
+
+precautions:[
+"People with stomach, kidney, heart or blood-pressure problems should seek medical advice.",
+"Do not combine with another NSAID unless advised."
+],
+
+warnings:
+"NSAIDs may increase the risk of stomach bleeding and cardiovascular problems in some people.",
+
+storage:"Store according to the package instructions.",
+
+manufacturer:"Example Pharma Ltd.",
+prescription:true
+},
+
+
+{
+id:"MED012",
+name:"Calcium + Vitamin D",
+genericName:"Calcium / Vitamin D supplement",
+category:"Vitamins & Supplements",
+type:"Tablet",
+image:"https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=800&q=80",
+
+uses:[
+"Supports normal bone health",
+"Helps provide calcium and vitamin D when dietary intake is inadequate"
+],
+
+howItWorks:
+"Calcium is an essential mineral for bones and many body functions. Vitamin D helps the body absorb calcium.",
+
+dosage:
+"Use according to the product label or healthcare professional's advice. Requirements vary by age and health status.",
+
+sideEffects:[
+"Constipation",
+"Stomach discomfort",
+"Nausea"
+],
+
+precautions:[
+"Do not take more than recommended.",
+"Tell a healthcare professional about kidney disease or kidney stones.",
+"Check other supplements to avoid unnecessary duplication."
+],
+
+warnings:
+"Excessive intake of some supplements can be harmful.",
+
+storage:"Store tightly closed in a cool, dry place.",
+
+manufacturer:"Example Nutrition Ltd.",
+prescription:false
+}
 
 ];
 
 
 /* =====================================================
-   INITIALIZE DATABASE
+   LOCAL STORAGE SUPPORT
    ===================================================== */
 
-function initializeMedicinesData() {
+function getAllMedicines() {
 
-    const stored =
-        localStorage.getItem(MEDICINES_KEY);
-
-    if (!stored) {
-
-        localStorage.setItem(
-            MEDICINES_KEY,
-            JSON.stringify(DEFAULT_MEDICINES)
-        );
-
-        return;
-    }
-
-    /*
-     * If old/invalid data exists,
-     * restore demo data.
-     */
+    let custom = [];
 
     try {
+        custom = JSON.parse(
+            localStorage.getItem("medicines") || "[]"
+        );
+    } catch(e) {
+        custom = [];
+    }
 
-        const medicines =
-            JSON.parse(stored);
+    if (!Array.isArray(custom)) {
+        custom = [];
+    }
 
-        if (!Array.isArray(medicines)) {
+    const map = new Map();
 
-            localStorage.setItem(
-                MEDICINES_KEY,
-                JSON.stringify(DEFAULT_MEDICINES)
-            );
+    MEDICINES.forEach(m => map.set(m.id, m));
 
+    custom.forEach(m => {
+        if (m.id) {
+            map.set(m.id, {
+                ...m,
+                uses: Array.isArray(m.uses) ? m.uses : [],
+                sideEffects: Array.isArray(m.sideEffects) ? m.sideEffects : [],
+                precautions: Array.isArray(m.precautions) ? m.precautions : []
+            });
         }
+    });
 
-    } catch (error) {
-
-        localStorage.setItem(
-            MEDICINES_KEY,
-            JSON.stringify(DEFAULT_MEDICINES)
-        );
-
-    }
-
+    return Array.from(map.values());
 }
-
-
-/* =====================================================
-   GET ALL MEDICINES
-   ===================================================== */
-
-function getMedicines() {
-
-    try {
-
-        const medicines =
-            JSON.parse(
-                localStorage.getItem(
-                    MEDICINES_KEY
-                )
-            );
-
-        return Array.isArray(medicines)
-            ? medicines
-            : [];
-
-    } catch (error) {
-
-        console.error(
-            "Error loading medicines:",
-            error
-        );
-
-        return [];
-
-    }
-
-}
-
-
-/* =====================================================
-   SAVE MEDICINES
-   ===================================================== */
-
-function saveMedicines(
-    medicines
-) {
-
-    localStorage.setItem(
-        MEDICINES_KEY,
-        JSON.stringify(medicines)
-    );
-
-}
-
-
-/* =====================================================
-   GET MEDICINE BY ID
-   ===================================================== */
-
-function getMedicineById(
-    id
-) {
-
-    const medicines =
-        getMedicines();
-
-    return medicines.find(
-        medicine =>
-            String(medicine.id) ===
-            String(id)
-    ) || null;
-
-}
-
-
-/* =====================================================
-   ADD MEDICINE
-   ===================================================== */
-
-function addMedicine(
-    medicineData
-) {
-
-    const medicines =
-        getMedicines();
-
-    const newMedicine = {
-
-        id:
-            medicineData.id ||
-            "MED" +
-            Date.now(),
-
-        name:
-            medicineData.name || "",
-
-        genericName:
-            medicineData.genericName || "",
-
-        image:
-            medicineData.image || "",
-
-        category:
-            medicineData.category || "Other",
-
-        form:
-            medicineData.form || "Tablet",
-
-        strength:
-            medicineData.strength || "",
-
-        uses:
-            Array.isArray(medicineData.uses)
-                ? medicineData.uses
-                : [],
-
-        dosage:
-            medicineData.dosage || "",
-
-        howToUse:
-            medicineData.howToUse || "",
-
-        sideEffects:
-            Array.isArray(medicineData.sideEffects)
-                ? medicineData.sideEffects
-                : [],
-
-        precautions:
-            Array.isArray(medicineData.precautions)
-                ? medicineData.precautions
-                : [],
-
-        warnings:
-            medicineData.warnings || "",
-
-        contraindications:
-            Array.isArray(
-                medicineData.contraindications
-            )
-                ? medicineData.contraindications
-                : [],
-
-        storage:
-            medicineData.storage || "",
-
-        manufacturer:
-            medicineData.manufacturer || "",
-
-        prescriptionRequired:
-            Boolean(
-                medicineData.prescriptionRequired
-            ),
-
-        description:
-            medicineData.description || "",
-
-        createdAt:
-            new Date().toISOString()
-
-    };
-
-
-    medicines.push(
-        newMedicine
-    );
-
-    saveMedicines(
-        medicines
-    );
-
-    return newMedicine;
-
-}
-
-
-/* =====================================================
-   UPDATE MEDICINE
-   ===================================================== */
-
-function updateMedicine(
-    id,
-    updatedData
-) {
-
-    const medicines =
-        getMedicines();
-
-    const index =
-        medicines.findIndex(
-            medicine =>
-                String(medicine.id) ===
-                String(id)
-        );
-
-    if (index === -1) {
-
-        return null;
-
-    }
-
-    medicines[index] = {
-
-        ...medicines[index],
-
-        ...updatedData,
-
-        id:
-            medicines[index].id,
-
-        updatedAt:
-            new Date().toISOString()
-
-    };
-
-    saveMedicines(
-        medicines
-    );
-
-    return medicines[index];
-
-}
-
-
-/* =====================================================
-   DELETE MEDICINE
-   ===================================================== */
-
-function deleteMedicine(
-    id
-) {
-
-    const medicines =
-        getMedicines();
-
-    const updated =
-        medicines.filter(
-            medicine =>
-                String(medicine.id) !==
-                String(id)
-        );
-
-    if (
-        updated.length ===
-        medicines.length
-    ) {
-
-        return false;
-
-    }
-
-    saveMedicines(
-        updated
-    );
-
-    return true;
-
-}
-
-
-/* =====================================================
-   SEARCH MEDICINES
-   ===================================================== */
-
-function searchMedicines(
-    keyword
-) {
-
-    const medicines =
-        getMedicines();
-
-    const search =
-        String(keyword || "")
-            .trim()
-            .toLowerCase();
-
-    if (!search) {
-
-        return medicines;
-
-    }
-
-    return medicines.filter(
-        medicine => {
-
-            const text = [
-
-                medicine.name,
-
-                medicine.genericName,
-
-                medicine.category,
-
-                medicine.form,
-
-                medicine.strength,
-
-                medicine.description
-
-            ]
-                .join(" ")
-                .toLowerCase();
-
-            return text.includes(search);
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   GET CATEGORIES
-   ===================================================== */
-
-function getMedicineCategories() {
-
-    const medicines =
-        getMedicines();
-
-    return [
-        ...new Set(
-            medicines
-                .map(
-                    medicine =>
-                        medicine.category
-                )
-                .filter(Boolean)
-        )
-    ].sort();
-
-}
-
-
-/* =====================================================
-   RESET DEMO DATA
-   ===================================================== */
-
-function resetDemoMedicines() {
-
-    localStorage.setItem(
-        MEDICINES_KEY,
-        JSON.stringify(
-            DEFAULT_MEDICINES
-        )
-    );
-
-    return DEFAULT_MEDICINES;
-
-}
-
-
-/* =====================================================
-   INITIALIZE
-   ===================================================== */
-
-initializeMedicinesData();
