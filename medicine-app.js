@@ -1,21 +1,16 @@
 /* =====================================================
-   MEDINFO PORTAL - MEDICINE APP
+   MEDICINE INFORMATION PORTAL
    File: js/medicine-app.js
    ===================================================== */
 
-
-/* =====================================================
-   GLOBAL STATE
-   ===================================================== */
-
 let displayedMedicines = [];
-let currentMedicinePage = 1;
+let currentPage = 1;
 
 const MEDICINES_PER_PAGE = 8;
 
 
 /* =====================================================
-   DOM READY
+   PAGE INITIALIZATION
    ===================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -25,36 +20,21 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-/* =====================================================
-   INITIALIZE MEDICINE PAGE
-   ===================================================== */
-
 function initializeMedicinePage() {
 
-    const medicineContainer =
-        document.getElementById(
-            "medicineList"
-        );
+    const medicineList =
+        document.getElementById("medicineList");
 
-
-    /*
-     * If medicineList doesn't exist,
-     * this script is probably being used
-     * on another page.
-     */
-
-    if (!medicineContainer) {
+    if (!medicineList) {
         return;
     }
 
-
-    loadMedicineCategories();
-
+    loadCategoryFilter();
+    loadFormFilter();
     loadMedicines();
 
-    setupMedicineSearch();
-
-    setupMedicineFilters();
+    setupSearch();
+    setupFilters();
 
 }
 
@@ -63,20 +43,12 @@ function initializeMedicinePage() {
    LOAD MEDICINES
    ===================================================== */
 
-function loadMedicines(
-    medicines = null
-) {
-
-    const allMedicines =
-        medicines || getMedicines();
-
+function loadMedicines() {
 
     displayedMedicines =
-        [...allMedicines];
+        getMedicines();
 
-
-    currentMedicinePage = 1;
-
+    currentPage = 1;
 
     renderMedicines();
 
@@ -90,214 +62,180 @@ function loadMedicines(
 function renderMedicines() {
 
     const container =
-        document.getElementById(
-            "medicineList"
-        );
-
+        document.getElementById("medicineList");
 
     if (!container) {
         return;
     }
 
 
-    const startIndex =
-        (
-            currentMedicinePage -
-            1
-        ) *
+    const start =
+        (currentPage - 1) *
         MEDICINES_PER_PAGE;
 
 
-    const endIndex =
-        startIndex +
+    const end =
+        start +
         MEDICINES_PER_PAGE;
 
 
-    const pageMedicines =
+    const medicines =
         displayedMedicines.slice(
-            startIndex,
-            endIndex
+            start,
+            end
         );
 
 
     container.innerHTML = "";
 
 
-    if (
-        displayedMedicines.length === 0
-    ) {
+    if (displayedMedicines.length === 0) {
 
-        renderNoMedicines(
-            container
-        );
+        showNoMedicines(container);
 
         updateMedicineCount();
 
         renderPagination();
 
         return;
-
     }
 
 
-    pageMedicines.forEach(
-        function (medicine) {
+    medicines.forEach(function (medicine) {
 
-            container.insertAdjacentHTML(
-                "beforeend",
-                createMedicineCard(
-                    medicine
-                )
-            );
+        container.insertAdjacentHTML(
+            "beforeend",
+            createMedicineCard(medicine)
+        );
 
-        }
-    );
+    });
 
 
     updateMedicineCount();
-
     renderPagination();
 
 }
 
 
 /* =====================================================
-   CREATE MEDICINE CARD
+   MEDICINE CARD
    ===================================================== */
 
-function createMedicineCard(
-    medicine
-) {
-
-    const medicineId =
-        encodeURIComponent(
-            medicine.id
-        );
-
-
-    const category =
-        escapeMedicineHTML(
-            medicine.category
-        );
-
-
-    const name =
-        escapeMedicineHTML(
-            medicine.name
-        );
-
-
-    const genericName =
-        escapeMedicineHTML(
-            medicine.genericName
-        );
-
-
-    const form =
-        escapeMedicineHTML(
-            medicine.form
-        );
-
-
-    const strength =
-        escapeMedicineHTML(
-            medicine.strength
-        );
-
+function createMedicineCard(medicine) {
 
     const prescriptionBadge =
         medicine.prescriptionRequired
+
             ? `
                 <span class="badge bg-warning text-dark">
-                    <i class="bi bi-prescription2"></i>
+                    <i class="bi bi-prescription2 me-1"></i>
                     Prescription
                 </span>
               `
+
             : `
                 <span class="badge bg-success">
-                    <i class="bi bi-check-circle"></i>
+                    <i class="bi bi-check-circle me-1"></i>
                     General
                 </span>
               `;
 
 
+    const image =
+        medicine.image ||
+        "https://via.placeholder.com/600x400?text=Medicine";
+
+
     return `
 
-        <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="col-sm-6 col-lg-4 col-xl-3 mb-4">
 
-            <div class="medicine-card h-100">
+            <div class="card medicine-card h-100 border-0 shadow-sm">
 
-                <div class="medicine-card-icon">
 
-                    <i class="bi bi-capsule"></i>
+                <div class="position-relative">
+
+                    <img
+                        src="${escapeHTML(image)}"
+                        alt="${escapeHTML(medicine.name)}"
+                        class="card-img-top medicine-card-image"
+                        onerror="this.src='https://via.placeholder.com/600x400?text=Medicine';"
+                    >
+
+
+                    <span
+                        class="badge bg-primary position-absolute top-0 start-0 m-3">
+
+                        ${escapeHTML(medicine.category)}
+
+                    </span>
 
                 </div>
 
 
-                <div class="medicine-card-body">
-
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-
-                        <span class="badge bg-light text-primary">
-
-                            ${category}
-
-                        </span>
-
-                    </div>
+                <div class="card-body d-flex flex-column">
 
 
-                    <h5 class="medicine-name">
+                    <h5 class="card-title fw-bold">
 
-                        ${name}
+                        ${escapeHTML(medicine.name)}
 
                     </h5>
 
 
-                    <p class="medicine-generic">
+                    <p class="text-muted small mb-2">
 
-                        ${genericName}
+                        ${escapeHTML(medicine.genericName)}
 
                     </p>
 
 
-                    <div class="medicine-meta">
+                    <div class="small text-secondary mb-3">
 
-                        <span>
+                        <div class="mb-1">
 
-                            <i class="bi bi-box"></i>
+                            <i class="bi bi-capsule me-1"></i>
 
-                            ${form}
+                            ${escapeHTML(medicine.form)}
 
-                        </span>
+                        </div>
 
 
-                        <span>
+                        <div>
 
-                            <i class="bi bi-speedometer2"></i>
+                            <i class="bi bi-speedometer2 me-1"></i>
 
-                            ${strength}
+                            ${escapeHTML(medicine.strength)}
 
-                        </span>
+                        </div>
 
                     </div>
 
 
-                    <div class="mt-3">
+                    <div class="mb-3">
 
                         ${prescriptionBadge}
 
                     </div>
 
 
+                    <p class="card-text text-muted small flex-grow-1">
+
+                        ${escapeHTML(
+                            medicine.description ||
+                            "Medicine information available."
+                        )}
+
+                    </p>
+
+
                     <a
-                        href="medicine-details.html?id=${medicineId}"
-                        class="btn btn-primary w-100 mt-3"
-                    >
+                        href="medicine-details.html?id=${encodeURIComponent(medicine.id)}"
+                        class="btn btn-primary w-100">
+
+                        <i class="bi bi-eye me-1"></i>
 
                         View Details
-
-                        <i class="bi bi-arrow-right ms-1"></i>
 
                     </a>
 
@@ -313,72 +251,15 @@ function createMedicineCard(
 
 
 /* =====================================================
-   NO MEDICINES
-   ===================================================== */
-
-function renderNoMedicines(
-    container
-) {
-
-    container.innerHTML = `
-
-        <div class="col-12">
-
-            <div class="text-center py-5">
-
-                <div class="mb-3">
-
-                    <i
-                        class="bi bi-search"
-                        style="font-size: 3rem; color: #94a3b8;"
-                    ></i>
-
-                </div>
-
-
-                <h4>
-                    No medicines found
-                </h4>
-
-
-                <p class="text-muted">
-
-                    Try changing your search
-                    or category filter.
-
-                </p>
-
-
-                <button
-                    type="button"
-                    class="btn btn-outline-primary"
-                    onclick="clearMedicineFilters()"
-                >
-
-                    Clear Filters
-
-                </button>
-
-            </div>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =====================================================
    SEARCH
    ===================================================== */
 
-function setupMedicineSearch() {
+function setupSearch() {
 
     const searchInput =
         document.getElementById(
             "medicineSearch"
         );
-
 
     if (!searchInput) {
         return;
@@ -398,26 +279,26 @@ function setupMedicineSearch() {
 
 
 /* =====================================================
-   FILTER SETUP
+   FILTERS
    ===================================================== */
 
-function setupMedicineFilters() {
+function setupFilters() {
 
-    const categorySelect =
+    const category =
         document.getElementById(
             "medicineCategory"
         );
 
 
-    const formSelect =
+    const form =
         document.getElementById(
             "medicineForm"
         );
 
 
-    if (categorySelect) {
+    if (category) {
 
-        categorySelect.addEventListener(
+        category.addEventListener(
             "change",
             filterMedicines
         );
@@ -425,9 +306,9 @@ function setupMedicineFilters() {
     }
 
 
-    if (formSelect) {
+    if (form) {
 
-        formSelect.addEventListener(
+        form.addEventListener(
             "change",
             filterMedicines
         );
@@ -449,20 +330,20 @@ function filterMedicines() {
         );
 
 
-    const categorySelect =
+    const categoryInput =
         document.getElementById(
             "medicineCategory"
         );
 
 
-    const formSelect =
+    const formInput =
         document.getElementById(
             "medicineForm"
         );
 
 
     const search =
-        String(
+        (
             searchInput?.value || ""
         )
         .trim()
@@ -470,16 +351,16 @@ function filterMedicines() {
 
 
     const category =
-        String(
-            categorySelect?.value || ""
+        (
+            categoryInput?.value || ""
         )
         .trim()
         .toLowerCase();
 
 
     const form =
-        String(
-            formSelect?.value || ""
+        (
+            formInput?.value || ""
         )
         .trim()
         .toLowerCase();
@@ -503,7 +384,9 @@ function filterMedicines() {
 
                     medicine.form,
 
-                    medicine.strength
+                    medicine.strength,
+
+                    medicine.description
 
                 ]
                 .join(" ")
@@ -541,7 +424,7 @@ function filterMedicines() {
         );
 
 
-    currentMedicinePage = 1;
+    currentPage = 1;
 
     renderMedicines();
 
@@ -549,10 +432,10 @@ function filterMedicines() {
 
 
 /* =====================================================
-   LOAD CATEGORIES
+   CATEGORY FILTER
    ===================================================== */
 
-function loadMedicineCategories() {
+function loadCategoryFilter() {
 
     const select =
         document.getElementById(
@@ -569,10 +452,6 @@ function loadMedicineCategories() {
         getMedicineCategories();
 
 
-    /*
-     * Keep the first/default option.
-     */
-
     select.innerHTML = `
 
         <option value="">
@@ -585,17 +464,19 @@ function loadMedicineCategories() {
     categories.forEach(
         function (category) {
 
-            select.insertAdjacentHTML(
-                "beforeend",
+            const option =
+                document.createElement(
+                    "option"
+                );
 
-                `
-                    <option value="${escapeMedicineHTML(category)}">
+            option.value =
+                category;
 
-                        ${escapeMedicineHTML(category)}
+            option.textContent =
+                category;
 
-                    </option>
-                `
-
+            select.appendChild(
+                option
             );
 
         }
@@ -605,10 +486,10 @@ function loadMedicineCategories() {
 
 
 /* =====================================================
-   LOAD MEDICINE FORMS
+   FORM FILTER
    ===================================================== */
 
-function loadMedicineForms() {
+function loadFormFilter() {
 
     const select =
         document.getElementById(
@@ -621,19 +502,14 @@ function loadMedicineForms() {
     }
 
 
-    const medicines =
-        getMedicines();
-
-
     const forms = [
         ...new Set(
-            medicines.map(
-                function (medicine) {
-
-                    return medicine.form;
-
-                }
-            )
+            getMedicines()
+                .map(
+                    medicine =>
+                        medicine.form
+                )
+                .filter(Boolean)
         )
     ].sort();
 
@@ -650,17 +526,19 @@ function loadMedicineForms() {
     forms.forEach(
         function (form) {
 
-            select.insertAdjacentHTML(
-                "beforeend",
+            const option =
+                document.createElement(
+                    "option"
+                );
 
-                `
-                    <option value="${escapeMedicineHTML(form)}">
+            option.value =
+                form;
 
-                        ${escapeMedicineHTML(form)}
+            option.textContent =
+                form;
 
-                    </option>
-                `
-
+            select.appendChild(
+                option
             );
 
         }
@@ -675,20 +553,18 @@ function loadMedicineForms() {
 
 function updateMedicineCount() {
 
-    const elements =
-        document.querySelectorAll(
+    document
+        .querySelectorAll(
             "[data-medicine-count]"
+        )
+        .forEach(
+            function (element) {
+
+                element.textContent =
+                    displayedMedicines.length;
+
+            }
         );
-
-
-    elements.forEach(
-        function (element) {
-
-            element.textContent =
-                displayedMedicines.length;
-
-        }
-    );
 
 }
 
@@ -710,14 +586,14 @@ function renderPagination() {
     }
 
 
+    pagination.innerHTML = "";
+
+
     const totalPages =
         Math.ceil(
             displayedMedicines.length /
             MEDICINES_PER_PAGE
         );
-
-
-    pagination.innerHTML = "";
 
 
     if (totalPages <= 1) {
@@ -727,33 +603,53 @@ function renderPagination() {
 
     /* Previous */
 
-    pagination.insertAdjacentHTML(
-        "beforeend",
+    const previous =
+        document.createElement(
+            "li"
+        );
 
-        `
-            <li class="page-item ${
-                currentMedicinePage === 1
-                    ? "disabled"
-                    : ""
-            }">
+    previous.className =
+        "page-item " +
+        (
+            currentPage === 1
+                ? "disabled"
+                : ""
+        );
 
-                <button
-                    class="page-link"
-                    type="button"
-                    onclick="changeMedicinePage(${currentMedicinePage - 1})"
-                >
 
-                    <i class="bi bi-chevron-left"></i>
+    previous.innerHTML = `
 
-                </button>
+        <button
+            class="page-link"
+            type="button">
 
-            </li>
-        `
+            <i class="bi bi-chevron-left"></i>
 
+        </button>
+
+    `;
+
+
+    previous
+        .querySelector("button")
+        .addEventListener(
+            "click",
+            function () {
+
+                changePage(
+                    currentPage - 1
+                );
+
+            }
+        );
+
+
+    pagination.appendChild(
+        previous
     );
 
 
-    /* Page numbers */
+    /* Page Numbers */
 
     for (
         let page = 1;
@@ -761,29 +657,48 @@ function renderPagination() {
         page++
     ) {
 
-        pagination.insertAdjacentHTML(
-            "beforeend",
+        const item =
+            document.createElement(
+                "li"
+            );
 
-            `
-                <li class="page-item ${
-                    page === currentMedicinePage
-                        ? "active"
-                        : ""
-                }">
 
-                    <button
-                        class="page-link"
-                        type="button"
-                        onclick="changeMedicinePage(${page})"
-                    >
+        item.className =
+            "page-item " +
+            (
+                page === currentPage
+                    ? "active"
+                    : ""
+            );
 
-                        ${page}
 
-                    </button>
+        item.innerHTML = `
 
-                </li>
-            `
+            <button
+                class="page-link"
+                type="button">
 
+                ${page}
+
+            </button>
+
+        `;
+
+
+        item
+            .querySelector("button")
+            .addEventListener(
+                "click",
+                function () {
+
+                    changePage(page);
+
+                }
+            );
+
+
+        pagination.appendChild(
+            item
         );
 
     }
@@ -791,29 +706,50 @@ function renderPagination() {
 
     /* Next */
 
-    pagination.insertAdjacentHTML(
-        "beforeend",
+    const next =
+        document.createElement(
+            "li"
+        );
 
-        `
-            <li class="page-item ${
-                currentMedicinePage === totalPages
-                    ? "disabled"
-                    : ""
-            }">
 
-                <button
-                    class="page-link"
-                    type="button"
-                    onclick="changeMedicinePage(${currentMedicinePage + 1})"
-                >
+    next.className =
+        "page-item " +
+        (
+            currentPage === totalPages
+                ? "disabled"
+                : ""
+        );
 
-                    <i class="bi bi-chevron-right"></i>
 
-                </button>
+    next.innerHTML = `
 
-            </li>
-        `
+        <button
+            class="page-link"
+            type="button">
 
+            <i class="bi bi-chevron-right"></i>
+
+        </button>
+
+    `;
+
+
+    next
+        .querySelector("button")
+        .addEventListener(
+            "click",
+            function () {
+
+                changePage(
+                    currentPage + 1
+                );
+
+            }
+        );
+
+
+    pagination.appendChild(
+        next
     );
 
 }
@@ -823,9 +759,7 @@ function renderPagination() {
    CHANGE PAGE
    ===================================================== */
 
-function changeMedicinePage(
-    page
-) {
+function changePage(page) {
 
     const totalPages =
         Math.ceil(
@@ -844,30 +778,20 @@ function changeMedicinePage(
     }
 
 
-    currentMedicinePage =
+    currentPage =
         page;
 
 
     renderMedicines();
 
 
-    const list =
-        document.getElementById(
-            "medicineList"
-        );
+    window.scrollTo({
 
+        top: 0,
 
-    if (list) {
+        behavior: "smooth"
 
-        list.scrollIntoView({
-
-            behavior: "smooth",
-
-            block: "start"
-
-        });
-
-    }
+    });
 
 }
 
@@ -878,46 +802,100 @@ function changeMedicinePage(
 
 function clearMedicineFilters() {
 
-    const searchInput =
+    const search =
         document.getElementById(
             "medicineSearch"
         );
 
 
-    const categorySelect =
+    const category =
         document.getElementById(
             "medicineCategory"
         );
 
 
-    const formSelect =
+    const form =
         document.getElementById(
             "medicineForm"
         );
 
 
-    if (searchInput) {
-
-        searchInput.value = "";
-
+    if (search) {
+        search.value = "";
     }
 
 
-    if (categorySelect) {
-
-        categorySelect.value = "";
-
+    if (category) {
+        category.value = "";
     }
 
 
-    if (formSelect) {
-
-        formSelect.value = "";
-
+    if (form) {
+        form.value = "";
     }
 
 
-    loadMedicines();
+    displayedMedicines =
+        getMedicines();
+
+
+    currentPage = 1;
+
+    renderMedicines();
+
+}
+
+
+/* =====================================================
+   NO RESULTS
+   ===================================================== */
+
+function showNoMedicines(
+    container
+) {
+
+    container.innerHTML = `
+
+        <div class="col-12">
+
+            <div class="text-center py-5">
+
+                <i
+                    class="bi bi-search display-4 text-muted">
+                </i>
+
+
+                <h4 class="mt-3">
+
+                    No medicines found
+
+                </h4>
+
+
+                <p class="text-muted">
+
+                    Try another medicine name
+                    or change the filters.
+
+                </p>
+
+
+                <button
+                    type="button"
+                    class="btn btn-outline-primary"
+                    onclick="clearMedicineFilters()">
+
+                    <i class="bi bi-arrow-counterclockwise me-1"></i>
+
+                    Clear Filters
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
 
 }
 
@@ -926,34 +904,16 @@ function clearMedicineFilters() {
    ESCAPE HTML
    ===================================================== */
 
-function escapeMedicineHTML(
-    value
-) {
+function escapeHTML(value) {
 
     const div =
         document.createElement(
             "div"
         );
 
-
     div.textContent =
-        String(value ?? "");
-
+        value ?? "";
 
     return div.innerHTML;
 
 }
-
-
-/* =====================================================
-   INITIALIZE FORM FILTER
-   ===================================================== */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-        loadMedicineForms();
-
-    }
-);
