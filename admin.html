@@ -4,326 +4,110 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Admin Registration - MedInfo Portal</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <!-- Bootstrap CSS -->
+    <title>Admin Registration | Medicine Information Portal</title>
+
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
-    <!-- Bootstrap Icons -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+
     <link
         rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="../css/style.css">
-
-    <!-- Admin CSS -->
-    <link rel="stylesheet" href="../css/admin.css">
+        href="css/admin.css">
 
 </head>
+
 
 <body class="admin-auth-page">
 
 
-<!-- ================= NAVBAR ================= -->
+<div class="container-fluid min-vh-100">
 
-<nav class="navbar navbar-dark bg-primary shadow">
+    <div class="row min-vh-100">
 
-    <div class="container">
 
-        <a
-            class="navbar-brand fw-bold"
-            href="../index.html">
+        <!-- =================================================
+             LEFT SIDE
+        ================================================== -->
 
-            <i class="bi bi-capsule-pill"></i>
+        <div class="col-lg-6 d-none d-lg-flex admin-auth-left">
 
-            MedInfo Portal
+            <div class="admin-auth-content">
 
-        </a>
+                <div class="admin-auth-logo">
 
-        <a
-            href="../login.html"
-            class="btn btn-light btn-sm">
+                    <i class="bi bi-capsule-pill"></i>
 
-            <i class="bi bi-arrow-left"></i>
+                </div>
 
-            User Login
 
-        </a>
+                <h1>
+                    Medicine Information Portal
+                </h1>
 
-    </div>
 
-</nav>
+                <p>
 
+                    Secure administration panel for
+                    managing medicines, users and
+                    feedback.
 
+                </p>
 
-<!-- ================= ADMIN REGISTER ================= -->
 
-<section class="admin-auth-section py-5">
+                <div class="admin-feature-list">
 
-    <div class="container">
 
-        <div class="row justify-content-center">
+                    <div class="admin-feature">
 
-            <div class="col-md-7 col-lg-5">
+                        <i class="bi bi-check-circle-fill"></i>
 
-                <div class="card border-0 shadow-lg">
-
-                    <div class="card-body p-4 p-md-5">
-
-
-                        <!-- ICON -->
-
-                        <div class="text-center mb-4">
-
-                            <div class="admin-icon mx-auto">
-
-                                <i class="bi bi-shield-plus"></i>
-
-                            </div>
-
-
-                            <h2 class="fw-bold text-primary mt-3">
-
-                                Admin Registration
-
-                            </h2>
-
-
-                            <p class="text-muted">
-
-                                Create an administrator account
-
-                            </p>
-
-                        </div>
-
-
-
-                        <!-- MESSAGE -->
-
-                        <div
-                            id="adminRegisterMessage"
-                            class="alert"
-                            style="display:none;">
-                        </div>
-
-
-
-                        <!-- FORM -->
-
-                        <form id="adminRegisterForm">
-
-
-                            <!-- ADMIN NAME -->
-
-                            <div class="mb-3">
-
-                                <label
-                                    for="adminName"
-                                    class="form-label fw-semibold">
-
-                                    Admin Name
-
-                                </label>
-
-                                <div class="input-group">
-
-                                    <span class="input-group-text">
-
-                                        <i class="bi bi-person"></i>
-
-                                    </span>
-
-                                    <input
-                                        type="text"
-                                        id="adminName"
-                                        class="form-control"
-                                        placeholder="Enter admin name"
-                                        required>
-
-                                </div>
-
-                            </div>
-
-
-
-                            <!-- EMAIL -->
-
-                            <div class="mb-3">
-
-                                <label
-                                    for="adminEmail"
-                                    class="form-label fw-semibold">
-
-                                    Email Address
-
-                                </label>
-
-                                <div class="input-group">
-
-                                    <span class="input-group-text">
-
-                                        <i class="bi bi-envelope"></i>
-
-                                    </span>
-
-                                    <input
-                                        type="email"
-                                        id="adminEmail"
-                                        class="form-control"
-                                        placeholder="Enter admin email"
-                                        required>
-
-                                </div>
-
-                            </div>
-
-
-
-                            <!-- PASSWORD -->
-
-                            <div class="mb-3">
-
-                                <label
-                                    for="adminPassword"
-                                    class="form-label fw-semibold">
-
-                                    Password
-
-                                </label>
-
-                                <div class="input-group">
-
-                                    <span class="input-group-text">
-
-                                        <i class="bi bi-lock"></i>
-
-                                    </span>
-
-                                    <input
-                                        type="password"
-                                        id="adminPassword"
-                                        class="form-control"
-                                        placeholder="Create password"
-                                        required>
-
-                                    <button
-                                        type="button"
-                                        class="btn btn-outline-secondary"
-                                        onclick="toggleAdminPassword('adminPassword', this)">
-
-                                        <i class="bi bi-eye"></i>
-
-                                    </button>
-
-                                </div>
-
-                            </div>
-
-
-
-                            <!-- CONFIRM PASSWORD -->
-
-                            <div class="mb-4">
-
-                                <label
-                                    for="adminConfirmPassword"
-                                    class="form-label fw-semibold">
-
-                                    Confirm Password
-
-                                </label>
-
-                                <div class="input-group">
-
-                                    <span class="input-group-text">
-
-                                        <i class="bi bi-lock-fill"></i>
-
-                                    </span>
-
-                                    <input
-                                        type="password"
-                                        id="adminConfirmPassword"
-                                        class="form-control"
-                                        placeholder="Confirm password"
-                                        required>
-
-                                    <button
-                                        type="button"
-                                        class="btn btn-outline-secondary"
-                                        onclick="toggleAdminPassword('adminConfirmPassword', this)">
-
-                                        <i class="bi bi-eye"></i>
-
-                                    </button>
-
-                                </div>
-
-                            </div>
-
-
-
-                            <!-- REGISTER -->
-
-                            <button
-                                type="submit"
-                                class="btn btn-primary w-100 py-2">
-
-                                <i class="bi bi-person-plus"></i>
-
-                                Create Admin Account
-
-                            </button>
-
-
-                        </form>
-
-
-
-                        <!-- LOGIN LINK -->
-
-                        <div class="text-center mt-4">
-
-                            <p class="mb-0 text-muted">
-
-                                Already have an admin account?
-
-                            </p>
-
-                            <a
-                                href="login.html"
-                                class="fw-semibold text-primary">
-
-                                Admin Login
-
-                            </a>
-
-                        </div>
-
-
-
-                        <!-- SECURITY NOTE -->
-
-                        <div class="alert alert-warning mt-4 mb-0 small">
-
-                            <i class="bi bi-exclamation-triangle"></i>
-
-                            <strong>Demo Notice:</strong>
-
-                            This frontend project stores account information
-                            in browser LocalStorage. It is intended for
-                            academic demonstration only.
-
-                        </div>
-
+                        <span>
+                            Manage medicine information
+                        </span>
 
                     </div>
+
+
+                    <div class="admin-feature">
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        <span>
+                            Manage registered users
+                        </span>
+
+                    </div>
+
+
+                    <div class="admin-feature">
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        <span>
+                            View user feedback
+                        </span>
+
+                    </div>
+
+
+                    <div class="admin-feature">
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        <span>
+                            Monitor portal dashboard
+                        </span>
+
+                    </div>
+
 
                 </div>
 
@@ -331,50 +115,682 @@
 
         </div>
 
+
+
+        <!-- =================================================
+             RIGHT SIDE
+        ================================================== -->
+
+        <div class="col-lg-6 d-flex align-items-center justify-content-center">
+
+            <div class="admin-auth-card">
+
+
+                <!-- MOBILE LOGO -->
+
+                <div class="text-center d-lg-none mb-4">
+
+                    <div class="admin-mobile-logo">
+
+                        <i class="bi bi-capsule-pill"></i>
+
+                    </div>
+
+
+                    <h4 class="fw-bold mt-3">
+
+                        Medicine Information Portal
+
+                    </h4>
+
+                </div>
+
+
+
+                <!-- HEADING -->
+
+                <div class="text-center mb-4">
+
+                    <div class="admin-form-icon">
+
+                        <i class="bi bi-person-plus-fill"></i>
+
+                    </div>
+
+
+                    <h2 class="fw-bold mt-3">
+
+                        Admin Registration
+
+                    </h2>
+
+
+                    <p class="text-muted">
+
+                        Create an administrator account
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- MESSAGE -->
+
+                <div
+                    id="adminRegisterMessage"
+                    class="alert d-none"
+                    role="alert">
+                </div>
+
+
+
+                <!-- FORM -->
+
+                <form
+                    id="adminRegisterForm"
+                    novalidate>
+
+
+                    <!-- NAME -->
+
+                    <div class="mb-3">
+
+                        <label
+                            for="adminNameInput"
+                            class="form-label fw-semibold">
+
+                            Full Name
+
+                        </label>
+
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+
+                                <i class="bi bi-person"></i>
+
+                            </span>
+
+
+                            <input
+                                type="text"
+                                id="adminNameInput"
+                                class="form-control"
+                                placeholder="Enter full name"
+                                required
+                                minlength="2">
+
+                        </div>
+
+
+                        <div class="invalid-feedback">
+
+                            Please enter your name.
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- EMAIL -->
+
+                    <div class="mb-3">
+
+                        <label
+                            for="adminEmailInput"
+                            class="form-label fw-semibold">
+
+                            Email Address
+
+                        </label>
+
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+
+                                <i class="bi bi-envelope"></i>
+
+                            </span>
+
+
+                            <input
+                                type="email"
+                                id="adminEmailInput"
+                                class="form-control"
+                                placeholder="admin@example.com"
+                                required>
+
+                        </div>
+
+
+                        <div class="invalid-feedback">
+
+                            Please enter a valid email.
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="mb-3">
+
+                        <label
+                            for="adminPasswordInput"
+                            class="form-label fw-semibold">
+
+                            Password
+
+                        </label>
+
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+
+                                <i class="bi bi-lock"></i>
+
+                            </span>
+
+
+                            <input
+                                type="password"
+                                id="adminPasswordInput"
+                                class="form-control"
+                                placeholder="Create password"
+                                required
+                                minlength="6">
+
+
+                            <button
+                                type="button"
+                                class="btn btn-outline-secondary"
+                                id="toggleAdminPassword">
+
+                                <i class="bi bi-eye"></i>
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="form-text">
+
+                            Password must contain at least
+                            6 characters.
+
+                        </div>
+
+
+                        <div class="invalid-feedback">
+
+                            Password must be at least
+                            6 characters.
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CONFIRM PASSWORD -->
+
+                    <div class="mb-4">
+
+                        <label
+                            for="adminConfirmPasswordInput"
+                            class="form-label fw-semibold">
+
+                            Confirm Password
+
+                        </label>
+
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+
+                                <i class="bi bi-shield-lock"></i>
+
+                            </span>
+
+
+                            <input
+                                type="password"
+                                id="adminConfirmPasswordInput"
+                                class="form-control"
+                                placeholder="Confirm password"
+                                required>
+
+                        </div>
+
+
+                        <div
+                            id="confirmPasswordError"
+                            class="invalid-feedback">
+
+                            Passwords do not match.
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- SUBMIT -->
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary w-100 py-2 fw-semibold">
+
+                        <i
+                            class="bi bi-person-plus me-2">
+                        </i>
+
+                        Create Admin Account
+
+                    </button>
+
+
+                </form>
+
+
+
+                <!-- LOGIN -->
+
+                <div class="text-center mt-4">
+
+                    <span class="text-muted">
+
+                        Already have an admin account?
+
+                    </span>
+
+
+                    <a
+                        href="admin/login.html"
+                        class="fw-semibold text-decoration-none">
+
+                        Login
+
+                    </a>
+
+                </div>
+
+
+
+                <!-- WEBSITE -->
+
+                <div class="text-center mt-3">
+
+                    <a
+                        href="index.html"
+                        class="small text-muted text-decoration-none">
+
+                        <i class="bi bi-arrow-left me-1"></i>
+
+                        Back to Website
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
     </div>
 
-</section>
+</div>
 
 
 
-<!-- ================= FOOTER ================= -->
+<!-- =====================================================
+     ADMIN JS
+====================================================== -->
 
-<footer class="bg-primary text-white text-center py-4">
-
-    <div class="container">
-
-        <p class="mb-1">
-
-            <i class="bi bi-capsule-pill"></i>
-
-            <strong>Medicine Information Portal</strong>
-
-        </p>
-
-        <p class="mb-0">
-
-            © 2026 Medicine Information Portal.
-            All Rights Reserved.
-
-        </p>
-
-    </div>
-
-</footer>
+<script src="js/admin.js"></script>
 
 
+<script>
 
-<!-- Bootstrap JS -->
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
 
-<script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+
+        const form =
+            document.getElementById(
+                "adminRegisterForm"
+            );
+
+
+        const nameInput =
+            document.getElementById(
+                "adminNameInput"
+            );
+
+
+        const emailInput =
+            document.getElementById(
+                "adminEmailInput"
+            );
+
+
+        const passwordInput =
+            document.getElementById(
+                "adminPasswordInput"
+            );
+
+
+        const confirmInput =
+            document.getElementById(
+                "adminConfirmPasswordInput"
+            );
+
+
+        const message =
+            document.getElementById(
+                "adminRegisterMessage"
+            );
+
+
+        const togglePassword =
+            document.getElementById(
+                "toggleAdminPassword"
+            );
+
+
+
+        /* =================================================
+           PASSWORD SHOW / HIDE
+        ================================================= */
+
+        if (togglePassword) {
+
+            togglePassword.addEventListener(
+                "click",
+                function () {
+
+                    const icon =
+                        this.querySelector(
+                            "i"
+                        );
+
+
+                    if (
+                        passwordInput.type ===
+                        "password"
+                    ) {
+
+                        passwordInput.type =
+                            "text";
+
+                        icon.className =
+                            "bi bi-eye-slash";
+
+                    }
+                    else {
+
+                        passwordInput.type =
+                            "password";
+
+                        icon.className =
+                            "bi bi-eye";
+
+                    }
+
+                }
+            );
+
+        }
+
+
+
+        /* =================================================
+           CONFIRM PASSWORD VALIDATION
+        ================================================= */
+
+        confirmInput.addEventListener(
+            "input",
+            function () {
+
+                if (
+                    confirmInput.value !==
+                    passwordInput.value
+                ) {
+
+                    confirmInput.setCustomValidity(
+                        "Passwords do not match"
+                    );
+
+                }
+                else {
+
+                    confirmInput.setCustomValidity(
+                        ""
+                    );
+
+                }
+
+            }
+        );
+
+
+        passwordInput.addEventListener(
+            "input",
+            function () {
+
+                if (
+                    confirmInput.value !==
+                    passwordInput.value
+                ) {
+
+                    confirmInput.setCustomValidity(
+                        "Passwords do not match"
+                    );
+
+                }
+                else {
+
+                    confirmInput.setCustomValidity(
+                        ""
+                    );
+
+                }
+
+            }
+        );
+
+
+
+        /* =================================================
+           FORM SUBMIT
+        ================================================= */
+
+        form.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+
+                form.classList.add(
+                    "was-validated"
+                );
+
+
+                if (!form.checkValidity()) {
+
+                    return;
+
+                }
+
+
+                const name =
+                    nameInput.value.trim();
+
+
+                const email =
+                    emailInput.value
+                        .trim()
+                        .toLowerCase();
+
+
+                const password =
+                    passwordInput.value;
+
+
+                const result =
+                    registerAdmin(
+                        name,
+                        email,
+                        password
+                    );
+
+
+                if (!result.success) {
+
+                    showMessage(
+                        result.message,
+                        "danger"
+                    );
+
+                    return;
+
+                }
+
+
+
+                /* =========================================
+                   REGISTRATION COMPLETED
+                ========================================== */
+
+                showMessage(
+                    "Registration completed successfully! Redirecting to admin login...",
+                    "success"
+                );
+
+
+                form.reset();
+
+                form.classList.remove(
+                    "was-validated"
+                );
+
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "admin/login.html";
+
+                    },
+                    1800
+                );
+
+            }
+        );
+
+
+
+        /* =================================================
+           SHOW MESSAGE
+        ================================================= */
+
+        function showMessage(
+            text,
+            type
+        ) {
+
+            message.className =
+                "alert alert-" +
+                type;
+
+
+            if (type === "success") {
+
+                message.innerHTML = `
+
+                    <i
+                        class="bi bi-check-circle-fill me-2">
+                    </i>
+
+                    <strong>
+                        Success!
+                    </strong>
+
+                    <br>
+
+                    ${escapeHTML(text)}
+
+                `;
+
+            }
+            else {
+
+                message.innerHTML = `
+
+                    <i
+                        class="bi bi-exclamation-circle-fill me-2">
+                    </i>
+
+                    ${escapeHTML(text)}
+
+                `;
+
+            }
+
+
+            message.classList.remove(
+                "d-none"
+            );
+
+
+            window.scrollTo(
+                {
+                    top: 0,
+                    behavior: "smooth"
+                }
+            );
+
+        }
+
+
+
+        /* =================================================
+           ESCAPE HTML
+        ================================================= */
+
+        function escapeHTML(
+            value
+        ) {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.textContent =
+                value ?? "";
+
+
+            return div.innerHTML;
+
+        }
+
+    }
+);
+
 </script>
-
-
-
-<!-- Admin JavaScript -->
-
-<script src="../js/admin.js"></script>
 
 
 </body>
