@@ -1,270 +1,140 @@
-/* =========================================
-   MEDINFO PORTAL
-   ADMIN USER MANAGEMENT
-========================================= */
+```javascript
+/* =========================================================
+   ADMIN USERS
+   Medicine Information Portal
+   ========================================================= */
+
+let selectedUserId = null;
 
 
-/* =========================================
-   GET USERS
-========================================= */
+/* =========================================================
+   PAGE LOAD
+   ========================================================= */
 
-function getAdminUsers() {
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
 
-    return JSON.parse(
-        localStorage.getItem("medicinePortalUsers")
-    ) || [];
-
-}
+        loadUsers();
 
 
-/* =========================================
-   SAVE USERS
-========================================= */
-
-function saveAdminUsers(users) {
-
-    localStorage.setItem(
-        "medicinePortalUsers",
-        JSON.stringify(users)
-    );
-
-}
+        const search =
+            document.getElementById(
+                "userSearch"
+            );
 
 
-/* =========================================
-   DISPLAY USERS
-========================================= */
+        if (search) {
 
-function displayUsers(users = getAdminUsers()) {
+            search.addEventListener(
+                "input",
+                function () {
 
-    const tableBody =
-        document.getElementById("userTableBody");
+                    loadUsers(
+                        this.value.trim()
+                    );
 
-    const emptyState =
-        document.getElementById("emptyUserState");
-
-    const count =
-        document.getElementById("userCount");
-
-
-    if (!tableBody) {
-        return;
-    }
-
-
-    tableBody.innerHTML = "";
-
-
-    /* Update total count */
-
-    if (count) {
-
-        count.textContent =
-            users.length;
-
-    }
-
-
-    /* Empty state */
-
-    if (users.length === 0) {
-
-        if (emptyState) {
-
-            emptyState.style.display =
-                "block";
+                }
+            );
 
         }
 
-        return;
 
-    }
-
-
-    if (emptyState) {
-
-        emptyState.style.display =
-            "none";
-
-    }
+        const deleteButton =
+            document.getElementById(
+                "confirmDeleteButton"
+            );
 
 
-    /* Create rows */
+        if (deleteButton) {
 
-    users.forEach(
-        function(user, index) {
-
-            const row =
-                document.createElement("tr");
-
-
-            const userName =
-                user.name ||
-                user.username ||
-                "User";
-
-
-            const email =
-                user.email ||
-                "Not available";
-
-
-            const registeredDate =
-                user.createdAt ||
-                user.registeredAt ||
-                "-";
-
-
-            const role =
-                user.role ||
-                "User";
-
-
-            row.innerHTML = `
-
-                <td class="px-3">
-                    ${index + 1}
-                </td>
-
-
-                <td>
-
-                    <div class="d-flex
-                                align-items-center">
-
-                        <div
-                            class="rounded-circle
-                                   bg-primary
-                                   text-white
-                                   d-flex
-                                   align-items-center
-                                   justify-content-center
-                                   me-2"
-                            style="
-                                width:40px;
-                                height:40px;
-                            ">
-
-                            <i class="bi bi-person-fill"></i>
-
-                        </div>
-
-
-                        <strong>
-                            ${escapeUserHTML(userName)}
-                        </strong>
-
-                    </div>
-
-                </td>
-
-
-                <td>
-
-                    ${escapeUserHTML(email)}
-
-                </td>
-
-
-                <td>
-
-                    <span class="badge bg-secondary">
-
-                        ${escapeUserHTML(role)}
-
-                    </span>
-
-                </td>
-
-
-                <td>
-
-                    <small>
-
-                        ${escapeUserHTML(
-                            registeredDate
-                        )}
-
-                    </small>
-
-                </td>
-
-
-                <td class="text-center">
-
-                    <span
-                        class="badge bg-success">
-
-                        Active
-
-                    </span>
-
-                </td>
-
-
-                <td class="text-center">
-
-                    <button
-                        class="btn btn-sm btn-danger"
-                        onclick="openDeleteUserModal(${index})"
-                        title="Delete User">
-
-                        <i class="bi bi-trash"></i>
-
-                    </button>
-
-                </td>
-
-            `;
-
-
-            tableBody.appendChild(row);
+            deleteButton.addEventListener(
+                "click",
+                deleteSelectedUser
+            );
 
         }
-    );
+
+    }
+);
+
+
+/* =========================================================
+   GET USERS FROM LOCAL STORAGE
+   ========================================================= */
+
+function getStoredUsers() {
+
+    try {
+
+        const data =
+            localStorage.getItem(
+                "users"
+            );
+
+
+        if (!data) {
+
+            return [];
+
+        }
+
+
+        const users =
+            JSON.parse(data);
+
+
+        return Array.isArray(users)
+            ? users
+            : [];
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error loading users:",
+            error
+        );
+
+
+        return [];
+
+    }
 
 }
 
 
-/* =========================================
-   SEARCH USERS
-========================================= */
+/* =========================================================
+   LOAD USERS
+   ========================================================= */
 
-function searchUsers() {
-
-    const searchInput =
-        document.getElementById("userSearch");
-
-
-    if (!searchInput) {
-        return;
-    }
-
-
-    const search =
-        searchInput.value
-            .trim()
-            .toLowerCase();
+function loadUsers(
+    searchText = ""
+) {
 
 
     const users =
-        getAdminUsers();
+        getStoredUsers();
+
+
+    const search =
+        searchText.toLowerCase();
 
 
     const filteredUsers =
         users.filter(
-            function(user) {
+            function (user) {
 
                 const name =
-                    (
+                    String(
                         user.name ||
-                        user.username ||
+                        user.fullName ||
                         ""
                     ).toLowerCase();
 
 
                 const email =
-                    (
+                    String(
                         user.email ||
                         ""
                     ).toLowerCase();
@@ -279,67 +149,474 @@ function searchUsers() {
         );
 
 
-    displayUsers(
+    updateStatistics(
+        users
+    );
+
+
+    renderUsers(
         filteredUsers
     );
 
 }
 
 
-/* =========================================
-   DELETE USER
-========================================= */
+/* =========================================================
+   UPDATE STATISTICS
+   ========================================================= */
 
-let userToDelete = null;
-
-
-function openDeleteUserModal(index) {
-
-    const users =
-        getAdminUsers();
+function updateStatistics(
+    users
+) {
 
 
-    if (!users[index]) {
-        return;
-    }
-
-
-    userToDelete =
-        index;
-
-
-    const userName =
-        users[index].name ||
-        users[index].username ||
-        "this user";
-
-
-    const nameElement =
+    const total =
         document.getElementById(
-            "deleteUserName"
+            "totalUsers"
         );
 
 
-    if (nameElement) {
+    const registered =
+        document.getElementById(
+            "registeredUsers"
+        );
 
-        nameElement.textContent =
-            userName;
+
+    const latest =
+        document.getElementById(
+            "latestUser"
+        );
+
+
+    if (total) {
+
+        total.textContent =
+            users.length;
 
     }
+
+
+    if (registered) {
+
+        registered.textContent =
+            users.length;
+
+    }
+
+
+    if (latest) {
+
+        if (users.length === 0) {
+
+            latest.textContent =
+                "No users";
+
+            return;
+
+        }
+
+
+        const sorted =
+            [...users].sort(
+                function (a, b) {
+
+                    const dateA =
+                        new Date(
+                            a.createdAt ||
+                            a.registeredAt ||
+                            0
+                        );
+
+                    const dateB =
+                        new Date(
+                            b.createdAt ||
+                            b.registeredAt ||
+                            0
+                        );
+
+                    return dateB - dateA;
+
+                }
+            );
+
+
+        const user =
+            sorted[0];
+
+
+        latest.textContent =
+            getUserName(user);
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER USERS TABLE
+   ========================================================= */
+
+function renderUsers(
+    users
+) {
+
+
+    const tbody =
+        document.getElementById(
+            "usersTableBody"
+        );
+
+
+    const empty =
+        document.getElementById(
+            "emptyUsers"
+        );
+
+
+    if (!tbody) {
+
+        return;
+
+    }
+
+
+    tbody.innerHTML = "";
+
+
+    if (users.length === 0) {
+
+        if (empty) {
+
+            empty.classList.remove(
+                "d-none"
+            );
+
+        }
+
+
+        return;
+
+    }
+
+
+    if (empty) {
+
+        empty.classList.add(
+            "d-none"
+        );
+
+    }
+
+
+    users.forEach(
+        function (user, index) {
+
+            tbody.appendChild(
+                createUserRow(
+                    user,
+                    index
+                )
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   CREATE USER ROW
+   ========================================================= */
+
+function createUserRow(
+    user,
+    index
+) {
+
+
+    const row =
+        document.createElement(
+            "tr"
+        );
+
+
+    const name =
+        getUserName(user);
+
+
+    const email =
+        user.email ||
+        "No email";
+
+
+    const id =
+        user.id ||
+        user.userId ||
+        `USER-${index + 1}`;
+
+
+    const registeredDate =
+        formatDate(
+            user.createdAt ||
+            user.registeredAt
+        );
+
+
+    const status =
+        user.status ||
+        "Active";
+
+
+    row.innerHTML = `
+
+        <td>
+
+            <span
+                class="fw-semibold">
+
+                ${index + 1}
+
+            </span>
+
+        </td>
+
+
+        <td>
+
+            <div
+                class="d-flex
+                       align-items-center
+                       gap-2">
+
+
+                <div
+                    class="user-table-avatar">
+
+                    <i class="bi bi-person"></i>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        ${escapeHTML(name)}
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </td>
+
+
+        <td>
+
+            <span
+                class="text-muted">
+
+                ${escapeHTML(email)}
+
+            </span>
+
+        </td>
+
+
+        <td>
+
+            ${registeredDate}
+
+        </td>
+
+
+        <td>
+
+            <span
+                class="badge rounded-pill
+                       ${getStatusClass(status)}">
+
+                ${escapeHTML(status)}
+
+            </span>
+
+        </td>
+
+
+        <td>
+
+            <div
+                class="d-flex
+                       justify-content-end
+                       gap-1">
+
+
+                <button
+                    type="button"
+                    class="btn btn-sm btn-outline-primary"
+                    title="View User"
+                    onclick="viewUser('${escapeAttribute(id)}')">
+
+                    <i class="bi bi-eye"></i>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn btn-sm btn-outline-danger"
+                    title="Delete User"
+                    onclick="askDeleteUser('${escapeAttribute(id)}')">
+
+                    <i class="bi bi-trash"></i>
+
+                </button>
+
+
+            </div>
+
+        </td>
+
+    `;
+
+
+    return row;
+
+}
+
+
+/* =========================================================
+   GET USER NAME
+   ========================================================= */
+
+function getUserName(
+    user
+) {
+
+    return (
+        user.name ||
+        user.fullName ||
+        user.username ||
+        "User"
+    );
+
+}
+
+
+/* =========================================================
+   VIEW USER
+   ========================================================= */
+
+function viewUser(
+    userId
+) {
+
+
+    const users =
+        getStoredUsers();
+
+
+    const user =
+        users.find(
+            function (item, index) {
+
+                const id =
+                    item.id ||
+                    item.userId ||
+                    `USER-${index + 1}`;
+
+
+                return String(id) ===
+                    String(userId);
+
+            }
+        );
+
+
+    if (!user) {
+
+        showMessage(
+            "User not found.",
+            "danger"
+        );
+
+        return;
+
+    }
+
+
+    setText(
+        "modalUserName",
+        getUserName(user)
+    );
+
+
+    setText(
+        "modalUserEmail",
+        user.email ||
+        "No email"
+    );
+
+
+    setText(
+        "modalUserId",
+        user.id ||
+        user.userId ||
+        "N/A"
+    );
+
+
+    const status =
+        user.status ||
+        "Active";
+
+
+    const statusElement =
+        document.getElementById(
+            "modalUserStatus"
+        );
+
+
+    if (statusElement) {
+
+        statusElement.textContent =
+            status;
+
+
+        statusElement.className =
+            "fw-semibold " +
+            (
+                String(status).toLowerCase() ===
+                "active"
+                    ? "text-success"
+                    : "text-danger"
+            );
+
+    }
+
+
+    setText(
+        "modalUserDate",
+        formatDate(
+            user.createdAt ||
+            user.registeredAt
+        )
+    );
 
 
     const modalElement =
         document.getElementById(
-            "deleteUserModal"
+            "userDetailsModal"
         );
 
 
     if (modalElement) {
 
         const modal =
-            new bootstrap.Modal(
+            bootstrap.Modal.getOrCreateInstance(
                 modalElement
             );
+
 
         modal.show();
 
@@ -348,43 +625,18 @@ function openDeleteUserModal(index) {
 }
 
 
-/* =========================================
-   CONFIRM DELETE
-========================================= */
+/* =========================================================
+   ASK DELETE
+   ========================================================= */
 
-function deleteAdminUser() {
-
-    if (
-        userToDelete === null
-    ) {
-        return;
-    }
+function askDeleteUser(
+    userId
+) {
 
 
-    const users =
-        getAdminUsers();
+    selectedUserId =
+        userId;
 
-
-    if (!users[userToDelete]) {
-        return;
-    }
-
-
-    users.splice(
-        userToDelete,
-        1
-    );
-
-
-    saveAdminUsers(
-        users
-    );
-
-
-    userToDelete = null;
-
-
-    /* Close modal */
 
     const modalElement =
         document.getElementById(
@@ -395,10 +647,111 @@ function deleteAdminUser() {
     if (modalElement) {
 
         const modal =
-            bootstrap.Modal
-                .getInstance(
-                    modalElement
-                );
+            bootstrap.Modal.getOrCreateInstance(
+                modalElement
+            );
+
+
+        modal.show();
+
+    }
+
+}
+
+
+/* =========================================================
+   DELETE USER
+   ========================================================= */
+
+function deleteSelectedUser() {
+
+
+    if (!selectedUserId) {
+
+        return;
+
+    }
+
+
+    const users =
+        getStoredUsers();
+
+
+    const updatedUsers =
+        users.filter(
+            function (user, index) {
+
+                const id =
+                    user.id ||
+                    user.userId ||
+                    `USER-${index + 1}`;
+
+
+                return String(id) !==
+                    String(selectedUserId);
+
+            }
+        );
+
+
+    if (
+        updatedUsers.length ===
+        users.length
+    ) {
+
+        showMessage(
+            "User not found.",
+            "danger"
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        localStorage.setItem(
+            "users",
+            JSON.stringify(
+                updatedUsers
+            )
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            error
+        );
+
+
+        showMessage(
+            "Unable to delete user.",
+            "danger"
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Close modal
+     */
+
+    const modalElement =
+        document.getElementById(
+            "deleteUserModal"
+        );
+
+
+    if (modalElement) {
+
+        const modal =
+            bootstrap.Modal.getInstance(
+                modalElement
+            );
 
 
         if (modal) {
@@ -410,25 +763,200 @@ function deleteAdminUser() {
     }
 
 
-    /* Refresh table */
+    selectedUserId =
+        null;
 
-    displayUsers();
+
+    /*
+     * Reload table
+     */
+
+    loadUsers();
+
+
+    showMessage(
+        "User deleted successfully.",
+        "success"
+    );
 
 }
 
 
-/* =========================================
-   ESCAPE HTML
-========================================= */
+/* =========================================================
+   FORMAT DATE
+   ========================================================= */
 
-function escapeUserHTML(value) {
+function formatDate(
+    value
+) {
+
+
+    if (!value) {
+
+        return "Not available";
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return "Not available";
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-IN",
+        {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   STATUS CLASS
+   ========================================================= */
+
+function getStatusClass(
+    status
+) {
+
+
+    if (
+        String(status).toLowerCase() ===
+        "active"
+    ) {
+
+        return "bg-success-subtle text-success";
+
+    }
+
+
+    if (
+        String(status).toLowerCase() ===
+        "blocked"
+    ) {
+
+        return "bg-danger-subtle text-danger";
+
+    }
+
+
+    return "bg-secondary-subtle text-secondary";
+
+}
+
+
+/* =========================================================
+   SET TEXT
+   ========================================================= */
+
+function setText(
+    id,
+    value
+) {
+
+
+    const element =
+        document.getElementById(id);
+
+
+    if (element) {
+
+        element.textContent =
+            value ?? "";
+
+    }
+
+}
+
+
+/* =========================================================
+   SHOW MESSAGE
+   ========================================================= */
+
+function showMessage(
+    message,
+    type = "info"
+) {
+
+
+    const box =
+        document.getElementById(
+            "pageMessage"
+        );
+
+
+    if (!box) {
+
+        return;
+
+    }
+
+
+    box.className =
+        `alert alert-${type}`;
+
+
+    box.innerHTML = `
+
+        <i
+            class="bi bi-info-circle-fill me-2">
+        </i>
+
+        ${escapeHTML(message)}
+
+    `;
+
+
+    box.classList.remove(
+        "d-none"
+    );
+
+
+    setTimeout(
+        function () {
+
+            box.classList.add(
+                "d-none"
+            );
+
+        },
+        3000
+    );
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+   ========================================================= */
+
+function escapeHTML(
+    value
+) {
+
 
     const div =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     div.textContent =
-        value;
+        value ?? "";
 
 
     return div.innerHTML;
@@ -436,54 +964,25 @@ function escapeUserHTML(value) {
 }
 
 
-/* =========================================
-   INITIALIZE
-========================================= */
+/* =========================================================
+   ESCAPE ATTRIBUTE
+   ========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
+function escapeAttribute(
+    value
+) {
 
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /\\/g,
+        "\\\\"
+    )
+    .replace(
+        /'/g,
+        "\\'"
+    );
 
-        /* Load users */
-
-        displayUsers();
-
-
-        /* Search */
-
-        const searchInput =
-            document.getElementById(
-                "userSearch"
-            );
-
-
-        if (searchInput) {
-
-            searchInput.addEventListener(
-                "input",
-                searchUsers
-            );
-
-        }
-
-
-        /* Delete button */
-
-        const deleteButton =
-            document.getElementById(
-                "confirmDeleteUser"
-            );
-
-
-        if (deleteButton) {
-
-            deleteButton.addEventListener(
-                "click",
-                deleteAdminUser
-            );
-
-        }
-
-    }
-);
+}
+```
