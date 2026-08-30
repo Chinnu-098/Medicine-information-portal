@@ -1,10 +1,10 @@
 /* =====================================================
-   MEDINFO PORTAL - ADMIN AUTHENTICATION
+   MEDICINE INFORMATION PORTAL
    File: js/admin.js
    ===================================================== */
 
 const ADMIN_USERS_KEY = "medinfo_admin_users";
-const CURRENT_ADMIN_KEY = "medinfo_current_admin";
+const ADMIN_SESSION_KEY = "medinfo_admin_session";
 
 
 /* =====================================================
@@ -12,13 +12,61 @@ const CURRENT_ADMIN_KEY = "medinfo_current_admin";
    ===================================================== */
 
 const DEFAULT_ADMIN = {
-    id: "admin_001",
-    name: "Administrator",
-    email: "admin@medinfo.com",
+    id: "ADMIN001",
+    name: "Portal Admin",
+    email: "admin@medicineportal.com",
     password: "admin123",
     role: "admin",
     createdAt: new Date().toISOString()
 };
+
+
+/* =====================================================
+   INITIALIZE ADMIN SYSTEM
+   ===================================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    initializeAdminSystem();
+
+});
+
+
+function initializeAdminSystem() {
+
+    let admins = [];
+
+    try {
+
+        admins =
+            JSON.parse(
+                localStorage.getItem(
+                    ADMIN_USERS_KEY
+                )
+            );
+
+    } catch (error) {
+
+        admins = [];
+
+    }
+
+
+    if (
+        !Array.isArray(admins) ||
+        admins.length === 0
+    ) {
+
+        localStorage.setItem(
+            ADMIN_USERS_KEY,
+            JSON.stringify([
+                DEFAULT_ADMIN
+            ])
+        );
+
+    }
+
+}
 
 
 /* =====================================================
@@ -36,36 +84,15 @@ function getAdminUsers() {
                 )
             );
 
-        if (
-            Array.isArray(admins) &&
-            admins.length > 0
-        ) {
-
-            return admins;
-
-        }
+        return Array.isArray(admins)
+            ? admins
+            : [];
 
     } catch (error) {
 
-        console.error(
-            "Unable to load admin users:",
-            error
-        );
+        return [];
 
     }
-
-
-    localStorage.setItem(
-        ADMIN_USERS_KEY,
-        JSON.stringify([
-            DEFAULT_ADMIN
-        ])
-    );
-
-
-    return [
-        DEFAULT_ADMIN
-    ];
 
 }
 
@@ -74,9 +101,7 @@ function getAdminUsers() {
    SAVE ADMIN USERS
    ===================================================== */
 
-function saveAdminUsers(
-    admins
-) {
+function saveAdminUsers(admins) {
 
     localStorage.setItem(
         ADMIN_USERS_KEY,
@@ -87,37 +112,135 @@ function saveAdminUsers(
 
 
 /* =====================================================
-   GET CURRENT ADMIN
+   REGISTER ADMIN
    ===================================================== */
 
-function getCurrentAdmin() {
+function registerAdmin(
+    name,
+    email,
+    password
+) {
 
-    try {
+    name =
+        String(name || "").trim();
 
-        return JSON.parse(
-            localStorage.getItem(
-                CURRENT_ADMIN_KEY
-            )
-        );
+    email =
+        String(email || "")
+            .trim()
+            .toLowerCase();
 
-    } catch (error) {
+    password =
+        String(password || "");
 
-        return null;
+
+    if (!name) {
+
+        return {
+            success: false,
+            message: "Please enter admin name."
+        };
 
     }
 
-}
+
+    if (!email) {
+
+        return {
+            success: false,
+            message: "Please enter email address."
+        };
+
+    }
 
 
-/* =====================================================
-   CHECK ADMIN LOGIN
-   ===================================================== */
+    if (!isValidEmail(email)) {
 
-function isAdminLoggedIn() {
+        return {
+            success: false,
+            message: "Please enter a valid email address."
+        };
 
-    return (
-        getCurrentAdmin() !== null
+    }
+
+
+    if (password.length < 6) {
+
+        return {
+            success: false,
+            message:
+                "Password must contain at least 6 characters."
+        };
+
+    }
+
+
+    const admins =
+        getAdminUsers();
+
+
+    const exists =
+        admins.some(
+            admin =>
+                admin.email === email
+        );
+
+
+    if (exists) {
+
+        return {
+            success: false,
+            message:
+                "An admin account with this email already exists."
+        };
+
+    }
+
+
+    const newAdmin = {
+
+        id:
+            "ADMIN" +
+            Date.now(),
+
+        name:
+            name,
+
+        email:
+            email,
+
+        password:
+            password,
+
+        role:
+            "admin",
+
+        createdAt:
+            new Date().toISOString()
+
+    };
+
+
+    admins.push(
+        newAdmin
     );
+
+
+    saveAdminUsers(
+        admins
+    );
+
+
+    return {
+
+        success: true,
+
+        message:
+            "Admin account created successfully.",
+
+        admin:
+            newAdmin
+
+    };
 
 }
 
@@ -126,7 +249,7 @@ function isAdminLoggedIn() {
    ADMIN LOGIN
    ===================================================== */
 
-function adminLogin(
+function loginAdmin(
     email,
     password
 ) {
@@ -160,17 +283,9 @@ function adminLogin(
 
     const admin =
         admins.find(
-            function (item) {
-
-                return (
-                    item.email
-                        .toLowerCase() ===
-                    email &&
-                    item.password ===
-                    password
-                );
-
-            }
+            user =>
+                user.email === email &&
+                user.password === password
         );
 
 
@@ -190,166 +305,27 @@ function adminLogin(
 
     const session = {
 
-        id: admin.id,
-
-        name: admin.name,
-
-        email: admin.email,
-
-        role: "admin"
-
-    };
-
-
-    localStorage.setItem(
-
-        CURRENT_ADMIN_KEY,
-
-        JSON.stringify(session)
-
-    );
-
-
-    return {
-
-        success: true,
-
-        message:
-            "Admin login successful.",
-
-        admin: session
-
-    };
-
-}
-
-
-/* =====================================================
-   ADMIN REGISTER
-   ===================================================== */
-
-function registerAdmin(
-    name,
-    email,
-    password
-) {
-
-    name =
-        String(name || "").trim();
-
-    email =
-        String(email || "")
-            .trim()
-            .toLowerCase();
-
-    password =
-        String(password || "");
-
-
-    if (name.length < 2) {
-
-        return {
-
-            success: false,
-
-            message:
-                "Please enter a valid name."
-
-        };
-
-    }
-
-
-    if (
-        !email ||
-        !email.includes("@")
-    ) {
-
-        return {
-
-            success: false,
-
-            message:
-                "Please enter a valid email address."
-
-        };
-
-    }
-
-
-    if (password.length < 6) {
-
-        return {
-
-            success: false,
-
-            message:
-                "Password must contain at least 6 characters."
-
-        };
-
-    }
-
-
-    const admins =
-        getAdminUsers();
-
-
-    const exists =
-        admins.some(
-            function (admin) {
-
-                return (
-                    admin.email
-                        .toLowerCase() ===
-                    email
-                );
-
-            }
-        );
-
-
-    if (exists) {
-
-        return {
-
-            success: false,
-
-            message:
-                "An admin account with this email already exists."
-
-        };
-
-    }
-
-
-    const newAdmin = {
-
         id:
-            "admin_" +
-            Date.now(),
+            admin.id,
 
-        name: name,
+        name:
+            admin.name,
 
-        email: email,
+        email:
+            admin.email,
 
-        password: password,
+        role:
+            admin.role,
 
-        role: "admin",
-
-        createdAt:
+        loginTime:
             new Date().toISOString()
 
     };
 
 
-    admins.push(
-        newAdmin
-    );
-
-
-    saveAdminUsers(
-        admins
+    localStorage.setItem(
+        ADMIN_SESSION_KEY,
+        JSON.stringify(session)
     );
 
 
@@ -358,19 +334,10 @@ function registerAdmin(
         success: true,
 
         message:
-            "Admin account created successfully.",
+            "Login successful.",
 
-        admin: {
-
-            id: newAdmin.id,
-
-            name: newAdmin.name,
-
-            email: newAdmin.email,
-
-            role: newAdmin.role
-
-        }
+        admin:
+            session
 
     };
 
@@ -378,27 +345,52 @@ function registerAdmin(
 
 
 /* =====================================================
-   ADMIN LOGOUT
+   GET CURRENT ADMIN
    ===================================================== */
 
-function adminLogout() {
+function getCurrentAdmin() {
 
-    localStorage.removeItem(
-        CURRENT_ADMIN_KEY
-    );
+    try {
 
+        return JSON.parse(
+            localStorage.getItem(
+                ADMIN_SESSION_KEY
+            )
+        );
 
-    window.location.href =
-        "login.html";
+    } catch (error) {
+
+        return null;
+
+    }
 
 }
 
 
 /* =====================================================
-   PROTECT ADMIN PAGE
+   CHECK ADMIN LOGIN
    ===================================================== */
 
-function requireAdmin() {
+function isAdminLoggedIn() {
+
+    const admin =
+        getCurrentAdmin();
+
+
+    return !!(
+        admin &&
+        admin.id &&
+        admin.role === "admin"
+    );
+
+}
+
+
+/* =====================================================
+   REQUIRE ADMIN LOGIN
+   ===================================================== */
+
+function requireAdminLogin() {
 
     if (!isAdminLoggedIn()) {
 
@@ -416,108 +408,46 @@ function requireAdmin() {
 
 
 /* =====================================================
-   REDIRECT LOGGED-IN ADMIN
+   REQUIRE ADMIN LOGIN
+   FOR ADMIN FOLDER
    ===================================================== */
 
-function redirectLoggedInAdmin() {
+function requireAdminAuth() {
 
-    if (isAdminLoggedIn()) {
+    if (!isAdminLoggedIn()) {
 
         window.location.href =
-            "dashboard.html";
+            "login.html";
+
+        return false;
 
     }
+
+
+    return true;
 
 }
 
 
 /* =====================================================
-   ADMIN LOGIN FORM
+   LOGOUT
    ===================================================== */
 
-function setupAdminLoginForm() {
+function logoutAdmin() {
 
-    const form =
-        document.getElementById(
-            "adminLoginForm"
-        );
-
-
-    if (!form) {
-        return;
-    }
-
-
-    form.addEventListener(
-        "submit",
-        function (event) {
-
-            event.preventDefault();
-
-
-            const email =
-                document.getElementById(
-                    "adminEmail"
-                )?.value || "";
-
-
-            const password =
-                document.getElementById(
-                    "adminPassword"
-                )?.value || "";
-
-
-            const messageBox =
-                document.getElementById(
-                    "adminLoginMessage"
-                );
-
-
-            const result =
-                adminLogin(
-                    email,
-                    password
-                );
-
-
-            if (!result.success) {
-
-                showAdminMessage(
-                    messageBox,
-                    result.message,
-                    "danger"
-                );
-
-                return;
-
-            }
-
-
-            showAdminMessage(
-                messageBox,
-                result.message,
-                "success"
-            );
-
-
-            setTimeout(
-                function () {
-
-                    window.location.href =
-                        "dashboard.html";
-
-                },
-                700
-            );
-
-        }
+    localStorage.removeItem(
+        ADMIN_SESSION_KEY
     );
+
+
+    window.location.href =
+        "login.html";
 
 }
 
 
 /* =====================================================
-   ADMIN REGISTER FORM
+   ADMIN REGISTER PAGE HELPER
    ===================================================== */
 
 function setupAdminRegisterForm() {
@@ -543,31 +473,25 @@ function setupAdminRegisterForm() {
             const name =
                 document.getElementById(
                     "adminName"
-                )?.value || "";
+                )?.value;
 
 
             const email =
                 document.getElementById(
                     "adminEmail"
-                )?.value || "";
+                )?.value;
 
 
             const password =
                 document.getElementById(
                     "adminPassword"
-                )?.value || "";
+                )?.value;
 
 
             const confirmPassword =
                 document.getElementById(
                     "adminConfirmPassword"
-                )?.value || "";
-
-
-            const messageBox =
-                document.getElementById(
-                    "adminRegisterMessage"
-                );
+                )?.value;
 
 
             if (
@@ -576,7 +500,6 @@ function setupAdminRegisterForm() {
             ) {
 
                 showAdminMessage(
-                    messageBox,
                     "Passwords do not match.",
                     "danger"
                 );
@@ -594,38 +517,30 @@ function setupAdminRegisterForm() {
                 );
 
 
-            if (!result.success) {
+            showAdminMessage(
+                result.message,
+                result.success
+                    ? "success"
+                    : "danger"
+            );
 
-                showAdminMessage(
-                    messageBox,
-                    result.message,
-                    "danger"
+
+            if (result.success) {
+
+                form.reset();
+
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "login.html";
+
+                    },
+                    1200
                 );
 
-                return;
-
             }
-
-
-            showAdminMessage(
-                messageBox,
-                result.message,
-                "success"
-            );
-
-
-            form.reset();
-
-
-            setTimeout(
-                function () {
-
-                    window.location.href =
-                        "login.html";
-
-                },
-                1200
-            );
 
         }
     );
@@ -634,18 +549,153 @@ function setupAdminRegisterForm() {
 
 
 /* =====================================================
-   ADMIN UI
+   ADMIN LOGIN PAGE HELPER
+   ===================================================== */
+
+function setupAdminLoginForm() {
+
+    const form =
+        document.getElementById(
+            "adminLoginForm"
+        );
+
+
+    if (!form) {
+        return;
+    }
+
+
+    form.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            const email =
+                document.getElementById(
+                    "adminEmail"
+                )?.value;
+
+
+            const password =
+                document.getElementById(
+                    "adminPassword"
+                )?.value;
+
+
+            const result =
+                loginAdmin(
+                    email,
+                    password
+                );
+
+
+            showAdminMessage(
+                result.message,
+                result.success
+                    ? "success"
+                    : "danger"
+            );
+
+
+            if (result.success) {
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "dashboard.html";
+
+                    },
+                    500
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   ADMIN MESSAGE
+   ===================================================== */
+
+function showAdminMessage(
+    message,
+    type = "info"
+) {
+
+    let box =
+        document.getElementById(
+            "adminMessage"
+        );
+
+
+    if (!box) {
+
+        box =
+            document.createElement(
+                "div"
+            );
+
+        box.id =
+            "adminMessage";
+
+        box.className =
+            "alert mt-3";
+
+
+        const form =
+            document.querySelector(
+                "form"
+            );
+
+
+        if (form) {
+
+            form.parentNode.insertBefore(
+                box,
+                form.nextSibling
+            );
+
+        } else {
+
+            document.body.prepend(
+                box
+            );
+
+        }
+
+    }
+
+
+    box.className =
+        "alert alert-" +
+        type +
+        " mt-3";
+
+
+    box.textContent =
+        message;
+
+
+    box.style.display =
+        "block";
+
+}
+
+
+/* =====================================================
+   UPDATE ADMIN UI
    ===================================================== */
 
 function updateAdminUI() {
 
     const admin =
         getCurrentAdmin();
-
-
-    if (!admin) {
-        return;
-    }
 
 
     document
@@ -656,7 +706,8 @@ function updateAdminUI() {
             function (element) {
 
                 element.textContent =
-                    admin.name;
+                    admin?.name ||
+                    "Admin";
 
             }
         );
@@ -670,23 +721,8 @@ function updateAdminUI() {
             function (element) {
 
                 element.textContent =
-                    admin.email;
-
-            }
-        );
-
-
-    document
-        .querySelectorAll(
-            "[data-admin-initial]"
-        )
-        .forEach(
-            function (element) {
-
-                element.textContent =
-                    admin.name
-                        .charAt(0)
-                        .toUpperCase();
+                    admin?.email ||
+                    "";
 
             }
         );
@@ -695,70 +731,95 @@ function updateAdminUI() {
 
 
 /* =====================================================
-   ADMIN LOGOUT BUTTON
+   EMAIL VALIDATION
    ===================================================== */
 
-function setupAdminLogout() {
-
-    document
-        .querySelectorAll(
-            "[data-admin-logout]"
-        )
-        .forEach(
-            function (button) {
-
-                button.addEventListener(
-                    "click",
-                    function (event) {
-
-                        event.preventDefault();
-
-                        adminLogout();
-
-                    }
-                );
-
-            }
-        );
-
-}
-
-
-/* =====================================================
-   SHOW ADMIN MESSAGE
-   ===================================================== */
-
-function showAdminMessage(
-    element,
-    message,
-    type = "success"
+function isValidEmail(
+    email
 ) {
 
-    if (!element) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        .test(email);
 
-        alert(message);
+}
 
-        return;
+
+/* =====================================================
+   DELETE ADMIN
+   ===================================================== */
+
+function deleteAdmin(
+    adminId
+) {
+
+    const currentAdmin =
+        getCurrentAdmin();
+
+
+    if (
+        currentAdmin &&
+        currentAdmin.id === adminId
+    ) {
+
+        return {
+
+            success: false,
+
+            message:
+                "You cannot delete the currently logged-in admin."
+
+        };
 
     }
 
 
-    element.className =
-        "alert alert-" + type;
+    const admins =
+        getAdminUsers();
 
 
-    element.textContent =
-        message;
+    const updated =
+        admins.filter(
+            admin =>
+                admin.id !== adminId
+        );
 
 
-    element.style.display =
-        "block";
+    if (
+        updated.length ===
+        admins.length
+    ) {
+
+        return {
+
+            success: false,
+
+            message:
+                "Admin not found."
+
+        };
+
+    }
+
+
+    saveAdminUsers(
+        updated
+    );
+
+
+    return {
+
+        success: true,
+
+        message:
+            "Admin deleted successfully."
+
+    };
 
 }
 
 
 /* =====================================================
-   ADMIN PAGE INITIALIZATION
+   INITIALIZE PAGE HELPERS
    ===================================================== */
 
 document.addEventListener(
@@ -768,8 +829,6 @@ document.addEventListener(
         setupAdminLoginForm();
 
         setupAdminRegisterForm();
-
-        setupAdminLogout();
 
         updateAdminUI();
 
