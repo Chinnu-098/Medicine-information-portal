@@ -1,448 +1,514 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+          content="width=device-width, initial-scale=1.0">
 
-    <title>Admin Login | Medicine Information Portal</title>
+    <title>Login | Medicine Information Portal</title>
 
-    <!-- Bootstrap -->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+    <link rel="stylesheet"
+          href="css/style.css">
 
-    <!-- Bootstrap Icons -->
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
 
-    <!-- Admin CSS -->
-    <link rel="stylesheet" href="../css/admin.css">
+        /* ================= LOGIN PAGE ================= */
+
+        .auth-page {
+            min-height: calc(100vh - 76px);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 60px 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #effcf9,
+                    #f7fbff
+                );
+        }
+
+        .auth-container {
+            width: min(950px, 100%);
+
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+
+            background: #ffffff;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 20px 60px rgba(20, 32, 51, 0.12);
+        }
+
+
+        /* ================= LEFT SIDE ================= */
+
+        .auth-info {
+            background: #087f73;
+
+            color: #ffffff;
+
+            padding: 55px 45px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .big-icon {
+            width: 70px;
+            height: 70px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(255,255,255,0.15);
+
+            border-radius: 18px;
+
+            font-size: 35px;
+
+            margin-bottom: 25px;
+        }
+
+        .auth-info h1 {
+            font-size: 38px;
+
+            line-height: 1.2;
+
+            margin-bottom: 18px;
+        }
+
+        .auth-info p {
+            color: rgba(255,255,255,0.85);
+
+            font-size: 15px;
+
+            margin-bottom: 28px;
+        }
+
+        .auth-points {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 14px;
+        }
+
+        .auth-point {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            font-size: 14px;
+        }
+
+        .check {
+            width: 24px;
+            height: 24px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(255,255,255,0.15);
+
+            border-radius: 50%;
+        }
+
+
+        /* ================= FORM ================= */
+
+        .auth-form {
+            padding: 55px 48px;
+        }
+
+        .auth-form-header {
+            margin-bottom: 25px;
+        }
+
+        .auth-form-header h2 {
+            font-size: 30px;
+
+            color: #172033;
+
+            margin-bottom: 7px;
+        }
+
+        .auth-form-header p {
+            color: #667085;
+
+            font-size: 14px;
+        }
+
+
+        /* ================= MESSAGES ================= */
+
+        .success-message,
+        .error-message {
+            display: none;
+
+            padding: 14px 16px;
+
+            margin-bottom: 20px;
+
+            border-radius: 9px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+        .success-message {
+            background: #e8f7f0;
+
+            border: 1px solid #a8ddc3;
+
+            color: #12633e;
+        }
+
+        .error-message {
+            background: #fff1f1;
+
+            border: 1px solid #f2b8b8;
+
+            color: #b42318;
+        }
+
+        .success-message.show,
+        .error-message.show {
+            display: block;
+        }
+
+
+        /* ================= FORM GROUP ================= */
+
+        .form-group {
+            margin-bottom: 19px;
+        }
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            color: #344054;
+        }
+
+        .form-group input {
+            width: 100%;
+
+            padding: 14px;
+
+            border: 1px solid #d0d5dd;
+
+            border-radius: 9px;
+
+            outline: none;
+
+            font-size: 14px;
+
+            transition: 0.25s;
+        }
+
+        .form-group input:focus {
+            border-color: #087f73;
+
+            box-shadow:
+                0 0 0 3px rgba(8,127,115,0.08);
+        }
+
+
+        /* ================= PASSWORD ================= */
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper input {
+            padding-right: 55px;
+        }
+
+        .show-password {
+            position: absolute;
+
+            right: 12px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            font-size: 18px;
+        }
+
+
+        /* ================= LOGIN BUTTON ================= */
+
+        .login-submit {
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #087f73;
+
+            color: #ffffff;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .login-submit:hover {
+            background: #066d63;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* ================= REGISTER LINK ================= */
+
+        .auth-bottom {
+            text-align: center;
+
+            margin-top: 23px;
+
+            color: #667085;
+
+            font-size: 14px;
+        }
+
+        .auth-bottom a {
+            color: #087f73;
+
+            font-weight: 700;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 800px) {
+
+            .auth-container {
+                grid-template-columns: 1fr;
+            }
+
+            .auth-info {
+                padding: 35px 30px;
+            }
+
+            .auth-info h1 {
+                font-size: 30px;
+            }
+
+            .auth-form {
+                padding: 35px 30px;
+            }
+
+        }
+
+        @media (max-width: 480px) {
+
+            .auth-page {
+                padding: 25px 15px;
+            }
+
+            .auth-info,
+            .auth-form {
+                padding: 28px 22px;
+            }
+
+            .auth-form-header h2 {
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+
 </head>
 
 
-<body class="admin-auth-page">
+<body>
 
 
-    <!-- ================================================
-         LOGIN CONTAINER
-         ================================================ -->
+<!-- ================= NAVBAR ================= -->
 
-    <div class="container-fluid min-vh-100">
+<header class="navbar">
 
-        <div class="row min-vh-100">
+    <div class="nav-container">
 
+        <a href="index.html" class="logo">
 
-            <!-- ==========================================
-                 LEFT SIDE
-                 ========================================== -->
+            <span class="logo-icon">⚕</span>
 
-            <div class="col-lg-6 d-none d-lg-flex admin-login-intro">
+            <span>
+                Medicine<span class="logo-highlight">Info</span>
+            </span>
 
-                <div class="admin-intro-content">
-
-                    <div class="admin-logo mb-4">
-
-                        <i class="bi bi-capsule-pill"></i>
-
-                    </div>
+        </a>
 
 
-                    <h1 class="display-5 fw-bold">
+        <nav class="nav-menu">
 
-                        Medicine Information Portal
+            <a href="index.html">
+                Home
+            </a>
 
-                    </h1>
+            <a href="medicines.html">
+                Medicines
+            </a>
 
+            <a href="about.html">
+                About
+            </a>
 
-                    <p class="lead mt-3">
+            <a href="contact.html">
+                Contact
+            </a>
 
-                        Admin Management System
+            <a href="feedback.html">
+                Feedback
+            </a>
 
-                    </p>
+            <a href="register.html"
+               class="register-btn">
+                Register
+            </a>
 
-
-                    <p class="mt-4 text-white-50">
-
-                        Manage medicines, users, feedback
-                        and portal information from one
-                        centralized dashboard.
-
-                    </p>
-
-
-                    <div class="row mt-5 g-3">
-
-
-                        <div class="col-6">
-
-                            <div class="intro-feature">
-
-                                <i class="bi bi-speedometer2"></i>
-
-                                <span>
-                                    Dashboard
-                                </span>
-
-                            </div>
-
-                        </div>
+        </nav>
 
 
-                        <div class="col-6">
+        <button class="menu-toggle"
+                id="menuToggle">
 
-                            <div class="intro-feature">
+            ☰
 
-                                <i class="bi bi-capsule"></i>
+        </button>
 
-                                <span>
-                                    Medicines
-                                </span>
+    </div>
 
-                            </div>
-
-                        </div>
+</header>
 
 
-                        <div class="col-6">
+<!-- ================= MOBILE MENU ================= -->
 
-                            <div class="intro-feature">
+<div class="mobile-menu"
+     id="mobileMenu">
 
-                                <i class="bi bi-people"></i>
+    <a href="index.html">Home</a>
 
-                                <span>
-                                    Users
-                                </span>
+    <a href="medicines.html">Medicines</a>
 
-                            </div>
+    <a href="about.html">About</a>
 
-                        </div>
+    <a href="contact.html">Contact</a>
+
+    <a href="feedback.html">Feedback</a>
+
+    <a href="register.html">Register</a>
+
+</div>
 
 
-                        <div class="col-6">
+<!-- ================= LOGIN ================= -->
 
-                            <div class="intro-feature">
+<main class="auth-page">
 
-                                <i class="bi bi-chat-left-text"></i>
+    <div class="auth-container">
 
-                                <span>
-                                    Feedback
-                                </span>
 
-                            </div>
+        <!-- LEFT -->
 
-                        </div>
+        <div class="auth-info">
 
-                    </div>
+            <div class="big-icon">
+                🔐
+            </div>
+
+            <h1>
+                Welcome Back
+            </h1>
+
+            <p>
+                Login to your Medicine Information Portal
+                account and continue exploring medicine
+                information.
+            </p>
+
+
+            <div class="auth-points">
+
+                <div class="auth-point">
+
+                    <span class="check">✓</span>
+
+                    <span>
+                        Search medicine information
+                    </span>
 
                 </div>
 
-            </div>
 
+                <div class="auth-point">
 
+                    <span class="check">✓</span>
 
-            <!-- ==========================================
-                 RIGHT SIDE
-                 ========================================== -->
+                    <span>
+                        View detailed medicine information
+                    </span>
 
-            <div
-                class="col-lg-6 d-flex align-items-center justify-content-center bg-light">
+                </div>
 
-                <div class="admin-auth-card">
 
+                <div class="auth-point">
 
-                    <!-- Mobile Logo -->
+                    <span class="check">✓</span>
 
-                    <div class="text-center d-lg-none mb-4">
+                    <span>
+                        Submit feedback
+                    </span>
 
-                        <div class="admin-mobile-logo">
+                </div>
 
-                            <i class="bi bi-capsule-pill"></i>
 
-                        </div>
+                <div class="auth-point">
 
+                    <span class="check">✓</span>
 
-                        <h4 class="fw-bold mt-2">
-
-                            Medicine Information Portal
-
-                        </h4>
-
-                    </div>
-
-
-
-                    <!-- Header -->
-
-                    <div class="text-center mb-4">
-
-                        <div class="admin-login-icon">
-
-                            <i class="bi bi-shield-lock-fill"></i>
-
-                        </div>
-
-
-                        <h2 class="fw-bold mt-3">
-
-                            Admin Login
-
-                        </h2>
-
-
-                        <p class="text-muted">
-
-                            Sign in to access the admin dashboard.
-
-                        </p>
-
-                    </div>
-
-
-
-                    <!-- Message -->
-
-                    <div
-                        id="adminMessage"
-                        class="alert d-none"
-                        role="alert">
-
-                    </div>
-
-
-
-                    <!-- ==================================
-                         LOGIN FORM
-                         ================================== -->
-
-                    <form
-                        id="adminLoginForm"
-                        novalidate>
-
-
-                        <!-- Email -->
-
-                        <div class="mb-3">
-
-                            <label
-                                for="adminEmail"
-                                class="form-label fw-semibold">
-
-                                Email Address
-
-                            </label>
-
-
-                            <div class="input-group">
-
-                                <span class="input-group-text">
-
-                                    <i class="bi bi-envelope"></i>
-
-                                </span>
-
-
-                                <input
-                                    type="email"
-                                    class="form-control"
-                                    id="adminEmail"
-                                    name="email"
-                                    placeholder="Enter admin email"
-                                    autocomplete="email"
-                                    required>
-
-                            </div>
-
-                        </div>
-
-
-
-                        <!-- Password -->
-
-                        <div class="mb-3">
-
-                            <label
-                                for="adminPassword"
-                                class="form-label fw-semibold">
-
-                                Password
-
-                            </label>
-
-
-                            <div class="input-group">
-
-                                <span class="input-group-text">
-
-                                    <i class="bi bi-lock"></i>
-
-                                </span>
-
-
-                                <input
-                                    type="password"
-                                    class="form-control"
-                                    id="adminPassword"
-                                    name="password"
-                                    placeholder="Enter password"
-                                    autocomplete="current-password"
-                                    required>
-
-
-                                <button
-                                    type="button"
-                                    class="btn btn-outline-secondary"
-                                    id="togglePassword"
-                                    aria-label="Show password">
-
-                                    <i
-                                        class="bi bi-eye"
-                                        id="passwordIcon">
-                                    </i>
-
-                                </button>
-
-                            </div>
-
-                        </div>
-
-
-
-                        <!-- Remember -->
-
-                        <div
-                            class="d-flex justify-content-between align-items-center mb-4">
-
-                            <div class="form-check">
-
-                                <input
-                                    class="form-check-input"
-                                    type="checkbox"
-                                    id="rememberAdmin">
-
-                                <label
-                                    class="form-check-label text-muted"
-                                    for="rememberAdmin">
-
-                                    Remember me
-
-                                </label>
-
-                            </div>
-
-
-                            <span class="small text-muted">
-
-                                Admin Access
-
-                            </span>
-
-                        </div>
-
-
-
-                        <!-- Login Button -->
-
-                        <button
-                            type="submit"
-                            class="btn btn-primary w-100 py-2"
-                            id="adminLoginButton">
-
-                            <i class="bi bi-box-arrow-in-right me-2"></i>
-
-                            Login to Dashboard
-
-                        </button>
-
-                    </form>
-
-
-
-                    <!-- ==================================
-                         DEMO LOGIN
-                         ================================== -->
-
-                    <div class="demo-login-box mt-4">
-
-                        <div class="d-flex">
-
-                            <i
-                                class="bi bi-info-circle-fill me-2">
-                            </i>
-
-
-                            <div>
-
-                                <strong>
-                                    Demo Admin Account
-                                </strong>
-
-
-                                <div class="small mt-1">
-
-                                    Email:
-                                    admin@medicineportal.com
-
-                                </div>
-
-
-                                <div class="small">
-
-                                    Password:
-                                    admin123
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- ==================================
-                         LINKS
-                         ================================== -->
-
-                    <div class="text-center mt-4">
-
-                        <p class="mb-2 text-muted">
-
-                            Don't have an admin account?
-
-                        </p>
-
-
-                        <a
-                            href="register.html"
-                            class="btn btn-outline-primary">
-
-                            <i class="bi bi-person-plus me-1"></i>
-
-                            Create Admin Account
-
-                        </a>
-
-                    </div>
-
-
-                    <div class="text-center mt-3">
-
-                        <a
-                            href="../index.html"
-                            class="text-decoration-none">
-
-                            <i class="bi bi-arrow-left me-1"></i>
-
-                            Back to Website
-
-                        </a>
-
-                    </div>
+                    <span>
+                        Manage your profile
+                    </span>
 
                 </div>
 
@@ -450,229 +516,318 @@
 
         </div>
 
+
+        <!-- FORM -->
+
+        <div class="auth-form">
+
+
+            <div class="auth-form-header">
+
+                <h2>
+                    Login
+                </h2>
+
+                <p>
+                    Enter your registered email and password.
+                </p>
+
+            </div>
+
+
+            <!-- SUCCESS -->
+
+            <div class="success-message"
+                 id="successMessage">
+
+                ✅ Login Successful!
+                Welcome back.
+
+            </div>
+
+
+            <!-- ERROR -->
+
+            <div class="error-message"
+                 id="errorMessage">
+
+            </div>
+
+
+            <form id="loginForm">
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email address"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="show-password"
+                            onclick="togglePassword()">
+
+                            👁️
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LOGIN -->
+
+                <button
+                    type="submit"
+                    class="login-submit">
+
+                    Login
+
+                </button>
+
+
+            </form>
+
+
+            <div class="auth-bottom">
+
+                Don't have an account?
+
+                <a href="register.html">
+                    Create Account
+                </a>
+
+            </div>
+
+
+        </div>
+
     </div>
 
+</main>
 
 
-    <!-- ================================================
-         SCRIPT
-         ================================================ -->
+<!-- ================= FOOTER ================= -->
 
-    <script src="../js/admin.js"></script>
+<footer class="footer">
 
+    <div class="footer-bottom">
 
-    <script>
+        <p>
+            © 2026 Medicine Information Portal.
+            For educational purposes only.
+        </p>
 
-        document.addEventListener(
-            "DOMContentLoaded",
-            function () {
+    </div>
 
+</footer>
 
-                /* =====================================
-                   IF ALREADY LOGGED IN
-                   ===================================== */
 
-                if (typeof isAdminLoggedIn === "function") {
+<!-- ================= JAVASCRIPT ================= -->
 
-                    if (isAdminLoggedIn()) {
+<script>
 
-                        window.location.href =
-                            "dashboard.html";
+    /* ================= MOBILE MENU ================= */
 
-                        return;
+    const menuToggle =
+        document.getElementById("menuToggle");
 
-                    }
+    const mobileMenu =
+        document.getElementById("mobileMenu");
 
-                }
 
+    menuToggle.addEventListener(
+        "click",
+        function () {
 
+            mobileMenu.classList.toggle("show");
 
-                /* =====================================
-                   PASSWORD TOGGLE
-                   ===================================== */
+        }
+    );
 
-                const toggleButton =
-                    document.getElementById(
-                        "togglePassword"
-                    );
 
+    /* ================= PASSWORD ================= */
 
-                const passwordInput =
-                    document.getElementById(
-                        "adminPassword"
-                    );
+    function togglePassword() {
 
+        const password =
+            document.getElementById("password");
 
-                const passwordIcon =
-                    document.getElementById(
-                        "passwordIcon"
-                    );
+        const button =
+            document.querySelector(".show-password");
 
 
-                if (
-                    toggleButton &&
-                    passwordInput
-                ) {
+        if (password.type === "password") {
 
-                    toggleButton.addEventListener(
-                        "click",
-                        function () {
+            password.type = "text";
 
-                            if (
-                                passwordInput.type ===
-                                "password"
-                            ) {
+            button.textContent = "🙈";
 
-                                passwordInput.type =
-                                    "text";
+        } else {
 
-                                passwordIcon.className =
-                                    "bi bi-eye-slash";
+            password.type = "password";
 
-                            } else {
+            button.textContent = "👁️";
 
-                                passwordInput.type =
-                                    "password";
+        }
 
-                                passwordIcon.className =
-                                    "bi bi-eye";
+    }
 
-                            }
 
-                        }
-                    );
+    /* ================= LOGIN ================= */
 
-                }
+    const loginForm =
+        document.getElementById("loginForm");
 
+    const successMessage =
+        document.getElementById("successMessage");
 
+    const errorMessage =
+        document.getElementById("errorMessage");
 
-                /* =====================================
-                   FORM VALIDATION
-                   ===================================== */
 
-                const form =
-                    document.getElementById(
-                        "adminLoginForm"
-                    );
+    /* Registration redirect message */
 
+    const urlParams =
+        new URLSearchParams(window.location.search);
 
-                if (!form) {
-                    return;
-                }
 
+    if (urlParams.get("registered") === "true") {
 
-                form.addEventListener(
-                    "submit",
-                    function (event) {
+        successMessage.textContent =
+            "✅ Registration Successful! Please login with your account.";
 
-                        event.preventDefault();
+        successMessage.classList.add("show");
 
+    }
 
-                        if (!form.checkValidity()) {
 
-                            event.stopPropagation();
+    loginForm.addEventListener(
+        "submit",
+        function (event) {
 
-                            form.classList.add(
-                                "was-validated"
-                            );
+            event.preventDefault();
 
-                            return;
 
-                        }
+            const email =
+                document
+                    .getElementById("email")
+                    .value
+                    .trim();
 
+            const password =
+                document
+                    .getElementById("password")
+                    .value;
 
-                        const email =
-                            document.getElementById(
-                                "adminEmail"
-                            ).value;
 
+            /* GET USERS */
 
-                        const password =
-                            document.getElementById(
-                                "adminPassword"
-                            ).value;
+            const users =
+                JSON.parse(
+                    localStorage.getItem("medicineUsers")
+                ) || [];
 
 
-                        const button =
-                            document.getElementById(
-                                "adminLoginButton"
-                            );
+            /* FIND USER */
 
-
-                        const result =
-                            loginAdmin(
-                                email,
-                                password
-                            );
-
-
-                        const message =
-                            document.getElementById(
-                                "adminMessage"
-                            );
-
-
-                        if (result.success) {
-
-                            message.className =
-                                "alert alert-success";
-
-                            message.textContent =
-                                result.message;
-
-                            message.classList.remove(
-                                "d-none"
-                            );
-
-
-                            button.disabled =
-                                true;
-
-
-                            button.innerHTML = `
-
-                                <span
-                                    class="spinner-border spinner-border-sm me-2">
-                                </span>
-
-                                Logging in...
-
-                            `;
-
-
-                            setTimeout(
-                                function () {
-
-                                    window.location.href =
-                                        "dashboard.html";
-
-                                },
-                                600
-                            );
-
-                        } else {
-
-                            message.className =
-                                "alert alert-danger";
-
-                            message.textContent =
-                                result.message;
-
-                            message.classList.remove(
-                                "d-none"
-                            );
-
-                        }
-
-                    }
+            const user =
+                users.find(
+                    account =>
+                        account.email.toLowerCase() ===
+                        email.toLowerCase() &&
+                        account.password === password
                 );
 
-            }
-        );
 
-    </script>
+            /* LOGIN FAILED */
+
+            if (!user) {
+
+                successMessage.classList.remove("show");
+
+                errorMessage.textContent =
+                    "❌ Invalid email or password. Please check your details.";
+
+                errorMessage.classList.add("show");
+
+                return;
+
+            }
+
+
+            /* LOGIN SUCCESS */
+
+            errorMessage.classList.remove("show");
+
+            successMessage.textContent =
+                "✅ Login Successful! Welcome, " +
+                user.name + ".";
+
+            successMessage.classList.add("show");
+
+
+            /* SAVE CURRENT USER */
+
+            localStorage.setItem(
+                "currentUser",
+                JSON.stringify(user)
+            );
+
+
+            loginForm.reset();
+
+
+            /* REDIRECT */
+
+            setTimeout(
+                function () {
+
+                    window.location.href =
+                        "profile.html";
+
+                },
+                1500
+            );
+
+        }
+    );
+
+</script>
 
 
 </body>
 
 </html>
+```
